@@ -1,34 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# datafabrikken-portal
 
-## Getting Started
+## Description
 
-First, run the development server:
+A landing page (portal) for datafabrikken på datafabrikken.norge.no
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Installation and Usage
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Required tools to run this project:
+  - Node.js and npm to run locally on a host machine
+  - Docker and Docker Compose to run locally in a container
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+#### Running application locally on a host machine
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Install dependencies by running `npm install`
+- Run `npm start` to start local development server
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+#### Running application in a Docker container
 
-## Learn More
+- Build a Docker container using the following command:
+  - `docker build -t datafabrikken-portal .`
+- Run the container using the following comand:
+  - `docker run -d -p 3000:8080 -t datafabrikken-portal`
 
-To learn more about Next.js, take a look at the following resources:
+#### Running application using Docker Compose
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Run the application using the following command:
+  - `docker-compose up -d`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Environment Variables
 
-## Deploy on Vercel
+- `ENV` - Environment namespace
+  - `development`
+  - `production`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Branching Strategy
+
+Whenever a new change is to be implemented, follow these steps:
+
+- Create a new branch from the master branch
+- Implement and commit changes
+- Create a pull request for code review
+
+#### Commits
+
+This repository uses conventional commmit format. In order to commit, follow these steps:
+
+- Stage files to be committed
+- Run `npm run commit` script
+
+Do not use `--no-verify` flag when making commits.

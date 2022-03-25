@@ -1,12 +1,13 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+.DS_Store
+.vscode
+.vs
+.idea
+.env
+.envrc
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
+dist
+coverage
+node_modules
 
 # next.js
 /.next/
@@ -16,7 +17,6 @@
 /build
 
 # misc
-.DS_Store
 *.pem
 
 # debug

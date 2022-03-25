@@ -1,0 +1,567 @@
+{
+  "title": "Datafabrikken",
+  "lang": {
+    "chosenLanguage": "Language",
+    "norwegian-nb": "Norsk (bokmål)",
+    "norwegian-nn": "Norsk (nynorsk)",
+    "english-en": "English"
+  },
+  "header": {
+    "mainContent": "Til hovedinnhold",
+    "home": "Hjem",
+    "about": "Om Datafabrikken",
+    "findData": "Finn data",
+    "news": "Siste nytt",
+    "guidance": "Veiledning",
+    "community": "Datalandsbyen",
+    "communityAbout": "Om Datalandsbyen",
+    "organizations": "Virksomheter",
+    "metadataquality": "Metadatakvalitet",
+    "courses": "Kurs",
+    "guidance": "Veiledning"
+  },
+  "footer": {
+    "title": "Følg med på Datafabrikken",
+    "byLine": "Datafabrikken er et samarbeid mellom DigitalNorway og Digitaliseringsdirektoratet.",
+    "contact": {
+      "text": "Generelle henvendelser sendes til:"
+    },
+    "linkSection": {
+      "headings": {
+        "about": "Om Datafabrikken",
+        "usage": "Bruk av data",
+        "site": "Om nettstedet"
+      },
+      "links": {
+        "home": "Hjem",
+        "about": "Om Datafabrikken",
+        "communityAbout": "Om Datalandsbyen",
+        "news": "Siste nytt",
+
+        "findData": "Finn data",
+        "courses": "Kurs",
+        "guidance": "Veiledning",
+        "community": "Datalandsbyen",
+        "organizations": "Virksomheter",
+
+        "contact": "Kontaktinformasjon",
+        "privacy": "Personvernerklæring",
+        "cookies": "Informasjonskapsler",
+        "sitemap": "Nettstedkart"
+      }
+    }
+  },
+  "truncatedText": {
+    "expanded": "Skjul beskrivelsen",
+    "collapsed": "Vis hele beskrivelsen"
+  },
+  "main": {
+    "findData": "Søk blant {totalDatasets} datasett",
+    "seeAllPostsCommunity": "Se alle innlegg i Datalandsbyen"
+  },
+  "findDataPage": {
+    "title": "Finn data",
+    "findData": "Søk etter datasett",
+    "findDataText": "Rett til søkesiden.",
+    "noHits": "Ingen resultater funnet",
+    "noHitsSubtitle": "Prøv å fjerne et filter, eller",
+    "noHitsLink": "start søket på nytt",
+    "noHitsCommunity": "Du kan også ",
+    "noHitsCommunityLink": "etterspørre data i Datalandsbyen",
+    "totalNumDatasets": "Datasettbeskrivelser totalt",
+    "newDatasets": "Nye siste 7 dager",
+    "numOrganizationsPublished": "Virksomheter har publisert datasett"
+  },
+  "news": {
+    "title": "Siste nytt om Datafabrikken"
+  },
+  "owner": "Utgiver",
+  "openData": "Åpne data",
+  "accessRights": {
+    "limitedAccess": "Ikke åpne data"
+  },
+  "filter": {
+    "title": "Filter",
+    "openFilters": "Søkefilter",
+    "closeFilters": "Lukk søkefilter",
+    "accessRights": "Tilgang",
+    "openData": "åpne data",
+    "restrictedAccessRights": "ikke åpne data",
+    "format": "Format",
+    "search": "Søk",
+    "searchFormat": "Søk på format",
+    "showMore": "Vis flere",
+    "showFewer": "Vis færre",
+    "clearAll": "nullstill filter",
+    "last_x_days": "Siste {term} dager"
+  },
+  "unknown": "Ukjent",
+  "toTop": "Til toppen",
+  "sidemenu": {
+    "heading": "Gå til"
+  },
+  "detailsPage": {
+    "openData": "Åpne data",
+    "publicData": "Allmenn tilgang",
+    "restrictedData": "Betinget tilgang",
+    "nonPublicData": "Ikke-allmenn tilgang",
+    "intro": {
+      "lastPublishedInfo": "{entity} publisert i Felles datakatalog {lastPublished}",
+      "entity": {
+        "dataset": "Datasettbeskrivelse",
+        "dataservice": "Datatenestebeskrivelse",
+        "concept": "Omgrepsbeskrivelse",
+        "infomod": "Informasjonsmodellbeskrivelse",
+        "publicservice": "Tenestebeskrivelse",
+        "event": "Hendingsbeskrivelse"
+      }
+    },
+    "sectionTitles": {
+      "dataset": {
+        "description": "Beskrivelse",
+        "objective": "Formål",
+        "distributions": "Datatjenester (API) og distribusjoner",
+        "usage": "Bruk av datasettet",
+        "sample": "Eksempeldata",
+        "provenance": "Opphav og oppdatering",
+        "quality": "Kvalitet på innhold",
+        "conceptReferences": "Begreper brukt i datasett",
+        "datasetReferences": "Relasjoner",
+        "dataserviceReferences": "Brukt i datatjeneste (API)",
+        "keywords": "Søkeord",
+        "qualifiedAttributions": "Innholdsleverandører",
+        "restrictions": "Avgrensninger",
+        "contactInformation": "Kontaktinformasjon"
+      },
+      "dataService": {
+        "description": "Beskrivelse",
+        "formats": "Formater",
+        "contactInformation": "Kontaktinformasjon",
+        "usage": "Ta i bruk datatjenesten",
+        "conformsTo": "Er i samsvar med",
+        "datasetReferences": "Tilknyttede datasettbeskrivelser",
+        "informationModelReferences": "Informasjonsmodeller"
+      }
+    },
+    "relationList": {
+      "title": {
+        "dataset": "Andre som relaterer til dette datasettet",
+        "dataservice": "Andre som relaterer til denne datatjenesten",
+        "concept": "Andre som relaterer til dette begrepet",
+        "informationmodel": "Andre som relaterer til denne informasjonsmodellen",
+        "public_service": "Andre som relaterer til denne tjenesten",
+        "event": "Andre som relaterer til denne hendelsen"
+      },
+      "subtitle": {
+        "dataset": "Datasett",
+        "dataservice": "Datatjeneste",
+        "concept": "Begrep",
+        "informationmodel": "Informasjonsmodell",
+        "public_service": "Tjeneste",
+        "event": "Hendelse"
+      },
+      "referenceType": "relasjonstype"
+    },
+    "community": {
+      "title": "Datalandsbyen",
+      "seeLatest": "Siste saker fra",
+      "seeMore": "Se flere nylige innlegg",
+      "subtitle": {
+        "link": "Datalandsbyen",
+        "mention": " innlegg i ",
+        "mentionPlural": " innlegg i ",
+        "empty": {
+          "dataset": "Dette datasettet er ikke omtalt i ",
+          "dataservice": "Denne datatjenesten er ikke omtalt i ",
+          "concept": "Dette begrepet er ikke omtalt i ",
+          "informationmodel": "Denne informasjonsmodellen er ikke omtalt i ",
+          "public_service": "Denne tjenesten er ikke omtalt i ",
+          "event": "Denne hendelsen er ikke omtalt i "
+        },
+        "content": {
+          "dataset": "Dette datasettet er omtalt i ",
+          "dataservice": "Denne datatjenesten er omtalt i "
+        }
+      },
+      "timeago": {
+        "postPrefix": "skrev for ",
+        "singular": {
+          "seconds": "Noen få sekunder siden",
+          "minutes": "Ett minutt siden",
+          "hours": "En time siden",
+          "days": "En dag siden",
+          "months": "En måned",
+          "years": "Ett år siden"
+        },
+        "plural": {
+          "seconds": "Noen få sekunder siden",
+          "minutes": "minutter siden",
+          "hours": "timer siden",
+          "days": "dager siden",
+          "months": "måneder siden",
+          "years": "år siden"
+        }
+      },
+      "votes": "Stemmer",
+      "replies": "Svar",
+      "views": "Visninger"
+    }
+  },
+  "errorPage": {
+    "pageNotFound": "Ikke funnet",
+    "serverError": {
+      "title": "Dette er flaut...",
+      "content1": "Det har visst skjedd noe teknisk krøll i vår ende.",
+      "content2": "Vi jobber med å rette opp feilen. Prøv igjen om en liten stund."
+    },
+    "clientError": {
+      "title": "Oi da...",
+      "content": "Det ser ut til at du har blitt sendt til en side som ikke eksisterer.",
+      "backLink": "Gå til forsiden"
+    }
+  },
+  "dataset": {
+    "keyInfo": "Bruk av datasettet",
+    "accessRight": "Datasettet er",
+    "title": "Datasett",
+    "type": "Type",
+    "datasetdescription": "Datasettbeskrivelse",
+    "firstHarvested": "publisert i Felles datakatalog",
+    "lastChanged": "Sist endret i Felles datakatalog",
+    "conformsTo": "Innholdsstandard",
+    "informationModel": "I samsvar med informasjonsmodell",
+    "informationModelDefaultText": "Informasjonsmodell",
+    "distributions": "Andre distribusjoner",
+    "distributionsAPI": "API-distribusjoner ({term})",
+    "distibutionsAPILabel": "API-distribusjoner",
+    "distribution": {
+      "title": "Distribusjoner",
+      "description": "Beskrivelse",
+      "noDescription": "Ingen beskrivelse",
+      "downloadUrl": "Nedlastingslenke",
+      "download": "Last ned",
+      "format": "Tilgjengelig Format",
+      "accessUrl": "TilgangsURL",
+      "license": "Forutsetning for bruk av datasettet",
+      "licenseLinkDefault": "Lisens",
+      "conformsTo": "Innholdsstandard",
+      "moreInformation": "Mer Informasjon",
+      "page": "Mer informasjon om distribusjonen",
+      "standard": "Standard",
+      "referenceDefaultCode": "Andre relasjoner",
+      "referenceDefault": "Relasjon",
+      "type": "Type",
+      "dataService": "Datatjeneste",
+      "endpointDescription": "Endepunktsbeskrivelse",
+      "preview": "Forhåndsvisning",
+      "previewFailure": "Beklager, det ser ut at distribusjonen ikke finnes eller inneholder ugyldig data.",
+      "previewLoading": "Laster inn forhåndsvisning"
+    },
+    "issued": "Utgitt",
+    "quality": "Kvalitet på innhold",
+    "provenance": "Opphav",
+    "currentness": "Aktualitet",
+    "frequency": "Oppdateringsfrekvens",
+    "miscInfo": "Øvrig info",
+    "created": "Opprettet",
+    "modified": "Sist oppdatert",
+    "language": "Språk",
+    "theme": "Tema",
+    "periodFrom": "Tidsmessig avgrenset fra",
+    "periodTo": "Tidsmessig avgrenset til",
+    "spatial": "Geografisk avgrenset til",
+    "temporal": {
+      "description": "Tidsmessig avgrenset til",
+      "from": "Fra",
+      "to": "til"
+    },
+    "information": "Opplysninger",
+    "keyword": "Søkeord",
+    "subject": "Begrep brukt i datasettet",
+    "restrictions": "Avgrensninger",
+    "comments": "Kommentar",
+    "objective": "Formål",
+    "registeredIn": "registrert i",
+    "related": "Relasjoner",
+    "relates": "Relatert",
+    "restriction": "Restriksjon",
+    "downloadText": "Last ned DCAT-beskrivelse:",
+    "isPartOf": "Datasettet er en del av",
+    "relevanceAnnotation": "Relevans",
+    "completenessAnnotation": "Kompletthet",
+    "accuracyAnnotation": "Nøyaktighet",
+    "availabilityAnnotations": "Tilgjengelighet",
+    "contactPoint": {
+      "email": "E-post",
+      "telephone": "Telefon",
+      "background": "Bakgrunnsinformasjon om datasettet",
+      "organizationUnit": "Ta kontakt med"
+    },
+    "legalBasisForRestriction": "Skjermingshjemmel",
+    "legalBasisForRestrictionDefaultText": "Hjemmel",
+    "legalBasisForProcessing": "Behandlingsgrunnlag",
+    "legalBasisForProcessingDefaultText": "Grunnlag",
+    "legalBasisForAccess": "Utleveringshjemmel",
+    "leagalBasisForAccessDefaultText": "Hjemmel",
+    "accessRights": {
+      "authorityCode": {
+        "public": "Allmenn tilgang",
+        "restricted": "Betinget tilgang",
+        "nonPublic": "Ikke-allmenn tilgang",
+        "publicDetailsLabel": "Datasettet har allmenn tilgang",
+        "restrictedDetailsLabel": "Datasettet har betinget tilgang",
+        "nonPublicDetailsLabel": "Datasettet har ikke-allmenn tilgang"
+      }
+    },
+    "sample": "Eksempeldata",
+    "landingPage": "Mer informasjon",
+    "landingPageDesc": "Landingsside for dette datasettet"
+  },
+  "community": {
+    "posted": "svarte",
+    "noPosts": "Ingen innlegg ennå",
+    "topics": "emner",
+    "topic": "emne",
+    "posts": "innlegg",
+    "views": "visninger",
+    "votes": "stemmer",
+    "users": "brukere",
+    "pinned": "Festet",
+    "categoryHasNoPosts": "Denne kategorien har ingen innlegg ennå. Bli den første til å publisere.",
+    "newTopic": "Nytt emne",
+    "writeComment": "Skriv kommentar",
+    "formerUser": "En tidligere bruker",
+    "postDeleted": "Dette innlegget er slettet!",
+    "calendarEvent": "Hendelse",
+    "sort": {
+      "sortByDate": "Sorter etter dato:",
+      "ascending": "Stigende",
+      "descending": "Synkende"
+    },
+    "header": {
+      "categories": "Kategorier",
+      "tags": "Emneord",
+      "recent": "Siste",
+      "popular": "Populære",
+      "calendar": "Kalender",
+      "about": "Om Datalandsbyen",
+      "login": "Login/registrer",
+      "subcategories": "Underkategorier",
+      "topics": "Emner",
+      "inDatalandsbyen": "i Datalandsbyen"
+    },
+    "comments": {
+      "sectionTitle": "Har du spørsmål eller kommentarer til {entityType}?",
+      "session": "Du er innlogget som ",
+      "entityTypes": {
+        "dataset": "datasettet",
+        "dataservice": "datatjenesten",
+        "concept": "begrepet",
+        "informationmodel": "informasjonsmodellen",
+        "public_service": "den offentlige tjenesten",
+        "event": "hendelsen"
+      },
+      "ingress": "Kommentaren blir synlig for andre brukere og besvares her.",
+      "noCommunityUser": "Lag en konto på Datalandsbyen for å kommentere",
+      "buttons": {
+        "feedback": "Still spørsmål",
+        "logInFeedback": "Logg inn for å stille spørsmål",
+        "logOutFeedback": "Logg ut",
+
+        "reply": "Skriv et svar",
+        "edit": "Rediger",
+        "delete": "Slett",
+        "loadComments": "Last inn flere tilbakemeldinger",
+        "collapseComments": "Skjul tilbakemeldinger",
+        "expandReplies": "Vis flere svar",
+        "collapseReplies": "Skjul svar"
+      },
+      "gif": {
+        "play": "Trykk for å spille av GIF",
+        "pause": "Trykk for å pause GIF"
+      }
+    },
+    "composer": {
+      "commenter": "Kommenterer som ",
+      "placeholder": "Tekst",
+      "send": "Send",
+      "cancel": "Avbryt",
+      "tools": {
+        "modificationAlt": {
+          "bold": "Sterk",
+          "italic": "Kursiv",
+          "ul": "Punktliste",
+          "image": "Bilde",
+          "tag": "Tagg bruker",
+          "strikethrough": "Gjennomstreking",
+          "code": "Kode",
+          "link": "lenke"
+        },
+        "modification": {
+          "bold": {
+            "value": "**sterk tekst her**",
+            "left": "**",
+            "right": "**"
+          },
+          "italic": {
+            "value": "*krusiv tekst her*",
+            "left": "*",
+            "right": "*"
+          },
+          "ul": {
+            "value": "\n* punkt",
+            "left": "\n* ",
+            "right": ""
+          },
+          "image": {
+            "value": "![bildetekst](url til bilde)",
+            "left": "![",
+            "right": "](url til bilde)"
+          },
+          "tag": {
+            "value": "@brukernavn",
+            "left": "@",
+            "right": ""
+          },
+          "strikethrough": {
+            "value": "~~gjennomstreking~~",
+            "left": "~~",
+            "right": "~~"
+          },
+          "code": {
+            "value": "```\nkode\n```",
+            "left": "```\n",
+            "right": "\n```"
+          },
+          "link": {
+            "value": "[lenketekst](lenkeurl)",
+            "left": "[",
+            "right": "](lenkeurl)"
+          }
+        }
+      }
+    }
+  },
+  "contactPoint": {
+    "contactPoint": "Kontaktpunkt",
+    "email": "E-post",
+    "telephone": "Telefon"
+  },
+  "formatType": {
+    "MEDIA_TYPE": "Mediatype",
+    "FILE_TYPE": "Filtype"
+  },
+  "metadataQualityPage": {
+    "criterion": "Kriterium",
+    "metadataQuality": "Metadatakvalitet",
+    "criteria": {
+      "accessibility": "Tilgjengelighet",
+      "findability": "Søkbarhet",
+      "interoperability": "Interoperabilitet",
+      "readability": "Lesbarhet",
+      "reusability": "Gjenbrukbarhet"
+    },
+    "tooltipText": {
+      "accessibility": "Metadata og data kan deles og utveksles maskinelt via åpne, veldefinerte grensesnitt og formater.",
+      "findability": "Første steg for å benytte data er å finne den. Metadata og data skal være enkelt å finne både for mennesker og maskiner.",
+      "interoperability": "Metadata og data kan deles og utveksles maskinelt via åpne, veldefinerte grensesnitt og formater.",
+      "readability": "Metadata og data er representert på en brukervennlig og forståelig måte.",
+      "reusability": "Metadata og data kan deles og utveksles maskinelt via åpne, veldefinerte grensesnitt og formater."
+    },
+    "indicator": {
+      "distributableData": "Tilgangslenke er oppgitt",
+      "keywordUsage": "Søkeord er oppgitt",
+      "subjectUsage": "Begrep er oppgitt",
+      "geoSearch": "Datasettet er geografisk avgrenset",
+      "controlledVocabularyUsage": "Distribusjon har mediatype",
+      "licenseInformation": "Distribusjonslisensen er oppgitt",
+      "contactPoint": "Kontaktinformasjon er oppgitt",
+      "title": "Tittel er konsis",
+      "titleNoOrgName": "Organisasjonens navn er ikke med i tittel",
+      "description": "Beskrivelsen er konsis",
+      "descriptionWithoutTitle": "Tittelen er ikke en del av beskrivelsen"
+    },
+    "indicatorDescription": {
+      "distributableData": "Det finnes en tilgangsURL til datasett på distribusjon eller endpointURL på en tilknyttet datatjeneste.",
+      "keywordUsage": "Det finnes et eller flere søkeord tilknyttet datasettbeskrivelsen.",
+      "subjectUsage": "Det finnes et eller flere begreper tilknyttet datasettbeskrivelsen.",
+      "geoSearch": "Datasettet er geografisk avgrenset.",
+      "controlledVocabularyUsage": "Det finnes et eller flere format på distribusjonen til datasettbeskrivelsen som finnes i IANAs liste over mediatyper.",
+      "licenseInformation": "Det finnes en lisens for å gjenbruke datasettet på distribusjonsklassen til datasettet.",
+      "contactPoint": "Det finnes kontaktinformasjon for hvem konsument kan henvende seg til.",
+      "title": "Tittel er mindre enn 100 tegn.",
+      "titleNoOrgName": "Organisasjonens navn er ikke med i tittel.",
+      "description": "Beskrivelsen er mindre enn 400 tegn, ikke regnet med mellomrom.",
+      "descriptionWithoutTitle": "Tittelen er ikke en del av beskrivelsen."
+    },
+    "indicatorWeight": "Vekt: {weight}",
+    "descriptionsTotal": "Beskrivelser totalt",
+    "newDescriptions": "Nye beskrivelser {term}",
+    "lastYear": "siste år",
+    "lastMonth": "siste måned",
+    "lastWeek": "siste uke",
+    "metadataQualityIsExcellent": "Metadatakvaliteten er utmerket",
+    "metadataQualityIsGood": "Metadatakvaliteten er god",
+    "metadataQualityIsSufficient": "Metadatakvaliteten er tilstrekkelig",
+    "metadataQualityIsPoor": "Metadatakvaliteten er dårlig",
+    "metaDataMiddle": "middels",
+    "datasetIs": "Datasett som er {term}",
+    "authoritativeSources": "autoritative kilder",
+    "open": "åpne",
+    "metadataQualityCatalog": "metadatakvaliteten for datakatalogen er {term}",
+    "metadataQualitySatisfiedCriteria": "av kriteriene er oppfylt",
+    "organizationPageTitle": "Innhold for {organizationName}",
+    "organizationDatasetCatalogPageTitle": "Datasettbeskrivelsene til {organizationName}",
+    "organizationDatasetCatalogPageSubtitle": "Metadatakvalitet for datasettbeskrivelsene",
+    "organizationDatasetPageSubtitle": "Metadatakvalitet for datasettbeskrivelsen av",
+    "datasetCatalogStatistics": "Datasettbeskrivelser",
+    "dataserviceCatalogStatistics": "API-beskrivelser",
+    "conceptCatalogStatistics": "Begrepsbeskrivelser",
+    "informationModelCatalogStatistics": "Informasjonsmodellbeskrivelser",
+    "datasetTitle": "Tittel på datasettbeskrivelse",
+    "loadMoreDatasets": "Last inn flere datasettbeskrivelser (gjenstår: {count})",
+    "whatIsMetadataQualityFaqTitle": "Hva er metadatakvalitet?",
+    "whatIsMetadataQualityFaqDescription": "Metadatakvalitet er ment som et hjelpeverktøy til dataeiere slik at de kan vurdere metadata mot ulike indikatorer.",
+    "whatIsMetadataQualityFaqLink": "Lær mer om metadatakvalitet",
+    "averageRatingForOrganization": "Gjennomsnitt for virksomheten",
+    "organisationName": "Virksomhetsnavn",
+    "organisationNumber": "Organisasjonsnummer",
+    "organisationForm": "Organisasjonsform",
+    "organisationBusinessCodes": "Næringskode(r)",
+    "organisationInstitutionalSectorCode": "Institusjonell sektorkode",
+    "organisationHomePage": "Hjemmeside",
+    "organisationMoreInfo": "Flere opplysninger",
+    "organisationInEnhetsregisteret": "Opplysninger om {organizationName} i Enhetsregisteret",
+    "goToDataset": "Gå til datasettbeskrivelse"
+  },
+  "sampleData": "Eksempeldata",
+  "searchOrganizations": "Søk på virksomheter",
+  "searchOrganization": "Søk på virksomhetsnavn",
+  "organizationsPage": {
+    "datasetsDescription": "datasettbeskrivelser",
+    "organization": "Virksomhet",
+    "numberDatasets": "Antall Datasett"
+  },
+  "infoCard": {
+    "providerText": "Tilbys av ",
+    "INTRO_COURSE": "Introkurs",
+    "ADVANCED_TRAINING": "Dybdekurs",
+    "CONTINUING_EDUCATION": "Videreutdanning",
+    "minutes": "min",
+    "modules": "moduler",
+    "providerLogo": "Tilbyderlogo",
+    "free": "Gratis",
+    "contentType": {
+      "TEXT": "lesing",
+      "VIDEO": "video",
+      "TEXT_AND_VIDEO": "lesing og video"
+    }
+  },
+  "guidancePage": {
+    "radio": {
+      "all": "Alle ressurser",
+      "provider": "Vis ressurser for datatilbydere",
+      "consumer": "Vis ressurser for datakonsumenter"
+    }
+  }
+}
