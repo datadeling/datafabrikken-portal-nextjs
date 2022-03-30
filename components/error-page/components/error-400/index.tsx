@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
 import SC from './styled';
-import LinkIcon from '../../../icons/link-icon';
 import Translation from '../../../translation';
 
 const Error400: FC = () => (
@@ -16,7 +15,6 @@ const Error400: FC = () => (
       </SC.SubTitle>
       <SC.Link to='/'>
         <Translation id='errorPage.clientError.backLink' />
-        <LinkIcon />
       </SC.Link>
     </SC.Error400>
   </SC.Container>
