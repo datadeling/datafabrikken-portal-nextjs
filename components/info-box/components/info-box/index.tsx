@@ -89,7 +89,7 @@ const LinkWrapper: FC<PropsWithChildren<Props>> = ({
       <InfoBox {...props} />
     </Link>
   ) : (
-    <InfoBox {...props} />
+    <InfoBox href={href} {...props} />
   );
 
 export default memo(LinkWrapper);

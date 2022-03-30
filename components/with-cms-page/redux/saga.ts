@@ -11,7 +11,7 @@ import {
   extractPageData
 } from '../../../services/api/cms-api/page';
 
-import { getNewsPage, extractData } from '../../../services/api/cms-api/news';
+import { getCmsPage, extractData } from '../../../services/api/cms-api/news';
 
 import type { CmsArticle } from '../../../types';
 
@@ -37,7 +37,7 @@ function* getCmsNewsArticleRequested({
   payload: { id }
 }: ReturnType<typeof actions.getCmsNewsArticleRequested>) {
   try {
-    const data: Record<string, any> = yield call(getNewsPage, id);
+    const data: Record<string, any> = yield call(getCmsPage, id);
 
     if (data) {
       yield put(actions.getCmsPageSucceeded(extractData(data) as CmsArticle));
