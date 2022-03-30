@@ -14,10 +14,9 @@ import {
   InfoBoxTitle,
   SC as InfoBoxSC
 } from '../../components/info-box';
-import SC from './styled';
+import SC from '../../styles/pages/siste-nytt';
 import { getNews } from '../../services/api/cms-api/news';
-import { PATHNAME } from '../../types/enums';
-import { PAGE_PROPERTY } from './enums';
+import { PAGE_PROPERTY, PATHNAME } from '../../types/enums';
 import type { CmsArticle } from '../../types';
 
 export async function getStaticProps() {

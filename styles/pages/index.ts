@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-import ContainerSC from '../components/container/styled';
+import ContainerSC from '../../components/container/styled';
 
-import InfoBoxSC from '../components/info-box/components/info-box/styled';
+import InfoBoxSC from '../../components/info-box/components/info-box/styled';
 
-import { theme, Colour } from '../styles/theme';
+import { theme, Colour } from '../theme';
 
 const onMobileView = '@media (max-width: 900px)';
 

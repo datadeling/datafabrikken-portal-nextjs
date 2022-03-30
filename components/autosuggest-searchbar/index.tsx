@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { compose } from 'redux';
 import translations from '../../services/translations';
-import { SearchSuggestion } from '../../types';
+import type { SearchSuggestion } from '../../types';
 import SC from './styled';
 import SearchBar from '../search-bar';
 import withcachedSuggestions, {
@@ -121,7 +121,7 @@ const AutosuggestSearchBar: FC<Props> = ({
         ) ?? '';
       return (
         <SC.Suggestion
-        key={`search-suggestion-${index}`}
+          key={`search-suggestion-${index}`}
           $highlighted={index === focusedSuggestionIndex}
           onMouseOver={() => setFocusedSuggestionIndex(index)}
           tabIndex={0}

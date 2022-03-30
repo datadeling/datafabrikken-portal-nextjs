@@ -11,7 +11,7 @@ import {
 } from '../../services/api/generated/cms/graphql';
 import { initializeApollo } from '../../utils/apollo/apolloClient';
 
-import SC from './styled';
+import SC from '../../styles/pages/kontakt';
 
 const { STRAPI_API_HOST } = env;
 

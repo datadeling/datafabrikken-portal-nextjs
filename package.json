@@ -17,10 +17,9 @@
   "scripts": {
     "dev": "next dev -p 4301",
     "preinstall": "npx npm-force-resolutions",
-    "start": "run-s start:webpack",
+    "start": "next start -p 4302",
     "start:webpack": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack/dev.config.ts",
-    "build:dev": "run-s build:webpack:dev",
-    "build:prod": "run-s build:webpack:prod",
+    "build": "next build",
     "type:check": "tsc",
     "build:webpack:dev": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config webpack/dev.config.ts",
     "build:webpack:prod": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config webpack/prod.config.ts",

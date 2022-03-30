@@ -1,12 +1,11 @@
 import React, { FC } from 'react';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 
-import { PATHNAME } from '../../types/enums';
+import { PAGE_PROPERTY, PATHNAME } from '../../types/enums';
 import { getCmsPage, getNews } from '../../services/api/cms-api/news';
 import Root from '../../components/root';
 import Article from '../../components/article';
 import Breadcrumbs from '../../components/breadcrumbs';
-import { PAGE_PROPERTY } from './enums';
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
   const cmsPage = await getCmsPage(params?.articleId as string);

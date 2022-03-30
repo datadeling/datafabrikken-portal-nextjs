@@ -2,7 +2,7 @@ import React, { memo, FC, useState } from 'react';
 import { compose } from 'redux';
 import Head from 'next/head';
 
-import SC from './styled';
+import SC from '../../styles/pages/veiledning';
 import ErrorPage from '../../components/error-page';
 import withErrorBoundary from '../../components/with-error-boundary';
 import Root from '../../components/root';

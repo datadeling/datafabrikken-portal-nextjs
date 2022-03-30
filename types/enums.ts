@@ -34,7 +34,6 @@ export enum PARAGRAPH {
   MAIN_ELEMENT = 'paragraph--user_input_container'
 }
 
-
 export enum Environment {
   DEVELOPMENT = 'development',
   STAGING = 'staging',
@@ -147,4 +146,8 @@ export enum CourseType {
 
 export enum CourseProvider {
   DIGITAL_NORWAY = 'DIGITAL_NORWAY'
+}
+
+export enum PAGE_PROPERTY {
+  NEWS_LIMIT = 20
 }

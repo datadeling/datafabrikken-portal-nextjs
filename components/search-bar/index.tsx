@@ -15,7 +15,7 @@ import { getParameter } from '../../utils/location-helper';
 
 interface Props {
   placeholder: string;
-  onClear: () => void;
+  onClear?: () => void;
   onSubmit?: FormEventHandler<HTMLFormElement>;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
@@ -41,7 +41,7 @@ const SearchBar: FC<Props> = ({
   const clearSearchField = useCallback((e: FormEvent) => {
     e.preventDefault();
     setSearchQuery('');
-    onClear();
+    onClear && onClear();
   }, []);
 
   return (

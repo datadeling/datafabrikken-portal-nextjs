@@ -1,7 +1,7 @@
 import React, { memo, FC } from 'react';
 import { compose } from 'redux';
 
-import SC from './styled';
+import SC from '../../styles/pages/kurs';
 import ErrorPage from '../../components/error-page';
 import withErrorBoundary from '../../components/with-error-boundary';
 import Root from '../../components/root';

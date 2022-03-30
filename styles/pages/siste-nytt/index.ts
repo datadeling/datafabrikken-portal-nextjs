@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import InfoBoxSC from '../../components/info-box/components/info-box/styled';
-import { theme } from '../../styles/theme';
+import InfoBoxSC from '../../../components/info-box/components/info-box/styled';
+import { theme } from '../../theme';
 
 const onMobileView = '@media (max-width: 900px)';
 

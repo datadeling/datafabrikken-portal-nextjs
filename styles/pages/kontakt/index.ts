@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import ContainerSC from '../../components/container/styled';
-import { theme, Colour } from '../../styles/theme';
+import ContainerSC from '../../../components/container/styled';
+import { theme, Colour } from '../../theme';
 
 const onMobileView = '@media (max-width: 900px)';
 

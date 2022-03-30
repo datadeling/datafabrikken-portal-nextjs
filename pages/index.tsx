@@ -28,7 +28,7 @@ import Topic from '../components/community/topic';
 
 import { dateStringToDate, formatDate } from '../utils/date';
 
-import SC from './styled';
+import SC from '../styles/pages';
 
 import factoryLottieJson from '../public/images/factory.lottie.json';
 import { PATHNAME } from '../types/enums';
