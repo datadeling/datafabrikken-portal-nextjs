@@ -3,6 +3,10 @@ import styled, { css } from 'styled-components';
 import InfoBoxSC from '../info-box/styled';
 
 const InfoBoxImage = styled.div<{ $hasHover?: boolean }>`
+  position: relative;
+  width: 100%;
+  height: 100%;
+
   ${({ $hasHover }) =>
     $hasHover &&
     css`
