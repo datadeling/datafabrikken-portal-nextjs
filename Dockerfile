@@ -1,32 +1,79 @@
-FROM node:lts AS build
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm set progress=false && \
-  npm config set depth 0 && \
-  npm ci
-RUN npm audit --production --audit-level=moderate
-COPY babel.config.js tsconfig.json tsconfig.test.json tsconfig.webpack.json jest.config.js ./
-COPY webpack ./webpack
-COPY test ./test
-COPY src ./src
-RUN npm test
-RUN npm run build
+# # Install dependencies only when needed
+# FROM node:16-alpine AS builder
+# # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+# RUN apk add --no-cache libc6-compat
+# WORKDIR /app
 
-FROM nginx:alpine
+# RUN npm i sharp
+# COPY package.json package-lock.json ./
+# COPY . .
+# RUN npm ci
+
+# # Rebuild the source code only when needed
+# ENV NEXT_TELEMETRY_DISABLED 1
+# RUN npm audit --production --audit-level=moderate
+# RUN npm run build
+
+# # Production image, copy all the files and run next
+# FROM node:16-alpine AS runner
+# WORKDIR /app
+
+# ENV NODE_ENV production
+# # Uncomment the following line in case you want to disable telemetry during runtime.
+# # ENV NEXT_TELEMETRY_DISABLED 1
+
+# RUN addgroup --system --gid 1001 nodejs
+# RUN adduser --system --uid 1001 nextjs
+
+# # You only need to copy next.config.js if you are NOT using the default configuration
+# COPY --from=builder /app/next.config.js ./
+# COPY --from=builder /app/public ./public
+# COPY --from=builder /app/package.json ./package.json
+
+# # Automatically leverage output traces to reduce image size
+# # https://nextjs.org/docs/advanced-features/output-file-tracing
+# COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+# COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# CMD ["node", "server.js"]
+
+
+FROM node:16-alpine AS deps
+
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
-RUN addgroup -g 1001 -S app && \
-  adduser -u 1001 -S app -G app && \
-  chown -R app:app /app && \
-  chown -R app:app /var/cache/nginx && \
-  touch /var/run/nginx.pid && \
-  chown -R app:app /var/run/nginx.pid && \
-  chmod 770 /app
-USER app:app
-COPY --chown=app:app nginx.conf /etc/nginx/conf.d/default.conf
-COPY --chown=app:app --from=build /app/dist ./
-COPY --chown=app:app entrypoint.sh config.template.js ./
-COPY --chown=app:app /public/robots.txt ./
-COPY --chown=app:app /public/sitemap.xml ./
-RUN dos2unix entrypoint.sh && chmod +x entrypoint.sh
-ENTRYPOINT [ "./entrypoint.sh" ]
+RUN npm i sharp
+COPY package.json package-lock.json ./
+COPY .env ./
+RUN npm ci
+FROM node:16-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Production image, copy all the files and run next
+RUN npm run build
+FROM node:16-alpine AS runner
+WORKDIR /app
+ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
 EXPOSE 8080
+
+ENV PORT 8080
+
+CMD ["node", "server.js"]
