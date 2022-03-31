@@ -4,6 +4,12 @@ module.exports = {
     locales: ['nb'],
     defaultLocale: 'nb'
   },
+  images: {
+    domains: [
+      process.env.NEXT_PUBLIC_IMAGES_DRUPAL,
+      process.env.NEXT_PUBLIC_IMAGES_STRAPI
+    ]
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -20,9 +26,12 @@ module.exports = {
       fallback: [
         {
           source: '/:path*',
-          destination: `http://localhost:3000/:path*`
+          destination: `${process.env.NEXT_PUBLIC_DATAFABRIKKEN_CLIENT}/:path*`
         }
       ]
     };
+  },
+  experimental: {
+    outputStandalone: true
   }
 };

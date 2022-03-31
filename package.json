@@ -15,9 +15,9 @@
   "license": "ISC",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 4301",
+    "dev": "next dev",
     "preinstall": "npx npm-force-resolutions",
-    "start": "next start -p 4302",
+    "start": "next start",
     "start:webpack": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack/dev.config.ts",
     "build": "next build",
     "type:check": "tsc",
