@@ -8,10 +8,6 @@ import User from '../user';
 import SC from './styled';
 import type { CommunityTopic } from '../../../types';
 
-import {
-  withTranslations,
-  Props as TranslationProps
-} from '../../../providers/translations';
 import { formatDate } from '../../../utils/date';
 import { PATHNAME } from '../../../types/enums';
 
@@ -21,18 +17,16 @@ import PostIcon from '../../../public/images/icon-post.inline.svg';
 import LinkIcon from '../../icons/link-icon';
 import PinnedIcon from '../../../public/images/icon-pinned.inline.svg';
 
+import translations from '../../../services/translations';
+
 interface ExternalProps {
   topic: CommunityTopic;
   hideUserInfoAndTags?: boolean;
 }
 
-interface Props extends ExternalProps, TranslationProps {}
+interface Props extends ExternalProps {}
 
-const Topic: FC<Props> = ({
-  topic,
-  hideUserInfoAndTags = false,
-  translationsService
-}) => {
+const Topic: FC<Props> = ({ topic, hideUserInfoAndTags = false }) => {
   const topicOwner = topic.user;
   return (
     <Link
@@ -41,9 +35,7 @@ const Topic: FC<Props> = ({
     >
       <SC.Topic>
         {topic.pinned > 0 && (
-          <SC.Pinned
-            title={`${translationsService.translate('community.pinned')}`}
-          >
+          <SC.Pinned title={`${translations.translate('community.pinned')}`}>
             <PinnedIcon />
           </SC.Pinned>
         )}
@@ -70,7 +62,7 @@ const Topic: FC<Props> = ({
           <li
             title={`${
               topic.votes < 0 ? 0 : topic.votes
-            } ${translationsService.translate('community.votes')}`}
+            } ${translations.translate('community.votes')}`}
           >
             <span>
               <LikeIcon />
@@ -78,7 +70,7 @@ const Topic: FC<Props> = ({
             {topic.votes < 0 ? 0 : topic.votes}
           </li>
           <li
-            title={`${topic.postcount} ${translationsService.translate(
+            title={`${topic.postcount} ${translations.translate(
               'community.posts'
             )}`}
           >
@@ -88,7 +80,7 @@ const Topic: FC<Props> = ({
             {topic.postcount}
           </li>
           <li
-            title={`${topic.viewcount} ${translationsService.translate(
+            title={`${topic.viewcount} ${translations.translate(
               'community.views'
             )}`}
           >
@@ -103,4 +95,4 @@ const Topic: FC<Props> = ({
   );
 };
 
-export default compose<FC<ExternalProps>>(memo, withTranslations)(Topic);
+export default compose<FC<ExternalProps>>(memo)(Topic);

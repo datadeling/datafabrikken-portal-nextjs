@@ -1,11 +1,7 @@
 import React, { memo, FC } from 'react';
 import { compose } from 'redux';
+import translations, { FormatObject } from '../../services/translations';
 
-import {
-  withTranslations,
-  Props as TranslationsProps,
-  FormatObject
-} from '../../providers/translations';
 import type { TextLanguage } from '../../types';
 
 interface ExternalProps {
@@ -14,16 +10,16 @@ interface ExternalProps {
   text?: Partial<TextLanguage>;
 }
 
-interface Props extends ExternalProps, TranslationsProps {}
+interface Props extends ExternalProps {}
 
-const Translation: FC<Props> = ({ translationsService, id, values, text }) => {
+const Translation: FC<Props> = ({ id, values, text }) => {
   if (id) {
-    return <>{translationsService.translate(id, values)}</>;
+    return <>{translations.translate(id, values)}</>;
   }
   if (text) {
-    return <>{translationsService.getTranslateText(text)}</>;
+    return <>{translations.getTranslateText(text)}</>;
   }
   return <></>;
 };
 
-export default compose<FC<ExternalProps>>(memo, withTranslations)(Translation);
+export default compose<FC<ExternalProps>>(memo)(Translation);
