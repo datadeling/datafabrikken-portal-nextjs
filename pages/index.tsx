@@ -134,9 +134,12 @@ const MainPage: FC<Props> = ({
                   </Markdown>
                   <AutosuggestSearchbar
                     maxSuggestions={6}
-                    placeholder={`${translations.translate('main.findData', {
-                      totalDatasets
-                    })}`}
+                    placeholder={`${translations.translate(
+                      'main.search.findData',
+                      {
+                        totalDatasets
+                      }
+                    )}`}
                     onSubmit={searchString =>
                       router.push({
                         pathname: PATHNAME.FIND_DATA,

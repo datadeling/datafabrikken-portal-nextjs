@@ -55,7 +55,11 @@
     "collapsed": "Vis hele beskrivelsen"
   },
   "main": {
-    "findData": "Søk blant {totalDatasets} datasett",
+    "search": {
+      "findData": "Søk blant {totalDatasets} datasett",
+      "clear": "Tøm søket",
+      "search": "Søk"
+    },
     "seeAllPostsCommunity": "Se alle innlegg i Datalandsbyen"
   },
   "findDataPage": {
