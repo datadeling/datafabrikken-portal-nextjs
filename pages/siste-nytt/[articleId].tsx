@@ -6,7 +6,7 @@ import { getCmsPage, getNews } from '../../services/api/cms-api/news';
 import Root from '../../components/root';
 import Article from '../../components/article';
 import Breadcrumbs from '../../components/breadcrumbs';
-import Head from 'next/head';
+import Head from '../../components/head';
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
   const cmsPage = await getCmsPage(params?.articleId as string);
@@ -37,13 +37,11 @@ const ArticlePage: FC<Props> = ({ cmsPage }) => {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta property='og:title' content={title} />
-        <meta name='description' content={ingress} />
-        <meta name='og:description' content={ingress} />
-        {thumbnailSrc && <meta property='og:image' content={thumbnailSrc} />}
-      </Head>
+      <Head
+        title={title}
+        description={ingress}
+        previewImageSrc={thumbnailSrc}
+      />
       <Breadcrumbs dynamicPageTitles={[cmsPage?.title ?? '']} />
       <Root invertColor>{cmsPage && <Article article={cmsPage} />}</Root>
     </>

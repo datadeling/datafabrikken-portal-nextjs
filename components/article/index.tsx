@@ -1,5 +1,4 @@
 import React, { FC, memo } from 'react';
-import Head from 'next/head';
 
 import {
   getParagraphBodyProcessed,
@@ -19,6 +18,7 @@ import CommunityIllustration from '../../public/images/illustration-community.in
 import CourseIllustration from '../../public/images/illustration-course.inline.svg';
 import type { CmsArticle } from '../../types';
 import { PARAGRAPH } from '../../types/enums';
+import Head from '../head';
 
 interface Props {
   article: Partial<CmsArticle>;
@@ -123,13 +123,11 @@ const Article: FC<Props> = ({ article }) => {
 
   return (
     <SC.Article>
-      <Head>
-        <title>{title}</title>
-        <meta property='og:title' content={title} />
-        <meta name='description' content={ingress} />
-        <meta name='og:description' content={ingress} />
-        {thumbnailSrc && <meta property='og:image' content={thumbnailSrc} />}
-      </Head>
+      <Head
+        title={title}
+        description={ingress}
+        previewImageSrc={thumbnailSrc}
+      />
       <SC.Header>
         <SC.Container $variant={ContainerVariant.WIDTH_720}>
           <SC.Title>{title}</SC.Title>

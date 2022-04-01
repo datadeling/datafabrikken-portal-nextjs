@@ -1,6 +1,5 @@
 import React, { memo, FC, useState } from 'react';
 import { compose } from 'redux';
-import Head from 'next/head';
 
 import SC from '../../styles/pages/veiledning';
 import ErrorPage from '../../components/error-page';
@@ -26,6 +25,7 @@ import {
 import { InfoBoxStrapi } from '../../components/info-box';
 import { initializeApollo } from '../../utils/apollo/apolloClient';
 import Breadcrumbs from '../../components/breadcrumbs';
+import Head from '../../components/head';
 
 export async function getStaticProps() {
   const sixHoursInSeconds = 21600;
@@ -49,13 +49,13 @@ interface Props {
 }
 
 const GuidancePage: FC<Props> = ({ guides, topArticle, providers }) => {
-  const pageTitle = topArticle?.title ?? null;
+  const pageTitle = topArticle?.title ?? undefined;
   const ingressParagraph = isBasicParagraph(topArticle?.content?.[0])
-    ? topArticle?.content?.[0].content ?? null
-    : null;
+    ? topArticle?.content?.[0].content ?? undefined
+    : undefined;
   const coursesParagraph = isBasicParagraph(topArticle?.content?.[1])
-    ? topArticle?.content?.[1]?.content ?? null
-    : null;
+    ? topArticle?.content?.[1]?.content ?? undefined
+    : undefined;
 
   const [selectedTargetGroup, setSelectedTargetGroup] =
     useState<Enum_Guide_Primarytargetgroup>();
@@ -79,15 +79,7 @@ const GuidancePage: FC<Props> = ({ guides, topArticle, providers }) => {
 
   return (
     <>
-      {pageTitle && ingressParagraph && (
-        <Head>
-          <title>{pageTitle}</title>
-          <meta property='og:title' content={pageTitle} />
-
-          <meta name='description' content={ingressParagraph} />
-          <meta name='og:description' content={ingressParagraph} />
-        </Head>
-      )}
+      <Head title={pageTitle} description={ingressParagraph} />
       <Breadcrumbs />
       <Root>
         <SC.Header>
