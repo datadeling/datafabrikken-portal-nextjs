@@ -13,7 +13,7 @@ import FlameIcon from '../../../public/images/icon-flame.inline.svg';
 import InfoIcon from '../../../public/images/icon-info.inline.svg';
 import LoginIcon from '../../../public/images/icon-login.inline.svg';
 
-const { COMMUNITY_API_HOST } = env;
+const { COMMUNITY_API_HOST } = env.clientEnv;
 
 interface Props {}
 

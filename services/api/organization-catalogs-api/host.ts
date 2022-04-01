@@ -7,9 +7,11 @@ interface Props {
   data?: any;
 }
 
+const { ORGANIZATION_CATALOGUE_HOST } = env.clientEnv;
+
 export const organizationsCatalogApi = ({ path, method, data }: Props) =>
   axios({
-    url: `${env.ORGANIZATION_CATALOGUE_HOST}${path}`,
+    url: `${ORGANIZATION_CATALOGUE_HOST}${path}`,
     headers: {
       Accept: 'application/json'
     },

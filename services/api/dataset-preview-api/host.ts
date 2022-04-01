@@ -2,7 +2,8 @@ import axios from 'axios';
 
 import env from '../../../env';
 
-const { FDK_PORTAL_HOST, FDK_DATASET_PREVIEW_API_KEY } = env;
+const { FDK_PORTAL_HOST } = env.clientEnv;
+const { FDK_DATASET_PREVIEW_API_KEY } = env.serverEnv;
 
 interface Props {
   method: any;

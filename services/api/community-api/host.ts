@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import env from '../../../env';
 
-const { COMMUNITY_API_HOST } = env;
+const { COMMUNITY_API_HOST } = env.clientEnv;
 
 interface Props {
   path: string;

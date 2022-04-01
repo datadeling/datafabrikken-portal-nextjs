@@ -6,7 +6,7 @@ import isEqual from 'lodash/isEqual';
 import env from '../../env';
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
-const { STRAPI_API_HOST } = env;
+const { STRAPI_API_HOST } = env.clientEnv;
 
 let apolloClient;
 

@@ -10,6 +10,8 @@ import InfoBoxBody from '../info-box-body';
 import InfoBoxImage from '../info-box-image';
 import env from '../../../../env';
 
+const { STRAPI_API_HOST } = env.clientEnv;
+
 interface Props {
   infoBox: ComponentBasicInfobox;
   invertColor?: boolean;
@@ -23,11 +25,11 @@ const InfoBoxStrapi: FC<Props> = ({
     <InfoBoxIcon>
       {illustration?.url && (
         <InfoBoxImage
-          src={`${env.STRAPI_API_HOST}${illustration.url}`}
+          src={`${STRAPI_API_HOST}${illustration.url}`}
           alt={illustration.alternativeText ?? `${id}-illustration`}
           hoverSrc={
             hoverIllustration?.url &&
-            `${env.STRAPI_API_HOST}${hoverIllustration.url}`
+            `${STRAPI_API_HOST}${hoverIllustration.url}`
           }
           hoverAlt={hoverIllustration?.alternativeText ?? `${id}-illustration`}
         />

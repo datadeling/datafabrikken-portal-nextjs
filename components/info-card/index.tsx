@@ -7,7 +7,7 @@ import Translation from '../translation';
 import ExternalLinkIcon from '../icons/external-link-icon';
 import translations from '../../services/translations';
 
-const { STRAPI_API_HOST } = env;
+const { STRAPI_API_HOST } = env.clientEnv;
 
 interface ExternalProps {
   infoObject: any;

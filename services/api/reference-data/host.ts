@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import env from '../../../env';
 
-const { REFERENCE_DATA_HOST } = env;
+const { REFERENCE_DATA_HOST } = env.clientEnv;
 
 interface Props {
   path: string;

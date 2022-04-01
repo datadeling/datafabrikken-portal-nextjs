@@ -44,7 +44,6 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN npm i sharp
 COPY package.json package-lock.json ./
-COPY .env ./
 RUN npm ci
 FROM node:16-alpine AS builder
 WORKDIR /app

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import env from '../../../env';
 
+const { ORGANIZATION_HOST } = env.clientEnv;
 interface Props {
   path: string;
   method: any;
@@ -10,7 +11,7 @@ interface Props {
 
 export const organizationsApi = ({ path, method, data, params }: Props) =>
   axios({
-    url: `${env.ORGANIZATION_HOST}${path}`,
+    url: `${ORGANIZATION_HOST}${path}`,
     method,
     data,
     params

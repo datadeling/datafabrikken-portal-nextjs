@@ -1,5 +1,3 @@
-import type { EnvironmentVariables } from '../../types';
-
 function assertIsDefined<T>(
   key: string,
   value: T
@@ -9,9 +7,7 @@ function assertIsDefined<T>(
   }
 }
 
-export const validateEnv = (
-  env: EnvironmentVariables
-): EnvironmentVariables => {
+export function validateEnv<T>(env: T): T {
   Object.entries(env).forEach(([key, value]) => assertIsDefined(key, value));
   return env;
-};
+}
