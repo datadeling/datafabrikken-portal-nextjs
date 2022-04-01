@@ -16,7 +16,8 @@ interface Props {}
 const Header: FC<Props> = () => {
   const [isDropdownMenuOpen, setIsDropdownMenuOpen] = useState(false);
 
-  const bodyElement = document.querySelector('body');
+  const bodyElement =
+    typeof window !== 'undefined' && document.querySelector('body');
 
   const openDropdownMenu = () => {
     setIsDropdownMenuOpen(true);

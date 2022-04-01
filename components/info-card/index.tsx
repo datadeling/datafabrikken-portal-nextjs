@@ -5,10 +5,7 @@ import env from '../../env';
 import RoundedTag, { Variant } from '../rounded-tag';
 import Translation from '../translation';
 import ExternalLinkIcon from '../icons/external-link-icon';
-import {
-  withTranslations,
-  Props as TranslationsProps
-} from '../../providers/translations';
+import translations from '../../services/translations';
 
 const { STRAPI_API_HOST } = env;
 
@@ -17,7 +14,7 @@ interface ExternalProps {
   provider?: any;
 }
 
-interface Props extends ExternalProps, TranslationsProps {}
+interface Props extends ExternalProps {}
 
 const InfoCard: FC<Props> = ({
   infoObject: {
@@ -31,8 +28,7 @@ const InfoCard: FC<Props> = ({
     numberOfModules,
     contentType
   },
-  provider,
-  translationsService
+  provider
 }) => (
   <SC.Card href={link} target='_blank'>
     {featureImage?.url && (
@@ -42,7 +38,7 @@ const InfoCard: FC<Props> = ({
       <SC.Tags>
         {type && (
           <RoundedTag as='div'>
-            <span>{translationsService.translate(`infoCard.${type}`)}</span>
+            <span>{translations.translate(`infoCard.${type}`)}</span>
           </RoundedTag>
         )}
         {free && (
@@ -61,32 +57,28 @@ const InfoCard: FC<Props> = ({
       <SC.CourseFacts>
         {durationInMinutes && (
           <SC.Fact
-            title={`${durationInMinutes} ${translationsService.translate(
+            title={`${durationInMinutes} ${translations.translate(
               'infoCard.minutes'
             )}`}
           >
             <SC.ClockIcon />
-            {`${durationInMinutes} ${translationsService.translate(
+            {`${durationInMinutes} ${translations.translate(
               'infoCard.minutes'
             )} ${
               contentType
-                ? translationsService.translate(
-                    `infoCard.contentType.${contentType}`
-                  )
+                ? translations.translate(`infoCard.contentType.${contentType}`)
                 : ''
             }`}
           </SC.Fact>
         )}
         {numberOfModules && (
           <SC.Fact
-            title={`${numberOfModules} ${translationsService.translate(
+            title={`${numberOfModules} ${translations.translate(
               'infoCard.modules'
             )}`}
           >
             <SC.BoxIcon />
-            {`${numberOfModules} ${translationsService.translate(
-              'infoCard.modules'
-            )}`}
+            {`${numberOfModules} ${translations.translate('infoCard.modules')}`}
           </SC.Fact>
         )}
       </SC.CourseFacts>
@@ -97,15 +89,13 @@ const InfoCard: FC<Props> = ({
           src={`${STRAPI_API_HOST}${provider.logo.url}`}
           alt={
             provider.logo?.alternativeText ??
-            translationsService.translate('infoCard.providerLogo')
+            translations.translate('infoCard.providerLogo')
           }
         />
-        {`${translationsService.translate('infoCard.providerText')} ${
-          provider.title
-        }`}
+        {`${translations.translate('infoCard.providerText')} ${provider.title}`}
       </SC.CourseProvider>
     )}
   </SC.Card>
 );
 
-export default compose<FC<ExternalProps>>(memo, withTranslations)(InfoCard);
+export default compose<FC<ExternalProps>>(memo)(InfoCard);

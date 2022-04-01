@@ -1,4 +1,4 @@
 {
-  "presets": ["next/babel", "@babel/preset-env", "@babel/preset-react"],
+  "presets": ["next/babel", "@babel/preset-env", ["@babel/preset-react", {"runtime": "automatic"}]],
   "plugins": ["styled-components", "@babel/plugin-syntax-dynamic-import", "@babel/plugin-proposal-class-properties", "@babel/plugin-transform-runtime"]
 }

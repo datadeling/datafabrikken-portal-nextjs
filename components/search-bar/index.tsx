@@ -11,8 +11,8 @@ import React, {
 } from 'react';
 
 import SC from './styled';
-import { getParameter } from '../../utils/location-helper';
 import translations from '../../services/translations';
+import { useRouter } from 'next/router';
 
 interface Props {
   placeholder: string;
@@ -33,11 +33,14 @@ const SearchBar: FC<Props> = ({
   onClick,
   hideSearchIcon
 }) => {
-  const [searchQuery, setSearchQuery] = useState<string>(getParameter('q'));
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState<string>(
+    (router.query?.q as string) ?? ''
+  );
 
   useEffect(() => {
-    setSearchQuery(getParameter('q'));
-  }, [getParameter('q')]);
+    setSearchQuery(router.query?.q as string);
+  }, [router.query?.q as string]);
 
   const clearSearchField = useCallback((e: FormEvent) => {
     e.preventDefault();

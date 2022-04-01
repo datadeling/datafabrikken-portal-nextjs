@@ -3,28 +3,31 @@ import LocalizedStrings from 'react-localization';
 import nb from '../../l10n/nb.json';
 
 import type { TextLanguage } from '../../types';
-import type { ChangeLanguageCallback, FormatObject, Formatted } from './types';
+import type { FormatObject, Formatted } from './types';
 
 import { Language } from './enums';
+import { useRouter } from 'next/router';
+
+export const getLocale = () => {
+  const { locale } = useRouter();
+  return locale;
+};
 
 class TranslationsService {
   private language: Language;
-
-  private changeLanguageCallback?: ChangeLanguageCallback;
 
   private readonly translations = new LocalizedStrings({
     [Language.NB]: nb
   });
 
-  public init(language: Language, callback?: ChangeLanguageCallback) {
+  public init(language: Language) {
     this.language = language;
-    this.changeLanguageCallback = callback;
 
     this.translations.setLanguage(this.language);
   }
 
   public getLanguage(): Language {
-    return this.language;
+    return (getLocale() as Language) ?? Language.NB;
   }
 
   public translate(key: string, values?: FormatObject): Formatted[] | string {
@@ -50,14 +53,6 @@ class TranslationsService {
       textObj.en ||
       null
     );
-  }
-
-  public changeLanguage(language: Language): void {
-    this.language = language;
-
-    this.translations.setLanguage(this.language);
-
-    this.changeLanguageCallback?.(this.language);
   }
 
   public getTranslateTextWithLanguageCode(
