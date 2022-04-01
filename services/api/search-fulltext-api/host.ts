@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import env from '../../../env';
 
-const { SEARCH_FULLTEXT_HOST } = env;
+const { SEARCH_FULLTEXT_HOST } = env.clientEnv;
 
 interface Props {
   path: string;

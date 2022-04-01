@@ -1,8 +1,8 @@
 import axios from 'axios';
 import env from '../../../env';
-import { CommunityPost, CommunityTopic } from '../../../types';
+import type { CommunityPost, CommunityTopic } from '../../../types';
 
-const { COMMUNITY_API_HOST } = env;
+const { COMMUNITY_API_HOST } = env.clientEnv;
 
 export const searchCommunity = (queryTerm: string) =>
   axios

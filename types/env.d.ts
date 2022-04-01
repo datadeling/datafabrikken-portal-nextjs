@@ -1,7 +1,6 @@
-export interface EnvironmentVariables {
+export interface ClientEnvironmentVariables {
   ENV: string;
   OIDC_ISSUER: string;
-  OIDC_CLIENT_SECRET: string;
   SEARCH_FULLTEXT_HOST: string;
   REFERENCE_DATA_HOST: string;
   FDK_PORTAL_HOST: string;
@@ -11,7 +10,11 @@ export interface EnvironmentVariables {
   ORGANIZATION_HOST: string;
   ORGANIZATION_CATALOGUE_HOST: string;
   REPORT_API_HOST: string;
-  FDK_DATASET_PREVIEW_API_KEY: string;
   STRAPI_API_HOST: string;
   FDK_USER_FEEDBACK_SERVICE_BASE_URI: string;
+}
+
+export interface ServerEnvironmentVariables {
+  OIDC_CLIENT_SECRET: string;
+  FDK_DATASET_PREVIEW_API_KEY: string;
 }

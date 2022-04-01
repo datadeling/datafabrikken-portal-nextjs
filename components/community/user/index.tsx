@@ -9,7 +9,7 @@ import SC from './styled';
 import type { CommunityUser } from '../../../types';
 import { CommunityTemplateTag } from '../../../types/enums';
 
-const { COMMUNITY_API_HOST } = env;
+const { COMMUNITY_API_HOST } = env.clientEnv;
 
 interface Props {
   user: CommunityUser;

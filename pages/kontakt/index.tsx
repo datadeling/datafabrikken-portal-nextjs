@@ -13,7 +13,7 @@ import { initializeApollo } from '../../utils/apollo/apolloClient';
 
 import SC from '../../styles/pages/kontakt';
 
-const { STRAPI_API_HOST } = env;
+const { STRAPI_API_HOST } = env.clientEnv;
 
 export async function getStaticProps() {
   const sixHoursInSeconds = 21600;
