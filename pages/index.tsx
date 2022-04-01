@@ -101,9 +101,9 @@ const MainPage: FC<Props> = ({
     initAnimation();
   }, []);
 
-  const modules = cmsPage?.field_modules ?? [];
-  const firstElement = modules?.shift();
-  const secondElement = modules?.shift();
+  const [firstElement, secondElement, ...modules] =
+    cmsPage?.field_modules ?? [];
+
   return (
     <>
       {firstElement?.field_title && (
