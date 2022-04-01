@@ -12,6 +12,7 @@ import React, {
 
 import SC from './styled';
 import { getParameter } from '../../utils/location-helper';
+import translations from '../../services/translations';
 
 interface Props {
   placeholder: string;
@@ -68,12 +69,12 @@ const SearchBar: FC<Props> = ({
       />
       {searchQuery && (
         <SC.ClearButton type='button' onClick={clearSearchField}>
-          <SC.ClearIcon />
+          <SC.ClearIcon alt={translations.translate('main.search.clear')} />
         </SC.ClearButton>
       )}
       {hideSearchIcon ? null : (
         <SC.SearchButton>
-          <SC.SearchIcon />
+          <SC.SearchIcon alt={translations.translate('main.search.search')} />
         </SC.SearchButton>
       )}
     </SC.SearchBar>
