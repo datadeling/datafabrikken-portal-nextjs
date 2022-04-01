@@ -16,7 +16,7 @@ import {
 import { isBasicParagraph, isProvider } from '../../utils/strapi';
 import Breadcrumbs from '../../components/breadcrumbs';
 import { initializeApollo } from '../../utils/apollo/apolloClient';
-import Head from 'next/head';
+import Head from '../../components/head';
 
 export async function getStaticProps() {
   const sixHoursInSeconds = 21600;
@@ -40,10 +40,10 @@ interface Props {
 }
 
 const CoursesPage: FC<Props> = ({ courses, providers, topArticle }) => {
-  const pageTitle = topArticle?.title ?? null;
+  const pageTitle = topArticle?.title ?? undefined;
   const pageDescription = isBasicParagraph(topArticle?.content?.[0])
-    ? topArticle?.content?.[0].content ?? null
-    : null;
+    ? topArticle?.content?.[0].content ?? undefined
+    : undefined;
 
   const providersById =
     providers?.reduce(
@@ -59,15 +59,7 @@ const CoursesPage: FC<Props> = ({ courses, providers, topArticle }) => {
 
   return (
     <>
-      {pageTitle && pageDescription && (
-        <Head>
-          <title>{pageTitle}</title>
-          <meta property='og:title' content={pageTitle} />
-
-          <meta name='description' content={pageDescription} />
-          <meta name='og:description' content={pageDescription} />
-        </Head>
-      )}
+      <Head title={pageTitle} description={pageDescription} />
       <Breadcrumbs />
       <Root>
         <SC.Header>

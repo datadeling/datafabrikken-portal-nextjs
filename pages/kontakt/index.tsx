@@ -1,5 +1,4 @@
 import React, { FC, memo } from 'react';
-import Head from 'next/head';
 import { compose } from 'redux';
 import Breadcrumbs from '../../components/breadcrumbs';
 import Root from '../../components/root';
@@ -12,6 +11,7 @@ import {
 import { initializeApollo } from '../../utils/apollo/apolloClient';
 
 import SC from '../../styles/pages/kontakt';
+import Head from '../../components/head';
 
 const { STRAPI_API_HOST } = env.clientEnv;
 
@@ -35,11 +35,11 @@ interface Props {
 }
 
 const FindDataPage: FC<Props> = ({ contactPage }) => {
-  const pageTitle = contactPage?.title;
+  const pageTitle = contactPage?.title ?? undefined;
 
   const ingress =
     contactPage?.content?.[0]?.__typename === 'ComponentBasicParagraph'
-      ? contactPage.content[0].content
+      ? contactPage.content[0].content ?? undefined
       : undefined;
 
   const contacts = (contactPage?.content?.filter(
@@ -48,15 +48,7 @@ const FindDataPage: FC<Props> = ({ contactPage }) => {
 
   return (
     <>
-      {pageTitle && ingress && (
-        <Head>
-          <title>{pageTitle}</title>
-          <meta property='og:title' content={pageTitle} />
-
-          <meta name='description' content={ingress} />
-          <meta name='og:description' content={ingress} />
-        </Head>
-      )}
+      <Head title={pageTitle} description={ingress} />
       <Breadcrumbs />
       <Root>
         <SC.Header>

@@ -45,7 +45,7 @@ import GuideIllustration from '../public/images/illustration-guide.inline.svg';
 import BoxOfDataIllustration from '../public/images/illustration-box-of-data.inline.svg';
 import ArrowDownIcon from '../public/images/icon-arrow-down.inline.svg';
 import translations from '../services/translations';
-import Head from 'next/head';
+import Head from '../components/head';
 
 const articleId = 'bb81d27f-acf1-4fc6-9bc3-f289bf79207f';
 
@@ -106,18 +106,10 @@ const MainPage: FC<Props> = ({
 
   return (
     <>
-      {firstElement?.field_title && (
-        <Head>
-          <title>{translations.translate('title') as string}</title>
-          <meta
-            property='og:title'
-            content={translations.translate('title') as string}
-          />
-
-          <meta name='description' content={firstElement.field_title} />
-          <meta name='og:description' content={firstElement.field_title} />
-        </Head>
-      )}
+      <Head
+        title={translations.translate('title') as string}
+        description={firstElement?.field_title}
+      />
       <Root>
         <SC.Container>
           <SC.BannerSection>
