@@ -1,8 +1,8 @@
 import type {
   ClientEnvironmentVariables,
   ServerEnvironmentVariables
-} from './types';
-import { validateEnv } from './utils/common';
+} from './src/types';
+import { validateEnv } from './src/utils/common';
 
 const ENV = process.env.NEXT_PUBLIC_ENV! ?? 'staging';
 const OIDC_ISSUER = process.env.NEXT_PUBLIC_OIDC_ISSUER! ?? 'https://sso.staging.fellesdatakatalog.digdir.no/auth/realms/fdk';
