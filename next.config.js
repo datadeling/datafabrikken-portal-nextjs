@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  compilerOptions: {
+    baseUrl: 'src'
+  },
   compiler: {
     // ssr and displayName are configured by default
     styledComponents: true

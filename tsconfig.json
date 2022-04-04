@@ -35,7 +35,7 @@
     ],
     "typeRoots": [
       "node_modules/@types",
-      "types/*"
+      "src/types/*"
     ],
     "noEmit": true,
     "incremental": true
