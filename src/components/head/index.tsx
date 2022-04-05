@@ -10,7 +10,7 @@ interface Props {
 const Head: FC<Props> = ({
   title = 'Datafabrikken',
   description = 'Datafabrikken er en webapplikasjon som gir deg muligheten til å lage og bruke digitale kilder til å utvikle dine data.',
-  previewImageSrc = 'https://cms.datafabrikken.norge.no/uploads/Screenshot_2022_02_01_at_15_44_36_Datafabrikken_a4b77a0c0a.png'
+  previewImageSrc = 'https://cms.datafabrikken.norge.no/uploads/featured_image_e050281eed.jpg'
 }) => (
   <NextHead>
     {title && (
