@@ -68,7 +68,7 @@ const Footer: FC<Props> = () => (
           </SC.LinkTitle>
           <SC.LinkList>
             <li>
-              <Link href={PATHNAME.FIND_DATA} passHref>
+              <Link href={PATHNAME.FIND_DATA} passHref prefetch={false}>
                 <a>
                   <Translation id='footer.linkSection.links.findData' />
                 </a>
@@ -89,14 +89,14 @@ const Footer: FC<Props> = () => (
               </Link>
             </li>
             <li>
-              <Link href={PATHNAME.COMMUNITY} passHref>
+              <Link href={PATHNAME.COMMUNITY} passHref prefetch={false}>
                 <a>
                   <Translation id='footer.linkSection.links.community' />
                 </a>
               </Link>
             </li>
             <li>
-              <Link href={PATHNAME.ORGANIZATION} passHref>
+              <Link href={PATHNAME.ORGANIZATION} passHref prefetch={false}>
                 <a>
                   <Translation id='footer.linkSection.links.organizations' />
                 </a>
