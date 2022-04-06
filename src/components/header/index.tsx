@@ -53,7 +53,7 @@ const Header: FC<Props> = () => {
             </Link>
           </li>
           <li>
-            <Link href={PATHNAME.FIND_DATA} passHref>
+            <Link href={PATHNAME.FIND_DATA} passHref prefetch={false}>
               <SC.Link>
                 <Translation id='header.findData' />
               </SC.Link>
@@ -81,7 +81,7 @@ const Header: FC<Props> = () => {
             </Link>
           </li>
           <li>
-            <Link href={PATHNAME.COMMUNITY} passHref>
+            <Link href={PATHNAME.COMMUNITY} passHref prefetch={false}>
               <SC.Link>
                 <Translation id='header.community' />
               </SC.Link>
