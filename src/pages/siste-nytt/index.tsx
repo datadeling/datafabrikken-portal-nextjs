@@ -1,3 +1,4 @@
+import type { GetServerSidePropsResult } from 'next';
 import React, { FC, memo } from 'react';
 import { compose } from 'redux';
 
@@ -19,7 +20,9 @@ import { getNews } from '../../services/api/cms-api/news';
 import { PAGE_PROPERTY, PATHNAME } from '../../types/enums';
 import type { CmsArticle } from '../../types';
 
-export async function getStaticProps() {
+export async function getServerSideProps(): Promise<
+  GetServerSidePropsResult<Props>
+> {
   const cmsNews = await getNews(PAGE_PROPERTY.NEWS_LIMIT);
 
   return {
