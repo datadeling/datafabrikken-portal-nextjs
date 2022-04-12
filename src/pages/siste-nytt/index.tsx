@@ -20,12 +20,14 @@ import { PAGE_PROPERTY, PATHNAME } from '../../types/enums';
 import type { CmsArticle } from '../../types';
 
 export async function getStaticProps() {
+  const fiveMinutesInSeconds = 300;
   const cmsNews = await getNews(PAGE_PROPERTY.NEWS_LIMIT);
 
   return {
     props: {
       cmsNews
-    }
+    },
+    revalidate: fiveMinutesInSeconds
   };
 }
 
