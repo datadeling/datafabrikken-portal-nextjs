@@ -28,7 +28,7 @@ import Breadcrumbs from '../../components/breadcrumbs';
 import Head from '../../components/head';
 
 export async function getStaticProps() {
-  const sixHoursInSeconds = 21600;
+  const fiveMinutesInSeconds = 300;
   const apolloClient = initializeApollo();
   const { data } = await apolloClient.query({
     query: GetGuidanceDocument
@@ -38,7 +38,7 @@ export async function getStaticProps() {
     props: {
       ...data
     },
-    revalidate: sixHoursInSeconds
+    revalidate: fiveMinutesInSeconds
   };
 }
 

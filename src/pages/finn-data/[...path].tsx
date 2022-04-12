@@ -24,6 +24,7 @@ const articleIds: { [pathname: string]: { [key: string]: string } } = {
 };
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
+  const fiveMinutesInSeconds = 300;
   const path =
     params?.path && params?.path instanceof Array ? params?.path : [];
   const articleId = articleIds[`${PATHNAME.FIND_DATA}/${path.join('/')}`]?.nb;
@@ -32,7 +33,8 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   return {
     props: {
       cmsPage
-    }
+    },
+    revalidate: fiveMinutesInSeconds
   };
 }
 

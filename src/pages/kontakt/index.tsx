@@ -16,7 +16,7 @@ import Head from '../../components/head';
 const { STRAPI_API_HOST } = env.clientEnv;
 
 export async function getStaticProps() {
-  const sixHoursInSeconds = 21600;
+  const fiveMinutesInSeconds = 300;
   const apolloClient = initializeApollo();
   const { data } = await apolloClient.query({
     query: GetContactsDocument
@@ -26,7 +26,7 @@ export async function getStaticProps() {
     props: {
       ...data
     },
-    revalidate: sixHoursInSeconds
+    revalidate: fiveMinutesInSeconds
   };
 }
 

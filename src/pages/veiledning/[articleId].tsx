@@ -16,7 +16,7 @@ export const articleIds: { [pathname: string]: string } = {
 };
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const sixHoursInSeconds = 21600;
+  const fiveMinutesInSeconds = 300;
   const apolloClient = initializeApollo();
   const articleId = articleIds[`${PATHNAME.GUIDANCE}/${params?.articleId}`];
 
@@ -31,7 +31,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     props: {
       ...data
     },
-    revalidate: sixHoursInSeconds
+    revalidate: fiveMinutesInSeconds
   };
 }
 

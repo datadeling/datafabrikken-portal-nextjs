@@ -9,12 +9,14 @@ import Breadcrumbs from '../../components/breadcrumbs';
 import Head from '../../components/head';
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
+  const fiveMinutesInSeconds = 300;
   const cmsPage = await getCmsPage(params?.articleId as string);
 
   return {
     props: {
       cmsPage
-    }
+    },
+    revalidate: fiveMinutesInSeconds
   };
 }
 
