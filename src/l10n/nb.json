@@ -566,5 +566,9 @@
       "provider": "Vis ressurser for datatilbydere",
       "consumer": "Vis ressurser for datakonsumenter"
     }
+  },
+  "siteMapPage": {
+    "title": "Nettstedkart",
+    "subTitle": "I det hierarkiske nettstedkartet finner du liste over sider nettstedet består av."
   }
 }

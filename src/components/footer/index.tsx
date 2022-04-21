@@ -128,7 +128,7 @@ const Footer: FC<Props> = () => (
               </a>
             </li>
             <li>
-              <a href='/sitemap.xml'>
+              <a href={PATHNAME.SITEMAP}>
                 <Translation id='footer.linkSection.links.sitemap' />
               </a>
             </li>
