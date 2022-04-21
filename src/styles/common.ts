@@ -12,7 +12,7 @@ export default css`
   }
 
   body,
-  #root {
+  #__next {
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
