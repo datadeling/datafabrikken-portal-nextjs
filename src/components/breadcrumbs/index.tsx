@@ -11,9 +11,11 @@ import translations from '../../services/translations';
 const rootPathRegex = '^/$';
 const subPathRegex = '/[a-zA-Z0-9-_]+';
 
-interface Route {
+export interface Route {
   pathPattern: RegExp;
   breadcrumb: Breadcrumb;
+  showInSiteMap?: boolean;
+  siteMapPath?: string;
 }
 
 interface Breadcrumb {
@@ -26,7 +28,7 @@ const routeNotFound: Breadcrumb = {
   dynamic: false
 };
 
-const routes: Route[] = [
+export const routes: Route[] = [
   {
     pathPattern: new RegExp(rootPathRegex),
     breadcrumb: {
@@ -39,14 +41,18 @@ const routes: Route[] = [
     breadcrumb: {
       title: translations.translate('header.about') as string,
       dynamic: false
-    }
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.ABOUT
   },
   {
     pathPattern: new RegExp(`^${PATHNAME.FIND_DATA}$`),
     breadcrumb: {
       title: translations.translate('header.findData') as string,
       dynamic: false
-    }
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.FIND_DATA
   },
   {
     pathPattern: new RegExp(
@@ -77,7 +83,9 @@ const routes: Route[] = [
     breadcrumb: {
       title: translations.translate('header.news') as string,
       dynamic: false
-    }
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.NEWS
   },
   {
     pathPattern: new RegExp(`^${PATHNAME.NEWS}${subPathRegex}$`),
@@ -90,14 +98,18 @@ const routes: Route[] = [
         'footer.linkSection.links.contact'
       ) as string,
       dynamic: false
-    }
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.CONTACT
   },
   {
     pathPattern: new RegExp(`^${PATHNAME.COMMUNITY}$`),
     breadcrumb: {
       title: translations.translate('header.community') as string,
       dynamic: false
-    }
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.COMMUNITY
   },
   {
     pathPattern: new RegExp(
@@ -155,7 +167,9 @@ const routes: Route[] = [
     breadcrumb: {
       title: translations.translate('header.organizations') as string,
       dynamic: false
-    }
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.ORGANIZATION
   },
   {
     pathPattern: new RegExp(
@@ -177,18 +191,31 @@ const routes: Route[] = [
     breadcrumb: {
       title: translations.translate('header.courses') as string,
       dynamic: false
-    }
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.COURSES
   },
   {
     pathPattern: new RegExp(`^${PATHNAME.GUIDANCE}$`),
     breadcrumb: {
       title: translations.translate('header.guidance') as string,
       dynamic: false
-    }
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.GUIDANCE
   },
   {
     pathPattern: new RegExp(`^${PATHNAME.GUIDANCE}${subPathRegex}$`),
     breadcrumb: { title: undefined, dynamic: true }
+  },
+  {
+    pathPattern: new RegExp(`^${PATHNAME.SITEMAP}$`),
+    breadcrumb: {
+      title: translations.translate(
+        'footer.linkSection.links.sitemap'
+      ) as string,
+      dynamic: false
+    }
   }
 ];
 
