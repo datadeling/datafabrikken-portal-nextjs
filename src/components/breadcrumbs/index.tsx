@@ -55,18 +55,10 @@ const routes: Route[] = [
     breadcrumb: { title: undefined, dynamic: true }
   },
   {
-    pathPattern: new RegExp(`^${PATHNAME.DATA_SOURCES}$`),
-    breadcrumb: { title: 'Oversikt over datakilder', dynamic: false }
-  },
-  {
     pathPattern: new RegExp(
       `^${PATHNAME.GUIDEANCE_AND_COMPETENCE}${PATHNAME.LEGAL_FRAMEWORK}${subPathRegex}$`
     ),
     breadcrumb: { title: undefined, dynamic: true }
-  },
-  {
-    pathPattern: new RegExp(`^${PATHNAME.GUIDEANCE_AND_COMPETENCE}$`),
-    breadcrumb: { title: 'Veiledere og kompetanse', dynamic: false }
   },
   {
     pathPattern: new RegExp(
