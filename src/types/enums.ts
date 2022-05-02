@@ -14,7 +14,6 @@ export enum PATHNAME {
   PRIVATE_SECTOR = '/privat-sektor',
   CONTACT = '/kontakt',
   LEGAL_FRAMEWORK = '/juridiske-rammer-bruk-av-data',
-  TEXT_FORMAT = '/tekst-format',
   DATASET_DETAILS = '/datasett',
   FDK_PUBLIC_SERVICES = '/public-services',
   FDK_DATA_SERVICES = '/dataservices',
