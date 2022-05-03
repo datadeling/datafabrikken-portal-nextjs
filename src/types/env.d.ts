@@ -12,6 +12,7 @@ export interface ClientEnvironmentVariables {
   REPORT_API_HOST: string;
   STRAPI_API_HOST: string;
   FDK_USER_FEEDBACK_SERVICE_BASE_URI: string;
+  MAILCHIMP_HOST: string;
 }
 
 export interface ServerEnvironmentVariables {

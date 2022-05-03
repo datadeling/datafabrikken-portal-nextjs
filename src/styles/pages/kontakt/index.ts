@@ -102,6 +102,10 @@ const TopInfo = styled.div`
   margin-bottom: ${theme.spacing('S8')};
 `;
 
+const NewsletterSubscribe = styled.div`
+  margin-top: ${theme.spacing('S24')};
+`;
+
 export default {
   Container,
   Content,
@@ -113,5 +117,6 @@ export default {
   ContactImage,
   ContactName,
   ContactEmail,
-  TopInfo
+  TopInfo,
+  NewsletterSubscribe
 };

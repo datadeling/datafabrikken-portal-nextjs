@@ -9,6 +9,7 @@ import {
   GetContactsDocument
 } from '../../services/api/generated/cms/graphql';
 import { initializeApollo } from '../../utils/apollo/apolloClient';
+import NewsletterSubscribe from '../../components/newsletter-subscribe';
 
 import SC from '../../styles/pages/kontakt';
 import Head from '../../components/head';
@@ -75,6 +76,9 @@ const FindDataPage: FC<Props> = ({ contactPage }) => {
               </SC.ContactCard>
             ))}
           </SC.ContactCardContainer>
+          <SC.NewsletterSubscribe>
+            <NewsletterSubscribe />
+          </SC.NewsletterSubscribe>
         </SC.Container>
       </Root>
     </>

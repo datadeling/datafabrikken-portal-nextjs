@@ -570,5 +570,14 @@
   "siteMapPage": {
     "title": "Nettstedkart",
     "subTitle": "I det hierarkiske nettstedkartet finner du liste over sider nettstedet består av."
+  },
+  "newsLetter": {
+    "title": "Få siste nytt først",
+    "description": "Meld deg på nyhetsbrevet!",
+    "validEmail": "Vennligst oppgi en gyldig e-postadresse.",
+    "sending": "Sender...",
+    "readMore": "Les mer under Personvern",
+    "setEmail": "Din e-postadresse",
+    "send": "Send påmelding"
   }
 }

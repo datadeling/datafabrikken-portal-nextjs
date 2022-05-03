@@ -46,6 +46,7 @@ import BoxOfDataIllustration from '../../public/images/illustration-box-of-data.
 import ArrowDownIcon from '../../public/images/icon-arrow-down.inline.svg';
 import translations from '../services/translations';
 import Head from '../components/head';
+import NewsletterSubscribe from '../components/newsletter-subscribe';
 
 const articleId = 'bb81d27f-acf1-4fc6-9bc3-f289bf79207f';
 
@@ -278,6 +279,7 @@ const MainPage: FC<Props> = ({
                   )
                 )}
               </SC.NewsRow>
+              <NewsletterSubscribe />
             </SC.MainContent>
           </SC.MainContentSection>
         </SC.Container>

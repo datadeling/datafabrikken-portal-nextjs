@@ -20,6 +20,8 @@ const REPORT_API_HOST = process.env.NEXT_PUBLIC_REPORT_API_HOST! ?? 'https://rep
 const STRAPI_API_HOST = process.env.NEXT_PUBLIC_STRAPI_API_HOST! ?? 'https://cms.datafabrikken.norge.no';
 const FDK_USER_FEEDBACK_SERVICE_BASE_URI =
   process.env.NEXT_PUBLIC_FDK_USER_FEEDBACK_SERVICE_BASE_URI! ?? 'https://europe-west1-digdir-cloud-functions.cloudfunctions.net/user-feedback-service-staging';
+const MAILCHIMP_HOST =
+  process.env.NEXT_PUBLIC_MAILCHIMP_HOST! ?? 'https://norge.us6.list-manage.com/subscribe/post?u=215524fdb6&amp;id=ba4ff3ce11';
 
 const clientEnv: ClientEnvironmentVariables = {
   ENV,
@@ -34,7 +36,8 @@ const clientEnv: ClientEnvironmentVariables = {
   ORGANIZATION_CATALOGUE_HOST,
   REPORT_API_HOST,
   STRAPI_API_HOST,
-  FDK_USER_FEEDBACK_SERVICE_BASE_URI
+  FDK_USER_FEEDBACK_SERVICE_BASE_URI,
+  MAILCHIMP_HOST
 };
 
 const OIDC_CLIENT_SECRET = process.env.OIDC_CLIENT_SECRET ?? '';
