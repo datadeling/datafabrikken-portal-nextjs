@@ -4,6 +4,7 @@ import { Colour, theme } from '../../styles/theme';
 
 type ScrollToTopProps = {
   $invertColor?: boolean;
+  $alternativeBackgroundColor?: boolean;
 };
 
 const ScrollButton = styled.button`
@@ -28,10 +29,12 @@ const ScrollButton = styled.button`
 const ScrollToTop = styled.div<ScrollToTopProps>`
   display: flex;
   justify-content: center;
-  margin-bottom: ${theme.spacing('S20')};
-  margin-top: ${theme.spacing('S20')};
+  padding-bottom: ${theme.spacing('S20')};
+  padding-top: ${theme.spacing('S20')};
   z-index: 10;
   font-weight: ${theme.fontWeight('FW400')};
+  background: ${({ $alternativeBackgroundColor }) =>
+    $alternativeBackgroundColor ? theme.colour(Colour.BLUE, 'B04') : 'none'};
 
   ${ScrollButton} {
     color: ${({ $invertColor }) =>

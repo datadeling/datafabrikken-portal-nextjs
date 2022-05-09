@@ -15,27 +15,40 @@ import {
   SC as InfoBoxSC
 } from '../../components/info-box';
 import SC from '../../styles/pages/siste-nytt';
-import { getNews } from '../../services/api/cms-api/news';
 import { PAGE_PROPERTY, PATHNAME } from '../../types/enums';
-import type { CmsArticle } from '../../types';
+import { initializeApollo } from '../../utils/apollo/apolloClient';
+import {
+  GetNewsArticlesDocument,
+  NewsArticle
+} from '../../services/api/generated/cms/graphql';
+import env from '../../../env';
+
+const { STRAPI_API_HOST } = env.clientEnv;
 
 export async function getStaticProps() {
   const fiveMinutesInSeconds = 300;
-  const cmsNews = await getNews(PAGE_PROPERTY.NEWS_LIMIT);
+  const apolloClient = initializeApollo();
+
+  const { data }: { data: NewsArticle[] } = await apolloClient.query({
+    query: GetNewsArticlesDocument,
+    variables: {
+      limit: PAGE_PROPERTY.NEWS_LIMIT
+    }
+  });
 
   return {
     props: {
-      cmsNews
+      ...data
     },
     revalidate: fiveMinutesInSeconds
   };
 }
 
 interface Props {
-  cmsNews?: CmsArticle[];
+  newsArticles: NewsArticle[];
 }
 
-const NewsPage: FC<Props> = ({ cmsNews }) => (
+const NewsPage: FC<Props> = ({ newsArticles }) => (
   <Root>
     <Container>
       <SC.Page>
@@ -43,28 +56,31 @@ const NewsPage: FC<Props> = ({ cmsNews }) => (
           <Translation id='news.title' />
         </SC.Title>
         <SC.Content>
-          {cmsNews?.map(
+          {newsArticles?.map(
             ({
               id,
-              created,
+              slug,
+              published,
+              published_at,
               title,
-              field_ingress: ingress,
-              field_image_some: image_some
+              subtitle,
+              socialImage
             }) => (
-              <InfoBox key={id} href={`${PATHNAME.NEWS}/${id}`}>
-                {image_some && (
+              <InfoBox key={id} href={`${PATHNAME.NEWS}/${slug}-${id}`}>
+                {socialImage && (
                   <InfoBoxImage
-                    src={image_some.thumbnail.download_urls.canonical}
-                    alt={image_some.thumbnail.meta.alt}
+                    src={`${STRAPI_API_HOST}${socialImage.url}`}
+                    alt={socialImage.alternativeText ?? ''}
                   />
                 )}
                 <InfoBoxSC.InfoBox.Date>
-                  {created && formatDate(dateStringToDate(created))}
+                  {published && formatDate(dateStringToDate(published))}
+                  {!published && formatDate(dateStringToDate(published_at))}
                 </InfoBoxSC.InfoBox.Date>
                 <InfoBoxTitle>
                   <h4>{title}</h4>
                 </InfoBoxTitle>
-                <InfoBoxBody>{ingress}</InfoBoxBody>
+                <InfoBoxBody>{subtitle}</InfoBoxBody>
               </InfoBox>
             )
           )}

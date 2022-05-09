@@ -1,27 +1,25 @@
 import React, { FC } from 'react';
-import { GetStaticPropsContext } from 'next';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 
-import { PATHNAME } from '../../types/enums';
-import Breadcrumbs from '../../components/breadcrumbs';
-import { initializeApollo } from '../../utils/apollo/apolloClient';
-import {
-  FancyArticle,
-  GetFancyArticleDocument
-} from '../../services/api/generated/cms/graphql';
-import ArticleStrapi from '../../components/article-strapi';
-import Root from '../../components/root';
-import Head from '../../components/head';
+import { PATHNAME } from '../types/enums';
+import Root from '../components/root';
+import Breadcrumbs from '../components/breadcrumbs';
+import { initializeApollo } from '../utils/apollo/apolloClient';
+import { GetFancyArticleDocument } from '../services/api/generated/cms/graphql';
+import ArticleStrapi from '../components/article-strapi';
+import Head from '../components/head';
 
-export const articleIds: { [pathname: string]: string } = {
-  [`${PATHNAME.GUIDANCE}/tilby-data`]: '7',
-  [`${PATHNAME.GUIDANCE}/bruke-data`]: '9'
+const articleIds: { [pathname: string]: number } = {
+  [`${PATHNAME.ABOUT}`]: 11,
+  [`${PATHNAME.COMMUNITY_ABOUT}`]: 13
 };
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
   const fiveMinutesInSeconds = 300;
-  const apolloClient = initializeApollo();
-  const articleId = articleIds[`${PATHNAME.GUIDANCE}/${params?.articleId}`];
+  const path = params?.path instanceof Array ? params?.path : [params?.path];
+  const articleId = articleIds[`/${path.join('/')}`];
 
+  const apolloClient = initializeApollo();
   const { data } = await apolloClient.query({
     query: GetFancyArticleDocument,
     variables: {
@@ -44,9 +42,7 @@ export async function getStaticPaths() {
   };
 }
 
-interface Props {
-  fancyArticle?: FancyArticle;
-}
+interface Props extends InferGetStaticPropsType<typeof getStaticProps> {}
 
 const ArticlePage: FC<Props> = ({ fancyArticle }) => (
   <>

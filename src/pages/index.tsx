@@ -31,8 +31,6 @@ import { dateStringToDate, formatDate } from '../utils/date';
 import SC from '../styles/pages';
 
 import factoryLottieJson from '../../public/images/factory.lottie.json';
-import { PATHNAME } from '../types/enums';
-import { getNews, getCmsPage } from '../services/api/cms-api/news';
 import { getPopularTopics } from '../services/api/community-api/topics';
 import {
   searchDatasets,
@@ -47,20 +45,37 @@ import ArrowDownIcon from '../../public/images/icon-arrow-down.inline.svg';
 import translations from '../services/translations';
 import Head from '../components/head';
 import NewsletterSubscribe from '../components/newsletter-subscribe';
+import {
+  NewsArticle,
+  GetMainArticleAndLatestNewsDocument,
+  FancyArticle,
+  ComponentBasicInfobox
+} from '../services/api/generated/cms/graphql';
+import { initializeApollo } from '../utils/apollo/apolloClient';
+import { isBasicInfoBox } from '../utils/strapi';
+import { PATHNAME } from '../types/enums';
+import env from '../../env';
 
-const articleId = 'bb81d27f-acf1-4fc6-9bc3-f289bf79207f';
+const { STRAPI_API_HOST } = env.clientEnv;
+const mainArticleId = 12;
 
 export async function getStaticProps() {
   const fiveMinutesInSeconds = 300;
-  const cmsNews = await getNews(3);
-  const cmsPage = await getCmsPage(articleId);
   const popularCommunityTopics = (await getPopularTopics())?.topics;
   const totalDatasets = extractDatasetsTotal(await searchDatasets({}));
 
+  const apolloClient = initializeApollo();
+
+  const { data } = await apolloClient.query({
+    query: GetMainArticleAndLatestNewsDocument,
+    variables: {
+      id: mainArticleId
+    }
+  });
+
   return {
     props: {
-      cmsNews,
-      cmsPage,
+      data,
       popularCommunityTopics,
       totalDatasets
     },
@@ -79,8 +94,7 @@ const isAbsoluteUrl = (url: string) => {
 };
 
 const MainPage: FC<Props> = ({
-  cmsNews,
-  cmsPage,
+  data,
   totalDatasets,
   popularCommunityTopics
 }) => {
@@ -102,14 +116,21 @@ const MainPage: FC<Props> = ({
     initAnimation();
   }, []);
 
-  const [firstElement, secondElement, ...modules] =
-    cmsPage?.field_modules ?? [];
+  const {
+    mainArticle,
+    newsArticles
+  }: { mainArticle: FancyArticle; newsArticles: NewsArticle[] } = data;
+
+  const [firstInfoBox, secondInfoBox, ...mainContent] =
+    (mainArticle?.content?.filter(content =>
+      isBasicInfoBox(content)
+    ) as ComponentBasicInfobox[]) ?? [];
 
   return (
     <>
       <Head
         title={translations.translate('title') as string}
-        description={firstElement?.field_title}
+        description={firstInfoBox?.title}
       />
       <Root>
         <SC.Container>
@@ -118,13 +139,11 @@ const MainPage: FC<Props> = ({
               <ContentBox>
                 <ContentBoxHeader as='h1'>
                   <ContentBoxSC.ContentBoxHeader.Title>
-                    {firstElement?.field_title}
+                    {firstInfoBox?.title}
                   </ContentBoxSC.ContentBoxHeader.Title>
                 </ContentBoxHeader>
                 <ContextBoxBody>
-                  <Markdown allowHtml>
-                    {firstElement?.field_body?.processed}
-                  </Markdown>
+                  <Markdown allowHtml>{firstInfoBox?.content ?? ''}</Markdown>
                   <AutosuggestSearchbar
                     maxSuggestions={6}
                     placeholder={`${translations.translate(
@@ -162,12 +181,12 @@ const MainPage: FC<Props> = ({
                       <ContentBox>
                         <ContentBoxHeader>
                           <ContentBoxSC.ContentBoxHeader.Title>
-                            {secondElement?.field_title}
+                            {secondInfoBox?.title}
                           </ContentBoxSC.ContentBoxHeader.Title>
                         </ContentBoxHeader>
                         <ContextBoxBody>
                           <Markdown allowHtml>
-                            {secondElement?.field_body?.processed}
+                            {secondInfoBox?.content ?? ''}
                           </Markdown>
                         </ContextBoxBody>
                       </ContentBox>
@@ -193,22 +212,17 @@ const MainPage: FC<Props> = ({
                 </SC.Topics>
               </SC.Row>
               <SC.Row>
-                {modules.slice(0, 2).map((module: any, index: number) => (
+                {mainContent.slice(0, 2).map((infoBox, index: number) => (
                   <InfoBox
-                    key={module.id}
-                    {...(isAbsoluteUrl(
-                      module?.field_link?.uri?.replace('internal:', '')
-                    )
+                    key={infoBox?.id}
+                    {...(isAbsoluteUrl(`${infoBox?.link}`)
                       ? {
-                          href: module.field_link?.uri,
+                          href: infoBox?.link ?? '',
                           target: '_blank',
                           externalLink: true
                         }
                       : {
-                          href: module?.field_link?.uri?.replace(
-                            'internal:',
-                            ''
-                          )
+                          href: infoBox?.link ?? ''
                         })}
                   >
                     <InfoBoxIcon>
@@ -219,17 +233,15 @@ const MainPage: FC<Props> = ({
                       )}
                     </InfoBoxIcon>
                     <InfoBoxTitle>
-                      <h3>{module.field_link?.title}</h3>
+                      <h3>{infoBox?.title}</h3>
                     </InfoBoxTitle>
                     <InfoBoxBody>
-                      <Markdown allowHtml>
-                        {module.field_body?.processed}
-                      </Markdown>
+                      <Markdown allowHtml>{infoBox?.content ?? ''}</Markdown>
                     </InfoBoxBody>
                   </InfoBox>
                 ))}
               </SC.Row>
-              {modules.slice(2, 3).map((module: any, index: number) => (
+              {mainContent.slice(2, 3).map((infoBox, index: number) => (
                 <SC.Row key={`row-${index}`}>
                   <SC.Teaser>
                     <SC.IllustrationBox>
@@ -238,12 +250,12 @@ const MainPage: FC<Props> = ({
                         <ContentBox>
                           <ContentBoxHeader>
                             <ContentBoxSC.ContentBoxHeader.Title>
-                              {module?.field_title}
+                              {infoBox?.title}
                             </ContentBoxSC.ContentBoxHeader.Title>
                           </ContentBoxHeader>
                           <ContextBoxBody>
                             <Markdown allowHtml>
-                              {module?.field_body?.processed}
+                              {infoBox?.content ?? ''}
                             </Markdown>
                           </ContextBoxBody>
                         </ContentBox>
@@ -253,28 +265,31 @@ const MainPage: FC<Props> = ({
                 </SC.Row>
               ))}
               <SC.NewsRow>
-                {cmsNews?.map(
+                {newsArticles?.map(
                   ({
                     id,
-                    created,
+                    published,
+                    published_at,
                     title,
-                    field_ingress: ingress,
-                    field_image_some: image_some
+                    subtitle,
+                    socialImage
                   }) => (
                     <InfoBox key={id} href={`${PATHNAME.NEWS}/${id}`}>
-                      {image_some && (
+                      {socialImage && (
                         <InfoBoxImage
-                          src={image_some.thumbnail.download_urls.canonical}
-                          alt={image_some.thumbnail.meta.alt}
+                          src={`${STRAPI_API_HOST}${socialImage.url}`}
+                          alt={socialImage.alternativeText ?? ''}
                         />
                       )}
                       <InfoBoxSC.InfoBox.Date>
-                        {created && formatDate(dateStringToDate(created))}
+                        {published && formatDate(dateStringToDate(published))}
+                        {!published &&
+                          formatDate(dateStringToDate(published_at))}
                       </InfoBoxSC.InfoBox.Date>
                       <InfoBoxTitle>
                         <h4>{title}</h4>
                       </InfoBoxTitle>
-                      <InfoBoxBody>{ingress}</InfoBoxBody>
+                      <InfoBoxBody>{subtitle}</InfoBoxBody>
                     </InfoBox>
                   )
                 )}

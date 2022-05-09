@@ -7,9 +7,13 @@ import Translation from '../translation';
 
 interface Props {
   invertColor?: boolean;
+  alternativeBackgroundColor?: boolean;
 }
 
-const ScrollToTop: FC<Props> = ({ invertColor }) => {
+const ScrollToTop: FC<Props> = ({
+  invertColor,
+  alternativeBackgroundColor
+}) => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -18,7 +22,10 @@ const ScrollToTop: FC<Props> = ({ invertColor }) => {
   };
 
   return (
-    <SC.ScrollToTop $invertColor={invertColor}>
+    <SC.ScrollToTop
+      $invertColor={invertColor}
+      $alternativeBackgroundColor={alternativeBackgroundColor}
+    >
       <SC.ScrollButton onClick={scrollToTop}>
         <Translation id='toTop' />
         <UpIcon />

@@ -5,15 +5,17 @@ import SC from './styled';
 
 interface Props {
   invertColor?: boolean;
+  hideScrollToTop?: boolean;
 }
 
 const Root: FC<PropsWithChildren<Props>> = ({
   invertColor = false,
+  hideScrollToTop = false,
   children
 }) => (
   <SC.Root $invertColor={invertColor}>
     {children}
-    <ScrollToTop invertColor={invertColor} />
+    {!hideScrollToTop && <ScrollToTop invertColor={invertColor} />}
   </SC.Root>
 );
 

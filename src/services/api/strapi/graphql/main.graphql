@@ -1,0 +1,26 @@
+query GetMainArticleAndLatestNews($id: ID!) {
+  mainArticle: fancyArticle(id: $id) {
+    id
+    title
+    subtitle
+    content {
+      ... on ComponentBasicInfobox {
+        __typename
+        title
+        link
+        content
+      }
+    }
+  }
+  newsArticles(limit: 3, sort: "published:desc,published_at:desc") {
+    id
+    title
+    subtitle
+    slug
+    published
+    socialImage {
+      url
+      alternativeText
+    }
+  }
+}

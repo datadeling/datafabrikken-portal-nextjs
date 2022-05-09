@@ -24,7 +24,7 @@ const Title = styled.h1`
 const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: ${theme.spacing('S12')};
 
   ${InfoBoxSC.InfoBox} {
     flex: 0 1 32%;
