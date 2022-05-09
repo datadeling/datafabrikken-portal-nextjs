@@ -1,11 +1,18 @@
-query GetFancyArticle($id: ID!) {
-  fancyArticle(id: $id) {
+query GetNewsArticle($id: ID!) {
+  newsArticle(id: $id) {
+    id
     title
     subtitle
+    slug
+    published
+    socialImage {
+      url
+      alternativeText
+    }
     content {
       ... on ComponentBasicParagraph {
         __typename
-        content,
+        content
         alternativeBackgroundColor
       }
       ... on ComponentBasicInfobox {
@@ -20,7 +27,7 @@ query GetFancyArticle($id: ID!) {
           url
           alternativeText
         }
-        link,
+        link
         alternativeBackgroundColor
       }
       ... on ComponentBasicImage {
@@ -30,9 +37,23 @@ query GetFancyArticle($id: ID!) {
           url
           caption
         }
-        style,
+        style
         alternativeBackgroundColor
       }
+    }
+  }
+}
+
+query GetNewsArticles($limit: Int) {
+  newsArticles(limit: $limit, sort: "published:desc,published_at:desc") {
+    id
+    title
+    subtitle
+    slug
+    published
+    socialImage {
+      url
+      alternativeText
     }
   }
 }

@@ -55,30 +55,6 @@ export const routes: Route[] = [
     siteMapPath: PATHNAME.FIND_DATA
   },
   {
-    pathPattern: new RegExp(
-      `^${PATHNAME.DATA_SOURCES}${PATHNAME.PRIVATE_SECTOR}$`
-    ),
-    breadcrumb: { title: undefined, dynamic: true }
-  },
-  {
-    pathPattern: new RegExp(
-      `^${PATHNAME.GUIDEANCE_AND_COMPETENCE}${PATHNAME.LEGAL_FRAMEWORK}${subPathRegex}$`
-    ),
-    breadcrumb: { title: undefined, dynamic: true }
-  },
-  {
-    pathPattern: new RegExp(
-      `^${PATHNAME.FIND_DATA}${PATHNAME.GUIDEANCE_AND_COMPETENCE}$`
-    ),
-    breadcrumb: { title: 'Veiledere og kompetanse', dynamic: false }
-  },
-  {
-    pathPattern: new RegExp(
-      `^${PATHNAME.FIND_DATA}${PATHNAME.GUIDEANCE_AND_COMPETENCE}${subPathRegex}$`
-    ),
-    breadcrumb: { title: undefined, dynamic: true }
-  },
-  {
     pathPattern: new RegExp(`^${PATHNAME.NEWS}$`),
     breadcrumb: {
       title: translations.translate('header.news') as string,

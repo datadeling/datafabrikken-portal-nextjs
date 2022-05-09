@@ -17,24 +17,36 @@ const Container = styled.div<ContainerProps>`
   width: ${({ $variant }) => ($variant ? `${$variant}px` : '1200px')};
   z-index: 10;
 
-  ${({ $variant }) =>
-    $variant === Variant.WIDTH_720
-      ? css`
-          @media (max-width: 721px) {
-            & {
-              width: 100%;
-              padding: 0 ${theme.spacing('S32')};
-            }
+  ${({ $variant }) => {
+    if ($variant === Variant.WIDTH_720) {
+      return css`
+        @media (max-width: 721px) {
+          & {
+            width: 100%;
+            padding: 0 ${theme.spacing('S32')};
           }
-        `
-      : css`
-          @media (max-width: 1251px) {
-            & {
-              width: 100%;
-              padding: 0 ${theme.spacing('S32')};
-            }
+        }
+      `;
+    } else if ($variant === Variant.WIDTH_990) {
+      return css`
+        @media (max-width: 721px) {
+          & {
+            width: 100%;
+            padding: 0 ${theme.spacing('S32')};
           }
-        `}
+        }
+      `;
+    } else {
+      return css`
+        @media (max-width: 1251px) {
+          & {
+            width: 100%;
+            padding: 0 ${theme.spacing('S32')};
+          }
+        }
+      `;
+    }
+  }}
 
   ${onMobileView} {
     & {

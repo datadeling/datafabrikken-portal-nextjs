@@ -28,6 +28,8 @@ export type Scalars = {
   JSON: any;
   /** The `Long` scalar type represents 52-bit integers */
   Long: any;
+  /** Input type for dynamic zone content of NewsArticle */
+  NewsArticleContentDynamicZoneInput: any;
   /** A time string with format: HH:mm:ss.SSS */
   Time: any;
   /** The `Upload` scalar type represents a file upload. */
@@ -40,119 +42,6 @@ export type AdminUser = {
   id: Scalars['ID'];
   lastname: Scalars['String'];
   username?: Maybe<Scalars['String']>;
-};
-
-export type Article = {
-  __typename?: 'Article';
-  content: Scalars['String'];
-  created_at: Scalars['DateTime'];
-  excerpt: Scalars['String'];
-  featureImage?: Maybe<UploadFile>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-  localizations?: Maybe<Array<Maybe<Article>>>;
-  published_at?: Maybe<Scalars['DateTime']>;
-  title: Scalars['String'];
-  updated_at: Scalars['DateTime'];
-};
-
-export type ArticleLocalizationsArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-export type ArticleAggregator = {
-  __typename?: 'ArticleAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
-};
-
-export type ArticleConnection = {
-  __typename?: 'ArticleConnection';
-  aggregate?: Maybe<ArticleAggregator>;
-  groupBy?: Maybe<ArticleGroupBy>;
-  values?: Maybe<Array<Maybe<Article>>>;
-};
-
-export type ArticleConnectionContent = {
-  __typename?: 'ArticleConnectionContent';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionCreated_At = {
-  __typename?: 'ArticleConnectionCreated_at';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ArticleConnectionExcerpt = {
-  __typename?: 'ArticleConnectionExcerpt';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionFeatureImage = {
-  __typename?: 'ArticleConnectionFeatureImage';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ArticleConnectionId = {
-  __typename?: 'ArticleConnectionId';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ArticleConnectionLocale = {
-  __typename?: 'ArticleConnectionLocale';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionPublished_At = {
-  __typename?: 'ArticleConnectionPublished_at';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ArticleConnectionTitle = {
-  __typename?: 'ArticleConnectionTitle';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionUpdated_At = {
-  __typename?: 'ArticleConnectionUpdated_at';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ArticleGroupBy = {
-  __typename?: 'ArticleGroupBy';
-  content?: Maybe<Array<Maybe<ArticleConnectionContent>>>;
-  created_at?: Maybe<Array<Maybe<ArticleConnectionCreated_At>>>;
-  excerpt?: Maybe<Array<Maybe<ArticleConnectionExcerpt>>>;
-  featureImage?: Maybe<Array<Maybe<ArticleConnectionFeatureImage>>>;
-  id?: Maybe<Array<Maybe<ArticleConnectionId>>>;
-  locale?: Maybe<Array<Maybe<ArticleConnectionLocale>>>;
-  published_at?: Maybe<Array<Maybe<ArticleConnectionPublished_At>>>;
-  title?: Maybe<Array<Maybe<ArticleConnectionTitle>>>;
-  updated_at?: Maybe<Array<Maybe<ArticleConnectionUpdated_At>>>;
-};
-
-export type ArticleInput = {
-  content: Scalars['String'];
-  created_by?: Maybe<Scalars['ID']>;
-  excerpt: Scalars['String'];
-  featureImage?: Maybe<Scalars['ID']>;
-  locale?: Maybe<Scalars['String']>;
-  localizations?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  published_at?: Maybe<Scalars['DateTime']>;
-  title: Scalars['String'];
-  updated_by?: Maybe<Scalars['ID']>;
 };
 
 export type ComponentBasicContact = {
@@ -182,7 +71,7 @@ export type ComponentBasicContactInput = {
 
 export type ComponentBasicImage = {
   __typename?: 'ComponentBasicImage';
-  alternativeText?: Maybe<Scalars['String']>;
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
   media?: Maybe<Array<Maybe<UploadFile>>>;
   style?: Maybe<Enum_Componentbasicimage_Style>;
@@ -196,13 +85,14 @@ export type ComponentBasicImageMediaArgs = {
 };
 
 export type ComponentBasicImageInput = {
-  alternativeText?: Maybe<Scalars['String']>;
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   media?: Maybe<Array<Maybe<Scalars['ID']>>>;
   style?: Maybe<Enum_Componentbasicimage_Style>;
 };
 
 export type ComponentBasicInfobox = {
   __typename?: 'ComponentBasicInfobox';
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   content?: Maybe<Scalars['String']>;
   hoverIllustration?: Maybe<UploadFile>;
   id: Scalars['ID'];
@@ -212,6 +102,7 @@ export type ComponentBasicInfobox = {
 };
 
 export type ComponentBasicInfoboxInput = {
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   content?: Maybe<Scalars['String']>;
   hoverIllustration?: Maybe<Scalars['ID']>;
   illustration?: Maybe<Scalars['ID']>;
@@ -221,33 +112,28 @@ export type ComponentBasicInfoboxInput = {
 
 export type ComponentBasicParagraph = {
   __typename?: 'ComponentBasicParagraph';
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   content?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
 };
 
 export type ComponentBasicParagraphInput = {
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   content?: Maybe<Scalars['String']>;
 };
 
 export type ComponentBasicQuote = {
   __typename?: 'ComponentBasicQuote';
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   author?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
 };
 
 export type ComponentBasicQuoteInput = {
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   author?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
-};
-
-export type ComponentBasicSection = {
-  __typename?: 'ComponentBasicSection';
-  id: Scalars['ID'];
-};
-
-export type ComponentBasicSectionInput = {
-  _?: Maybe<Scalars['String']>;
 };
 
 export type Course = {
@@ -500,19 +386,6 @@ export enum Enum_Guide_Primarytargetgroup {
   DataProvider = 'DATA_PROVIDER'
 }
 
-export enum Enum_Servicemessage_Channel {
-  Adminportal = 'Adminportal',
-  Generell = 'Generell',
-  Publiseringsportal = 'Publiseringsportal',
-  Registreringsportal = 'Registreringsportal'
-}
-
-export enum Enum_Servicemessage_Message_Type {
-  Error = 'ERROR',
-  Info = 'INFO',
-  Warning = 'WARNING'
-}
-
 export type FancyArticle = {
   __typename?: 'FancyArticle';
   content?: Maybe<Array<Maybe<FancyArticleContentDynamicZone>>>;
@@ -522,7 +395,7 @@ export type FancyArticle = {
   localizations?: Maybe<Array<Maybe<FancyArticle>>>;
   published_at?: Maybe<Scalars['DateTime']>;
   subtitle?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
   updated_at: Scalars['DateTime'];
 };
 
@@ -593,8 +466,7 @@ export type FancyArticleContentDynamicZone =
   | ComponentBasicImage
   | ComponentBasicInfobox
   | ComponentBasicParagraph
-  | ComponentBasicQuote
-  | ComponentBasicSection;
+  | ComponentBasicQuote;
 
 export type FancyArticleGroupBy = {
   __typename?: 'FancyArticleGroupBy';
@@ -614,7 +486,7 @@ export type FancyArticleInput = {
   localizations?: Maybe<Array<Maybe<Scalars['ID']>>>;
   published_at?: Maybe<Scalars['DateTime']>;
   subtitle?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
   updated_by?: Maybe<Scalars['ID']>;
 };
 
@@ -864,25 +736,11 @@ export type LocaleInput = {
 };
 
 export type Morph =
-  | Article
-  | ArticleAggregator
-  | ArticleConnection
-  | ArticleConnectionContent
-  | ArticleConnectionCreated_At
-  | ArticleConnectionExcerpt
-  | ArticleConnectionFeatureImage
-  | ArticleConnectionId
-  | ArticleConnectionLocale
-  | ArticleConnectionPublished_At
-  | ArticleConnectionTitle
-  | ArticleConnectionUpdated_At
-  | ArticleGroupBy
   | ComponentBasicContact
   | ComponentBasicImage
   | ComponentBasicInfobox
   | ComponentBasicParagraph
   | ComponentBasicQuote
-  | ComponentBasicSection
   | Course
   | CourseAggregator
   | CourseAggregatorAvg
@@ -943,6 +801,20 @@ export type Morph =
   | GuideConnectionUpdated_At
   | GuideGroupBy
   | I18NLocale
+  | NewsArticle
+  | NewsArticleAggregator
+  | NewsArticleConnection
+  | NewsArticleConnectionCreated_At
+  | NewsArticleConnectionId
+  | NewsArticleConnectionLocale
+  | NewsArticleConnectionPublished
+  | NewsArticleConnectionPublished_At
+  | NewsArticleConnectionSlug
+  | NewsArticleConnectionSocialImage
+  | NewsArticleConnectionSubtitle
+  | NewsArticleConnectionTitle
+  | NewsArticleConnectionUpdated_At
+  | NewsArticleGroupBy
   | Provider
   | ProviderAggregator
   | ProviderConnection
@@ -954,22 +826,6 @@ export type Morph =
   | ProviderConnectionTitle
   | ProviderConnectionUpdated_At
   | ProviderGroupBy
-  | ServiceMessage
-  | ServiceMessageAggregator
-  | ServiceMessageConnection
-  | ServiceMessageConnectionChannel
-  | ServiceMessageConnectionCreated_At
-  | ServiceMessageConnectionDescription
-  | ServiceMessageConnectionId
-  | ServiceMessageConnectionLocale
-  | ServiceMessageConnectionMessage_Type
-  | ServiceMessageConnectionPublished_At
-  | ServiceMessageConnectionShort_Description
-  | ServiceMessageConnectionTitle
-  | ServiceMessageConnectionUpdated_At
-  | ServiceMessageConnectionValid_From
-  | ServiceMessageConnectionValid_To
-  | ServiceMessageGroupBy
   | UploadFile
   | UploadFileAggregator
   | UploadFileAggregatorAvg
@@ -1021,60 +877,54 @@ export type Morph =
   | UsersPermissionsUserConnectionUpdated_At
   | UsersPermissionsUserConnectionUsername
   | UsersPermissionsUserGroupBy
-  | CreateArticlePayload
   | CreateCoursePayload
   | CreateFancyArticlePayload
   | CreateGuidePayload
+  | CreateNewsArticlePayload
   | CreateProviderPayload
   | CreateRolePayload
-  | CreateServiceMessagePayload
   | CreateUserPayload
-  | DeleteArticlePayload
   | DeleteCoursePayload
   | DeleteFancyArticlePayload
   | DeleteFilePayload
   | DeleteGuidePayload
+  | DeleteNewsArticlePayload
   | DeleteProviderPayload
   | DeleteRolePayload
-  | DeleteServiceMessagePayload
   | DeleteUserPayload
-  | UpdateArticlePayload
   | UpdateCoursePayload
   | UpdateFancyArticlePayload
   | UpdateGuidePayload
+  | UpdateNewsArticlePayload
   | UpdateProviderPayload
   | UpdateRolePayload
-  | UpdateServiceMessagePayload
   | UpdateUserPayload;
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createArticle?: Maybe<CreateArticlePayload>;
-  createArticleLocalization: Article;
   createCourse?: Maybe<CreateCoursePayload>;
   createCourseLocalization: Course;
   createFancyArticle?: Maybe<CreateFancyArticlePayload>;
   createFancyArticleLocalization: FancyArticle;
   createGuide?: Maybe<CreateGuidePayload>;
   createGuideLocalization: Guide;
+  createNewsArticle?: Maybe<CreateNewsArticlePayload>;
+  createNewsArticleLocalization: NewsArticle;
   createProvider?: Maybe<CreateProviderPayload>;
   createProviderLocalization: Provider;
   /** Create a new role */
   createRole?: Maybe<CreateRolePayload>;
-  createServiceMessage?: Maybe<CreateServiceMessagePayload>;
-  createServiceMessageLocalization: ServiceMessage;
   /** Create a new user */
   createUser?: Maybe<CreateUserPayload>;
-  deleteArticle?: Maybe<DeleteArticlePayload>;
   deleteCourse?: Maybe<DeleteCoursePayload>;
   deleteFancyArticle?: Maybe<DeleteFancyArticlePayload>;
   /** Delete one file */
   deleteFile?: Maybe<DeleteFilePayload>;
   deleteGuide?: Maybe<DeleteGuidePayload>;
+  deleteNewsArticle?: Maybe<DeleteNewsArticlePayload>;
   deleteProvider?: Maybe<DeleteProviderPayload>;
   /** Delete an existing role */
   deleteRole?: Maybe<DeleteRolePayload>;
-  deleteServiceMessage?: Maybe<DeleteServiceMessagePayload>;
   /** Delete an existing user */
   deleteUser?: Maybe<DeleteUserPayload>;
   emailConfirmation?: Maybe<UsersPermissionsLoginPayload>;
@@ -1083,26 +933,17 @@ export type Mutation = {
   multipleUpload: Array<Maybe<UploadFile>>;
   register: UsersPermissionsLoginPayload;
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
-  updateArticle?: Maybe<UpdateArticlePayload>;
   updateCourse?: Maybe<UpdateCoursePayload>;
   updateFancyArticle?: Maybe<UpdateFancyArticlePayload>;
   updateFileInfo: UploadFile;
   updateGuide?: Maybe<UpdateGuidePayload>;
+  updateNewsArticle?: Maybe<UpdateNewsArticlePayload>;
   updateProvider?: Maybe<UpdateProviderPayload>;
   /** Update an existing role */
   updateRole?: Maybe<UpdateRolePayload>;
-  updateServiceMessage?: Maybe<UpdateServiceMessagePayload>;
   /** Update an existing user */
   updateUser?: Maybe<UpdateUserPayload>;
   upload: UploadFile;
-};
-
-export type MutationCreateArticleArgs = {
-  input?: Maybe<CreateArticleInput>;
-};
-
-export type MutationCreateArticleLocalizationArgs = {
-  input: UpdateArticleInput;
 };
 
 export type MutationCreateCourseArgs = {
@@ -1129,6 +970,14 @@ export type MutationCreateGuideLocalizationArgs = {
   input: UpdateGuideInput;
 };
 
+export type MutationCreateNewsArticleArgs = {
+  input?: Maybe<CreateNewsArticleInput>;
+};
+
+export type MutationCreateNewsArticleLocalizationArgs = {
+  input: UpdateNewsArticleInput;
+};
+
 export type MutationCreateProviderArgs = {
   input?: Maybe<CreateProviderInput>;
 };
@@ -1141,20 +990,8 @@ export type MutationCreateRoleArgs = {
   input?: Maybe<CreateRoleInput>;
 };
 
-export type MutationCreateServiceMessageArgs = {
-  input?: Maybe<CreateServiceMessageInput>;
-};
-
-export type MutationCreateServiceMessageLocalizationArgs = {
-  input: UpdateServiceMessageInput;
-};
-
 export type MutationCreateUserArgs = {
   input?: Maybe<CreateUserInput>;
-};
-
-export type MutationDeleteArticleArgs = {
-  input?: Maybe<DeleteArticleInput>;
 };
 
 export type MutationDeleteCourseArgs = {
@@ -1173,16 +1010,16 @@ export type MutationDeleteGuideArgs = {
   input?: Maybe<DeleteGuideInput>;
 };
 
+export type MutationDeleteNewsArticleArgs = {
+  input?: Maybe<DeleteNewsArticleInput>;
+};
+
 export type MutationDeleteProviderArgs = {
   input?: Maybe<DeleteProviderInput>;
 };
 
 export type MutationDeleteRoleArgs = {
   input?: Maybe<DeleteRoleInput>;
-};
-
-export type MutationDeleteServiceMessageArgs = {
-  input?: Maybe<DeleteServiceMessageInput>;
 };
 
 export type MutationDeleteUserArgs = {
@@ -1219,10 +1056,6 @@ export type MutationResetPasswordArgs = {
   passwordConfirmation: Scalars['String'];
 };
 
-export type MutationUpdateArticleArgs = {
-  input?: Maybe<UpdateArticleInput>;
-};
-
 export type MutationUpdateCourseArgs = {
   input?: Maybe<UpdateCourseInput>;
 };
@@ -1240,16 +1073,16 @@ export type MutationUpdateGuideArgs = {
   input?: Maybe<UpdateGuideInput>;
 };
 
+export type MutationUpdateNewsArticleArgs = {
+  input?: Maybe<UpdateNewsArticleInput>;
+};
+
 export type MutationUpdateProviderArgs = {
   input?: Maybe<UpdateProviderInput>;
 };
 
 export type MutationUpdateRoleArgs = {
   input?: Maybe<UpdateRoleInput>;
-};
-
-export type MutationUpdateServiceMessageArgs = {
-  input?: Maybe<UpdateServiceMessageInput>;
 };
 
 export type MutationUpdateUserArgs = {
@@ -1263,6 +1096,137 @@ export type MutationUploadArgs = {
   ref?: Maybe<Scalars['String']>;
   refId?: Maybe<Scalars['ID']>;
   source?: Maybe<Scalars['String']>;
+};
+
+export type NewsArticle = {
+  __typename?: 'NewsArticle';
+  content?: Maybe<Array<Maybe<NewsArticleContentDynamicZone>>>;
+  created_at: Scalars['DateTime'];
+  id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<Array<Maybe<NewsArticle>>>;
+  published?: Maybe<Scalars['DateTime']>;
+  published_at?: Maybe<Scalars['DateTime']>;
+  slug: Scalars['String'];
+  socialImage?: Maybe<UploadFile>;
+  subtitle?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  updated_at: Scalars['DateTime'];
+};
+
+export type NewsArticleLocalizationsArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  sort?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+export type NewsArticleAggregator = {
+  __typename?: 'NewsArticleAggregator';
+  count?: Maybe<Scalars['Int']>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type NewsArticleConnection = {
+  __typename?: 'NewsArticleConnection';
+  aggregate?: Maybe<NewsArticleAggregator>;
+  groupBy?: Maybe<NewsArticleGroupBy>;
+  values?: Maybe<Array<Maybe<NewsArticle>>>;
+};
+
+export type NewsArticleConnectionCreated_At = {
+  __typename?: 'NewsArticleConnectionCreated_at';
+  connection?: Maybe<NewsArticleConnection>;
+  key?: Maybe<Scalars['DateTime']>;
+};
+
+export type NewsArticleConnectionId = {
+  __typename?: 'NewsArticleConnectionId';
+  connection?: Maybe<NewsArticleConnection>;
+  key?: Maybe<Scalars['ID']>;
+};
+
+export type NewsArticleConnectionLocale = {
+  __typename?: 'NewsArticleConnectionLocale';
+  connection?: Maybe<NewsArticleConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type NewsArticleConnectionPublished = {
+  __typename?: 'NewsArticleConnectionPublished';
+  connection?: Maybe<NewsArticleConnection>;
+  key?: Maybe<Scalars['DateTime']>;
+};
+
+export type NewsArticleConnectionPublished_At = {
+  __typename?: 'NewsArticleConnectionPublished_at';
+  connection?: Maybe<NewsArticleConnection>;
+  key?: Maybe<Scalars['DateTime']>;
+};
+
+export type NewsArticleConnectionSlug = {
+  __typename?: 'NewsArticleConnectionSlug';
+  connection?: Maybe<NewsArticleConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type NewsArticleConnectionSocialImage = {
+  __typename?: 'NewsArticleConnectionSocialImage';
+  connection?: Maybe<NewsArticleConnection>;
+  key?: Maybe<Scalars['ID']>;
+};
+
+export type NewsArticleConnectionSubtitle = {
+  __typename?: 'NewsArticleConnectionSubtitle';
+  connection?: Maybe<NewsArticleConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type NewsArticleConnectionTitle = {
+  __typename?: 'NewsArticleConnectionTitle';
+  connection?: Maybe<NewsArticleConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type NewsArticleConnectionUpdated_At = {
+  __typename?: 'NewsArticleConnectionUpdated_at';
+  connection?: Maybe<NewsArticleConnection>;
+  key?: Maybe<Scalars['DateTime']>;
+};
+
+export type NewsArticleContentDynamicZone =
+  | ComponentBasicContact
+  | ComponentBasicImage
+  | ComponentBasicInfobox
+  | ComponentBasicParagraph
+  | ComponentBasicQuote;
+
+export type NewsArticleGroupBy = {
+  __typename?: 'NewsArticleGroupBy';
+  created_at?: Maybe<Array<Maybe<NewsArticleConnectionCreated_At>>>;
+  id?: Maybe<Array<Maybe<NewsArticleConnectionId>>>;
+  locale?: Maybe<Array<Maybe<NewsArticleConnectionLocale>>>;
+  published?: Maybe<Array<Maybe<NewsArticleConnectionPublished>>>;
+  published_at?: Maybe<Array<Maybe<NewsArticleConnectionPublished_At>>>;
+  slug?: Maybe<Array<Maybe<NewsArticleConnectionSlug>>>;
+  socialImage?: Maybe<Array<Maybe<NewsArticleConnectionSocialImage>>>;
+  subtitle?: Maybe<Array<Maybe<NewsArticleConnectionSubtitle>>>;
+  title?: Maybe<Array<Maybe<NewsArticleConnectionTitle>>>;
+  updated_at?: Maybe<Array<Maybe<NewsArticleConnectionUpdated_At>>>;
+};
+
+export type NewsArticleInput = {
+  content?: Maybe<Array<Scalars['NewsArticleContentDynamicZoneInput']>>;
+  created_by?: Maybe<Scalars['ID']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  published?: Maybe<Scalars['DateTime']>;
+  published_at?: Maybe<Scalars['DateTime']>;
+  slug: Scalars['String'];
+  socialImage?: Maybe<Scalars['ID']>;
+  subtitle?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  updated_by?: Maybe<Scalars['ID']>;
 };
 
 export type Provider = {
@@ -1367,9 +1331,6 @@ export enum PublicationState {
 
 export type Query = {
   __typename?: 'Query';
-  article?: Maybe<Article>;
-  articles?: Maybe<Array<Maybe<Article>>>;
-  articlesConnection?: Maybe<ArticleConnection>;
   course?: Maybe<Course>;
   courses?: Maybe<Array<Maybe<Course>>>;
   coursesConnection?: Maybe<CourseConnection>;
@@ -1382,6 +1343,9 @@ export type Query = {
   guides?: Maybe<Array<Maybe<Guide>>>;
   guidesConnection?: Maybe<GuideConnection>;
   me?: Maybe<UsersPermissionsMe>;
+  newsArticle?: Maybe<NewsArticle>;
+  newsArticles?: Maybe<Array<Maybe<NewsArticle>>>;
+  newsArticlesConnection?: Maybe<NewsArticleConnection>;
   provider?: Maybe<Provider>;
   providers?: Maybe<Array<Maybe<Provider>>>;
   providersConnection?: Maybe<ProviderConnection>;
@@ -1389,34 +1353,9 @@ export type Query = {
   /** Retrieve all the existing roles. You can't apply filters on this query. */
   roles?: Maybe<Array<Maybe<UsersPermissionsRole>>>;
   rolesConnection?: Maybe<UsersPermissionsRoleConnection>;
-  serviceMessage?: Maybe<ServiceMessage>;
-  serviceMessages?: Maybe<Array<Maybe<ServiceMessage>>>;
-  serviceMessagesConnection?: Maybe<ServiceMessageConnection>;
   user?: Maybe<UsersPermissionsUser>;
   users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
   usersConnection?: Maybe<UsersPermissionsUserConnection>;
-};
-
-export type QueryArticleArgs = {
-  id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
-};
-
-export type QueryArticlesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  locale?: Maybe<Scalars['String']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-export type QueryArticlesConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  locale?: Maybe<Scalars['String']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
 };
 
 export type QueryCourseArgs = {
@@ -1500,6 +1439,28 @@ export type QueryGuidesConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
+export type QueryNewsArticleArgs = {
+  id: Scalars['ID'];
+  publicationState?: Maybe<PublicationState>;
+};
+
+export type QueryNewsArticlesArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  publicationState?: Maybe<PublicationState>;
+  sort?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+export type QueryNewsArticlesConnectionArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  sort?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
 export type QueryProviderArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
@@ -1542,28 +1503,6 @@ export type QueryRolesConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type QueryServiceMessageArgs = {
-  id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
-};
-
-export type QueryServiceMessagesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  locale?: Maybe<Scalars['String']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-export type QueryServiceMessagesConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  locale?: Maybe<Scalars['String']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
 export type QueryUserArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
@@ -1592,148 +1531,6 @@ export type RoleInput = {
   type?: Maybe<Scalars['String']>;
   updated_by?: Maybe<Scalars['ID']>;
   users?: Maybe<Array<Maybe<Scalars['ID']>>>;
-};
-
-export type ServiceMessage = {
-  __typename?: 'ServiceMessage';
-  channel: Enum_Servicemessage_Channel;
-  created_at: Scalars['DateTime'];
-  description?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-  localizations?: Maybe<Array<Maybe<ServiceMessage>>>;
-  message_type: Enum_Servicemessage_Message_Type;
-  published_at?: Maybe<Scalars['DateTime']>;
-  short_description: Scalars['String'];
-  title: Scalars['String'];
-  updated_at: Scalars['DateTime'];
-  valid_from: Scalars['DateTime'];
-  valid_to?: Maybe<Scalars['DateTime']>;
-};
-
-export type ServiceMessageLocalizationsArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-export type ServiceMessageAggregator = {
-  __typename?: 'ServiceMessageAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
-};
-
-export type ServiceMessageConnection = {
-  __typename?: 'ServiceMessageConnection';
-  aggregate?: Maybe<ServiceMessageAggregator>;
-  groupBy?: Maybe<ServiceMessageGroupBy>;
-  values?: Maybe<Array<Maybe<ServiceMessage>>>;
-};
-
-export type ServiceMessageConnectionChannel = {
-  __typename?: 'ServiceMessageConnectionChannel';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ServiceMessageConnectionCreated_At = {
-  __typename?: 'ServiceMessageConnectionCreated_at';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ServiceMessageConnectionDescription = {
-  __typename?: 'ServiceMessageConnectionDescription';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ServiceMessageConnectionId = {
-  __typename?: 'ServiceMessageConnectionId';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ServiceMessageConnectionLocale = {
-  __typename?: 'ServiceMessageConnectionLocale';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ServiceMessageConnectionMessage_Type = {
-  __typename?: 'ServiceMessageConnectionMessage_type';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ServiceMessageConnectionPublished_At = {
-  __typename?: 'ServiceMessageConnectionPublished_at';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ServiceMessageConnectionShort_Description = {
-  __typename?: 'ServiceMessageConnectionShort_description';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ServiceMessageConnectionTitle = {
-  __typename?: 'ServiceMessageConnectionTitle';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ServiceMessageConnectionUpdated_At = {
-  __typename?: 'ServiceMessageConnectionUpdated_at';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ServiceMessageConnectionValid_From = {
-  __typename?: 'ServiceMessageConnectionValid_from';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ServiceMessageConnectionValid_To = {
-  __typename?: 'ServiceMessageConnectionValid_to';
-  connection?: Maybe<ServiceMessageConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ServiceMessageGroupBy = {
-  __typename?: 'ServiceMessageGroupBy';
-  channel?: Maybe<Array<Maybe<ServiceMessageConnectionChannel>>>;
-  created_at?: Maybe<Array<Maybe<ServiceMessageConnectionCreated_At>>>;
-  description?: Maybe<Array<Maybe<ServiceMessageConnectionDescription>>>;
-  id?: Maybe<Array<Maybe<ServiceMessageConnectionId>>>;
-  locale?: Maybe<Array<Maybe<ServiceMessageConnectionLocale>>>;
-  message_type?: Maybe<Array<Maybe<ServiceMessageConnectionMessage_Type>>>;
-  published_at?: Maybe<Array<Maybe<ServiceMessageConnectionPublished_At>>>;
-  short_description?: Maybe<
-    Array<Maybe<ServiceMessageConnectionShort_Description>>
-  >;
-  title?: Maybe<Array<Maybe<ServiceMessageConnectionTitle>>>;
-  updated_at?: Maybe<Array<Maybe<ServiceMessageConnectionUpdated_At>>>;
-  valid_from?: Maybe<Array<Maybe<ServiceMessageConnectionValid_From>>>;
-  valid_to?: Maybe<Array<Maybe<ServiceMessageConnectionValid_To>>>;
-};
-
-export type ServiceMessageInput = {
-  channel: Enum_Servicemessage_Channel;
-  created_by?: Maybe<Scalars['ID']>;
-  description?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-  localizations?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  message_type: Enum_Servicemessage_Message_Type;
-  published_at?: Maybe<Scalars['DateTime']>;
-  short_description: Scalars['String'];
-  title: Scalars['String'];
-  updated_by?: Maybe<Scalars['ID']>;
-  valid_from: Scalars['DateTime'];
-  valid_to?: Maybe<Scalars['DateTime']>;
 };
 
 export type UploadFile = {
@@ -2163,15 +1960,6 @@ export type UsersPermissionsUserGroupBy = {
   username?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUsername>>>;
 };
 
-export type CreateArticleInput = {
-  data?: Maybe<ArticleInput>;
-};
-
-export type CreateArticlePayload = {
-  __typename?: 'createArticlePayload';
-  article?: Maybe<Article>;
-};
-
 export type CreateCourseInput = {
   data?: Maybe<CourseInput>;
 };
@@ -2199,6 +1987,15 @@ export type CreateGuidePayload = {
   guide?: Maybe<Guide>;
 };
 
+export type CreateNewsArticleInput = {
+  data?: Maybe<NewsArticleInput>;
+};
+
+export type CreateNewsArticlePayload = {
+  __typename?: 'createNewsArticlePayload';
+  newsArticle?: Maybe<NewsArticle>;
+};
+
 export type CreateProviderInput = {
   data?: Maybe<ProviderInput>;
 };
@@ -2217,15 +2014,6 @@ export type CreateRolePayload = {
   role?: Maybe<UsersPermissionsRole>;
 };
 
-export type CreateServiceMessageInput = {
-  data?: Maybe<ServiceMessageInput>;
-};
-
-export type CreateServiceMessagePayload = {
-  __typename?: 'createServiceMessagePayload';
-  serviceMessage?: Maybe<ServiceMessage>;
-};
-
 export type CreateUserInput = {
   data?: Maybe<UserInput>;
 };
@@ -2233,15 +2021,6 @@ export type CreateUserInput = {
 export type CreateUserPayload = {
   __typename?: 'createUserPayload';
   user?: Maybe<UsersPermissionsUser>;
-};
-
-export type DeleteArticleInput = {
-  where?: Maybe<InputId>;
-};
-
-export type DeleteArticlePayload = {
-  __typename?: 'deleteArticlePayload';
-  article?: Maybe<Article>;
 };
 
 export type DeleteCourseInput = {
@@ -2280,6 +2059,15 @@ export type DeleteGuidePayload = {
   guide?: Maybe<Guide>;
 };
 
+export type DeleteNewsArticleInput = {
+  where?: Maybe<InputId>;
+};
+
+export type DeleteNewsArticlePayload = {
+  __typename?: 'deleteNewsArticlePayload';
+  newsArticle?: Maybe<NewsArticle>;
+};
+
 export type DeleteProviderInput = {
   where?: Maybe<InputId>;
 };
@@ -2298,15 +2086,6 @@ export type DeleteRolePayload = {
   role?: Maybe<UsersPermissionsRole>;
 };
 
-export type DeleteServiceMessageInput = {
-  where?: Maybe<InputId>;
-};
-
-export type DeleteServiceMessagePayload = {
-  __typename?: 'deleteServiceMessagePayload';
-  serviceMessage?: Maybe<ServiceMessage>;
-};
-
 export type DeleteUserInput = {
   where?: Maybe<InputId>;
 };
@@ -2314,18 +2093,6 @@ export type DeleteUserInput = {
 export type DeleteUserPayload = {
   __typename?: 'deleteUserPayload';
   user?: Maybe<UsersPermissionsUser>;
-};
-
-export type EditArticleInput = {
-  content?: Maybe<Scalars['String']>;
-  created_by?: Maybe<Scalars['ID']>;
-  excerpt?: Maybe<Scalars['String']>;
-  featureImage?: Maybe<Scalars['ID']>;
-  locale?: Maybe<Scalars['String']>;
-  localizations?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  published_at?: Maybe<Scalars['DateTime']>;
-  title?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
 };
 
 export type EditComponentBasicContactInput = {
@@ -2338,13 +2105,14 @@ export type EditComponentBasicContactInput = {
 };
 
 export type EditComponentBasicImageInput = {
-  alternativeText?: Maybe<Scalars['String']>;
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['ID']>;
   media?: Maybe<Array<Maybe<Scalars['ID']>>>;
   style?: Maybe<Enum_Componentbasicimage_Style>;
 };
 
 export type EditComponentBasicInfoboxInput = {
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   content?: Maybe<Scalars['String']>;
   hoverIllustration?: Maybe<Scalars['ID']>;
   id?: Maybe<Scalars['ID']>;
@@ -2354,17 +2122,15 @@ export type EditComponentBasicInfoboxInput = {
 };
 
 export type EditComponentBasicParagraphInput = {
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   content?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
 };
 
 export type EditComponentBasicQuoteInput = {
+  alternativeBackgroundColor?: Maybe<Scalars['Boolean']>;
   author?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
-};
-
-export type EditComponentBasicSectionInput = {
   id?: Maybe<Scalars['ID']>;
 };
 
@@ -2444,6 +2210,20 @@ export type EditLocaleInput = {
   updated_by?: Maybe<Scalars['ID']>;
 };
 
+export type EditNewsArticleInput = {
+  content?: Maybe<Array<Scalars['NewsArticleContentDynamicZoneInput']>>;
+  created_by?: Maybe<Scalars['ID']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  published?: Maybe<Scalars['DateTime']>;
+  published_at?: Maybe<Scalars['DateTime']>;
+  slug?: Maybe<Scalars['String']>;
+  socialImage?: Maybe<Scalars['ID']>;
+  subtitle?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updated_by?: Maybe<Scalars['ID']>;
+};
+
 export type EditProviderInput = {
   created_by?: Maybe<Scalars['ID']>;
   locale?: Maybe<Scalars['String']>;
@@ -2464,21 +2244,6 @@ export type EditRoleInput = {
   users?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
-export type EditServiceMessageInput = {
-  channel?: Maybe<Enum_Servicemessage_Channel>;
-  created_by?: Maybe<Scalars['ID']>;
-  description?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-  localizations?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  message_type?: Maybe<Enum_Servicemessage_Message_Type>;
-  published_at?: Maybe<Scalars['DateTime']>;
-  short_description?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
-  valid_from?: Maybe<Scalars['DateTime']>;
-  valid_to?: Maybe<Scalars['DateTime']>;
-};
-
 export type EditUserInput = {
   blocked?: Maybe<Scalars['Boolean']>;
   confirmationToken?: Maybe<Scalars['String']>;
@@ -2491,16 +2256,6 @@ export type EditUserInput = {
   role?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
   username?: Maybe<Scalars['String']>;
-};
-
-export type UpdateArticleInput = {
-  data?: Maybe<EditArticleInput>;
-  where?: Maybe<InputId>;
-};
-
-export type UpdateArticlePayload = {
-  __typename?: 'updateArticlePayload';
-  article?: Maybe<Article>;
 };
 
 export type UpdateCourseInput = {
@@ -2533,6 +2288,16 @@ export type UpdateGuidePayload = {
   guide?: Maybe<Guide>;
 };
 
+export type UpdateNewsArticleInput = {
+  data?: Maybe<EditNewsArticleInput>;
+  where?: Maybe<InputId>;
+};
+
+export type UpdateNewsArticlePayload = {
+  __typename?: 'updateNewsArticlePayload';
+  newsArticle?: Maybe<NewsArticle>;
+};
+
 export type UpdateProviderInput = {
   data?: Maybe<EditProviderInput>;
   where?: Maybe<InputId>;
@@ -2551,16 +2316,6 @@ export type UpdateRoleInput = {
 export type UpdateRolePayload = {
   __typename?: 'updateRolePayload';
   role?: Maybe<UsersPermissionsRole>;
-};
-
-export type UpdateServiceMessageInput = {
-  data?: Maybe<EditServiceMessageInput>;
-  where?: Maybe<InputId>;
-};
-
-export type UpdateServiceMessagePayload = {
-  __typename?: 'updateServiceMessagePayload';
-  serviceMessage?: Maybe<ServiceMessage>;
 };
 
 export type UpdateUserInput = {
@@ -2603,7 +2358,6 @@ export type GetContactsQuery = { __typename?: 'Query' } & {
                   'content'
                 >)
               | { __typename?: 'ComponentBasicQuote' }
-              | { __typename?: 'ComponentBasicSection' }
             >
           >
         >;
@@ -2627,7 +2381,6 @@ export type GetCoursesQuery = { __typename?: 'Query' } & {
                   'content'
                 >)
               | { __typename?: 'ComponentBasicQuote' }
-              | { __typename?: 'ComponentBasicSection' }
             >
           >
         >;
@@ -2689,14 +2442,43 @@ export type GetFancyArticleQuery = { __typename?: 'Query' } & {
           Array<
             Maybe<
               | { __typename?: 'ComponentBasicContact' }
-              | { __typename?: 'ComponentBasicImage' }
-              | { __typename?: 'ComponentBasicInfobox' }
+              | ({ __typename: 'ComponentBasicImage' } & Pick<
+                  ComponentBasicImage,
+                  'style' | 'alternativeBackgroundColor'
+                > & {
+                    media?: Maybe<
+                      Array<
+                        Maybe<
+                          { __typename?: 'UploadFile' } & Pick<
+                            UploadFile,
+                            'alternativeText' | 'url' | 'caption'
+                          >
+                        >
+                      >
+                    >;
+                  })
+              | ({ __typename: 'ComponentBasicInfobox' } & Pick<
+                  ComponentBasicInfobox,
+                  'title' | 'content' | 'link' | 'alternativeBackgroundColor'
+                > & {
+                    illustration?: Maybe<
+                      { __typename?: 'UploadFile' } & Pick<
+                        UploadFile,
+                        'url' | 'alternativeText'
+                      >
+                    >;
+                    hoverIllustration?: Maybe<
+                      { __typename?: 'UploadFile' } & Pick<
+                        UploadFile,
+                        'url' | 'alternativeText'
+                      >
+                    >;
+                  })
               | ({ __typename: 'ComponentBasicParagraph' } & Pick<
                   ComponentBasicParagraph,
-                  'content'
+                  'content' | 'alternativeBackgroundColor'
                 >)
               | { __typename?: 'ComponentBasicQuote' }
-              | { __typename?: 'ComponentBasicSection' }
             >
           >
         >;
@@ -2736,7 +2518,6 @@ export type GetGuidanceQuery = { __typename?: 'Query' } & {
                   'content'
                 >)
               | { __typename?: 'ComponentBasicQuote' }
-              | { __typename?: 'ComponentBasicSection' }
             >
           >
         >;
@@ -2771,6 +2552,139 @@ export type GetGuidanceQuery = { __typename?: 'Query' } & {
       Maybe<
         { __typename?: 'Provider' } & Pick<Provider, 'id' | 'title'> & {
             logo?: Maybe<
+              { __typename?: 'UploadFile' } & Pick<
+                UploadFile,
+                'url' | 'alternativeText'
+              >
+            >;
+          }
+      >
+    >
+  >;
+};
+
+export type GetMainArticleAndLatestNewsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type GetMainArticleAndLatestNewsQuery = { __typename?: 'Query' } & {
+  mainArticle?: Maybe<
+    { __typename?: 'FancyArticle' } & Pick<
+      FancyArticle,
+      'id' | 'title' | 'subtitle'
+    > & {
+        content?: Maybe<
+          Array<
+            Maybe<
+              | { __typename?: 'ComponentBasicContact' }
+              | { __typename?: 'ComponentBasicImage' }
+              | ({ __typename: 'ComponentBasicInfobox' } & Pick<
+                  ComponentBasicInfobox,
+                  'title' | 'link' | 'content'
+                >)
+              | { __typename?: 'ComponentBasicParagraph' }
+              | { __typename?: 'ComponentBasicQuote' }
+            >
+          >
+        >;
+      }
+  >;
+  newsArticles?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'NewsArticle' } & Pick<
+          NewsArticle,
+          'id' | 'title' | 'subtitle' | 'slug' | 'published'
+        > & {
+            socialImage?: Maybe<
+              { __typename?: 'UploadFile' } & Pick<
+                UploadFile,
+                'url' | 'alternativeText'
+              >
+            >;
+          }
+      >
+    >
+  >;
+};
+
+export type GetNewsArticleQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type GetNewsArticleQuery = { __typename?: 'Query' } & {
+  newsArticle?: Maybe<
+    { __typename?: 'NewsArticle' } & Pick<
+      NewsArticle,
+      'id' | 'title' | 'subtitle' | 'slug' | 'published'
+    > & {
+        socialImage?: Maybe<
+          { __typename?: 'UploadFile' } & Pick<
+            UploadFile,
+            'url' | 'alternativeText'
+          >
+        >;
+        content?: Maybe<
+          Array<
+            Maybe<
+              | { __typename?: 'ComponentBasicContact' }
+              | ({ __typename: 'ComponentBasicImage' } & Pick<
+                  ComponentBasicImage,
+                  'style' | 'alternativeBackgroundColor'
+                > & {
+                    media?: Maybe<
+                      Array<
+                        Maybe<
+                          { __typename?: 'UploadFile' } & Pick<
+                            UploadFile,
+                            'alternativeText' | 'url' | 'caption'
+                          >
+                        >
+                      >
+                    >;
+                  })
+              | ({ __typename: 'ComponentBasicInfobox' } & Pick<
+                  ComponentBasicInfobox,
+                  'title' | 'content' | 'link' | 'alternativeBackgroundColor'
+                > & {
+                    illustration?: Maybe<
+                      { __typename?: 'UploadFile' } & Pick<
+                        UploadFile,
+                        'url' | 'alternativeText'
+                      >
+                    >;
+                    hoverIllustration?: Maybe<
+                      { __typename?: 'UploadFile' } & Pick<
+                        UploadFile,
+                        'url' | 'alternativeText'
+                      >
+                    >;
+                  })
+              | ({ __typename: 'ComponentBasicParagraph' } & Pick<
+                  ComponentBasicParagraph,
+                  'content' | 'alternativeBackgroundColor'
+                >)
+              | { __typename?: 'ComponentBasicQuote' }
+            >
+          >
+        >;
+      }
+  >;
+};
+
+export type GetNewsArticlesQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+}>;
+
+export type GetNewsArticlesQuery = { __typename?: 'Query' } & {
+  newsArticles?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'NewsArticle' } & Pick<
+          NewsArticle,
+          'id' | 'title' | 'subtitle' | 'slug' | 'published'
+        > & {
+            socialImage?: Maybe<
               { __typename?: 'UploadFile' } & Pick<
                 UploadFile,
                 'url' | 'alternativeText'
@@ -2949,6 +2863,32 @@ export const GetFancyArticleDocument = gql`
         ... on ComponentBasicParagraph {
           __typename
           content
+          alternativeBackgroundColor
+        }
+        ... on ComponentBasicInfobox {
+          __typename
+          title
+          content
+          illustration {
+            url
+            alternativeText
+          }
+          hoverIllustration {
+            url
+            alternativeText
+          }
+          link
+          alternativeBackgroundColor
+        }
+        ... on ComponentBasicImage {
+          __typename
+          media {
+            alternativeText
+            url
+            caption
+          }
+          style
+          alternativeBackgroundColor
         }
       }
     }
@@ -3103,4 +3043,247 @@ export type GetGuidanceLazyQueryHookResult = ReturnType<
 export type GetGuidanceQueryResult = Apollo.QueryResult<
   GetGuidanceQuery,
   GetGuidanceQueryVariables
+>;
+export const GetMainArticleAndLatestNewsDocument = gql`
+  query GetMainArticleAndLatestNews($id: ID!) {
+    mainArticle: fancyArticle(id: $id) {
+      id
+      title
+      subtitle
+      content {
+        ... on ComponentBasicInfobox {
+          __typename
+          title
+          link
+          content
+        }
+      }
+    }
+    newsArticles(limit: 3, sort: "published:desc,published_at:desc") {
+      id
+      title
+      subtitle
+      slug
+      published
+      socialImage {
+        url
+        alternativeText
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetMainArticleAndLatestNewsQuery__
+ *
+ * To run a query within a React component, call `useGetMainArticleAndLatestNewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMainArticleAndLatestNewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMainArticleAndLatestNewsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetMainArticleAndLatestNewsQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetMainArticleAndLatestNewsQuery,
+    GetMainArticleAndLatestNewsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetMainArticleAndLatestNewsQuery,
+    GetMainArticleAndLatestNewsQueryVariables
+  >(GetMainArticleAndLatestNewsDocument, options);
+}
+export function useGetMainArticleAndLatestNewsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetMainArticleAndLatestNewsQuery,
+    GetMainArticleAndLatestNewsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetMainArticleAndLatestNewsQuery,
+    GetMainArticleAndLatestNewsQueryVariables
+  >(GetMainArticleAndLatestNewsDocument, options);
+}
+export type GetMainArticleAndLatestNewsQueryHookResult = ReturnType<
+  typeof useGetMainArticleAndLatestNewsQuery
+>;
+export type GetMainArticleAndLatestNewsLazyQueryHookResult = ReturnType<
+  typeof useGetMainArticleAndLatestNewsLazyQuery
+>;
+export type GetMainArticleAndLatestNewsQueryResult = Apollo.QueryResult<
+  GetMainArticleAndLatestNewsQuery,
+  GetMainArticleAndLatestNewsQueryVariables
+>;
+export const GetNewsArticleDocument = gql`
+  query GetNewsArticle($id: ID!) {
+    newsArticle(id: $id) {
+      id
+      title
+      subtitle
+      slug
+      published
+      socialImage {
+        url
+        alternativeText
+      }
+      content {
+        ... on ComponentBasicParagraph {
+          __typename
+          content
+          alternativeBackgroundColor
+        }
+        ... on ComponentBasicInfobox {
+          __typename
+          title
+          content
+          illustration {
+            url
+            alternativeText
+          }
+          hoverIllustration {
+            url
+            alternativeText
+          }
+          link
+          alternativeBackgroundColor
+        }
+        ... on ComponentBasicImage {
+          __typename
+          media {
+            alternativeText
+            url
+            caption
+          }
+          style
+          alternativeBackgroundColor
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetNewsArticleQuery__
+ *
+ * To run a query within a React component, call `useGetNewsArticleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetNewsArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetNewsArticleQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetNewsArticleQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetNewsArticleQuery,
+    GetNewsArticleQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetNewsArticleQuery, GetNewsArticleQueryVariables>(
+    GetNewsArticleDocument,
+    options
+  );
+}
+export function useGetNewsArticleLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetNewsArticleQuery,
+    GetNewsArticleQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetNewsArticleQuery, GetNewsArticleQueryVariables>(
+    GetNewsArticleDocument,
+    options
+  );
+}
+export type GetNewsArticleQueryHookResult = ReturnType<
+  typeof useGetNewsArticleQuery
+>;
+export type GetNewsArticleLazyQueryHookResult = ReturnType<
+  typeof useGetNewsArticleLazyQuery
+>;
+export type GetNewsArticleQueryResult = Apollo.QueryResult<
+  GetNewsArticleQuery,
+  GetNewsArticleQueryVariables
+>;
+export const GetNewsArticlesDocument = gql`
+  query GetNewsArticles($limit: Int) {
+    newsArticles(limit: $limit, sort: "published:desc,published_at:desc") {
+      id
+      title
+      subtitle
+      slug
+      published
+      socialImage {
+        url
+        alternativeText
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetNewsArticlesQuery__
+ *
+ * To run a query within a React component, call `useGetNewsArticlesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetNewsArticlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetNewsArticlesQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useGetNewsArticlesQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetNewsArticlesQuery,
+    GetNewsArticlesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetNewsArticlesQuery, GetNewsArticlesQueryVariables>(
+    GetNewsArticlesDocument,
+    options
+  );
+}
+export function useGetNewsArticlesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetNewsArticlesQuery,
+    GetNewsArticlesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetNewsArticlesQuery,
+    GetNewsArticlesQueryVariables
+  >(GetNewsArticlesDocument, options);
+}
+export type GetNewsArticlesQueryHookResult = ReturnType<
+  typeof useGetNewsArticlesQuery
+>;
+export type GetNewsArticlesLazyQueryHookResult = ReturnType<
+  typeof useGetNewsArticlesLazyQuery
+>;
+export type GetNewsArticlesQueryResult = Apollo.QueryResult<
+  GetNewsArticlesQuery,
+  GetNewsArticlesQueryVariables
 >;

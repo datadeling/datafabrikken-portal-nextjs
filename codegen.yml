@@ -3,9 +3,9 @@ hooks:
   afterOneFileWrite:
     - prettier --write
 generates:
-  ./services/api/generated/cms/graphql.ts:
+  ./src/services/api/generated/cms/graphql.ts:
     schema: https://cms.datafabrikken.norge.no/graphql
-    documents: services/**/*.graphql
+    documents: src/services/**/*.graphql
     config:
       withHooks: true
       withComponent: false
