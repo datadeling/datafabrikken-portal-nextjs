@@ -147,11 +147,11 @@ const MainPage: FC<Props> = ({
                 }}
               />
             </SC.Row>
-            <SC.ArrowDown>
+            <SC.ArrowDown href='#mainContentSection'>
               <ArrowDownIcon />
             </SC.ArrowDown>
           </SC.BannerSection>
-          <SC.MainContentSection>
+          <SC.MainContentSection id='mainContentSection'>
             <SC.MainContent>
               <SC.Row>
                 <SC.Topics>
