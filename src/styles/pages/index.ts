@@ -248,7 +248,7 @@ const Teaser = styled.div`
   }
 `;
 
-const ArrowDown = styled.div`
+const ArrowDown = styled.a`
   display: flex;
   justify-content: center;
   transform: translateX(-50%);
