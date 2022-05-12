@@ -11,7 +11,6 @@ const NewsletterSubscribe = styled.div`
   flex-flow: column;
   justify-content: space-evenly;
   font-size: ${theme.fontSize('FS12')};
-  margin-bottom: ${theme.spacing('S48')};
   gap: ${theme.fontSize('FS8')};
 
   ${onDesktopView} {
