@@ -51,7 +51,7 @@ import NewsletterSubscribe from '../components/newsletter-subscribe';
 const articleId = 'bb81d27f-acf1-4fc6-9bc3-f289bf79207f';
 
 export async function getStaticProps() {
-  const sixHoursInSeconds = 60 * 60 * 6; // 6 hrs
+  const fiveMinutesInSeconds = 300;
   const cmsNews = await getNews(3);
   const cmsPage = await getCmsPage(articleId);
   const popularCommunityTopics = (await getPopularTopics())?.topics;
@@ -67,7 +67,7 @@ export async function getStaticProps() {
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every revalidate seconds
-    revalidate: sixHoursInSeconds // In seconds
+    revalidate: fiveMinutesInSeconds // In seconds
   };
 }
 
