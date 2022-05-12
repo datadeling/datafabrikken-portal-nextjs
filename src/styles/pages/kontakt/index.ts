@@ -50,6 +50,7 @@ const ContactCardContainer = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  gap: ${theme.spacing('S16')};
 `;
 
 const ContactCard = styled.div`
@@ -58,7 +59,6 @@ const ContactCard = styled.div`
   flex: 0 1 30%;
   flex-direction: column;
   margin-top: ${theme.spacing('S40')};
-  margin-right: ${theme.spacing('S16')};
   margin-bottom: ${theme.spacing('S16')};
   padding: ${theme.spacing('S16')};
   border-radius: 2px;
