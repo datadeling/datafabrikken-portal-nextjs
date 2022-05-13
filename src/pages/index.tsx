@@ -136,7 +136,7 @@ const MainPage: FC<Props> = ({
                     onSubmit={searchString =>
                       router.push({
                         pathname: PATHNAME.FIND_DATA,
-                        query: { search: searchString || '' }
+                        query: { q: searchString || '' }
                       })
                     }
                   />
