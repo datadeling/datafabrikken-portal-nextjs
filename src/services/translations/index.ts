@@ -6,12 +6,6 @@ import type { TextLanguage } from '../../types';
 import type { FormatObject, Formatted } from './types';
 
 import { Language } from './enums';
-import { useRouter } from 'next/router';
-
-export const getLocale = () => {
-  const { locale } = useRouter();
-  return locale;
-};
 
 class TranslationsService {
   private language: Language;
@@ -27,7 +21,7 @@ class TranslationsService {
   }
 
   public getLanguage(): Language {
-    return (getLocale() as Language) ?? Language.NB;
+    return this.language ?? Language.NB;
   }
 
   public translate(key: string, values?: FormatObject): Formatted[] | string {
