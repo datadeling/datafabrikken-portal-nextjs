@@ -268,13 +268,14 @@ const MainPage: FC<Props> = ({
                 {newsArticles?.map(
                   ({
                     id,
+                    slug,
                     published,
                     published_at,
                     title,
                     subtitle,
                     socialImage
                   }) => (
-                    <InfoBox key={id} href={`${PATHNAME.NEWS}/${id}`}>
+                    <InfoBox key={id} href={`${PATHNAME.NEWS}/${slug}-${id}`}>
                       {socialImage && (
                         <InfoBoxImage
                           src={`${STRAPI_API_HOST}${socialImage.url}`}
