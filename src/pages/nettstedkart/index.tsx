@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-
 import Breadcrumbs, { Route, routes } from '../../components/breadcrumbs';
 import Head from '../../components/head';
 import Root from '../../components/root';

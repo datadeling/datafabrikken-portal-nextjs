@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CookiesProvider } from 'react-cookie';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
@@ -11,9 +11,15 @@ import { defaultTheme as theme } from '../styles/theme';
 import Footer from '../components/footer';
 import Header from '../components/header';
 import { useApollo } from '../utils/apollo/apolloClient';
+import { initAnalytics } from '../utils/analytics';
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps);
+
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />

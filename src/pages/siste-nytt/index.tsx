@@ -23,6 +23,10 @@ import {
 } from '../../services/api/generated/cms/graphql';
 import env from '../../../env';
 
+import Breadcrumbs from '../../components/breadcrumbs';
+import translations from '../../services/translations';
+import Head from '../../components/head';
+
 const { STRAPI_API_HOST } = env.clientEnv;
 
 export async function getStaticProps() {
@@ -49,45 +53,49 @@ interface Props {
 }
 
 const NewsPage: FC<Props> = ({ newsArticles }) => (
-  <Root>
-    <Container>
-      <SC.Page>
-        <SC.Title>
-          <Translation id='news.title' />
-        </SC.Title>
-        <SC.Content>
-          {newsArticles?.map(
-            ({
-              id,
-              slug,
-              published,
-              published_at,
-              title,
-              subtitle,
-              socialImage
-            }) => (
-              <InfoBox key={id} href={`${PATHNAME.NEWS}/${slug}-${id}`}>
-                {socialImage && (
-                  <InfoBoxImage
-                    src={`${STRAPI_API_HOST}${socialImage.url}`}
-                    alt={socialImage.alternativeText ?? ''}
-                  />
-                )}
-                <InfoBoxSC.InfoBox.Date>
-                  {published && formatDate(dateStringToDate(published))}
-                  {!published && formatDate(dateStringToDate(published_at))}
-                </InfoBoxSC.InfoBox.Date>
-                <InfoBoxTitle>
-                  <h4>{title}</h4>
-                </InfoBoxTitle>
-                <InfoBoxBody>{subtitle}</InfoBoxBody>
-              </InfoBox>
-            )
-          )}
-        </SC.Content>
-      </SC.Page>
-    </Container>
-  </Root>
+  <>
+    <Head title={translations.translate('news.title') as string} />
+    <Breadcrumbs />
+    <Root>
+      <Container>
+        <SC.Page>
+          <SC.Title>
+            <Translation id='news.title' />
+          </SC.Title>
+          <SC.Content>
+            {newsArticles?.map(
+              ({
+                id,
+                slug,
+                published,
+                published_at,
+                title,
+                subtitle,
+                socialImage
+              }) => (
+                <InfoBox key={id} href={`${PATHNAME.NEWS}/${slug}-${id}`}>
+                  {socialImage && (
+                    <InfoBoxImage
+                      src={`${STRAPI_API_HOST}${socialImage.url}`}
+                      alt={socialImage.alternativeText ?? ''}
+                    />
+                  )}
+                  <InfoBoxSC.InfoBox.Date>
+                    {published && formatDate(dateStringToDate(published))}
+                    {!published && formatDate(dateStringToDate(published_at))}
+                  </InfoBoxSC.InfoBox.Date>
+                  <InfoBoxTitle>
+                    <h4>{title}</h4>
+                  </InfoBoxTitle>
+                  <InfoBoxBody>{subtitle}</InfoBoxBody>
+                </InfoBox>
+              )
+            )}
+          </SC.Content>
+        </SC.Page>
+      </Container>
+    </Root>
+  </>
 );
 
 export default compose<FC>(memo)(NewsPage);
