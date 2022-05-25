@@ -20,7 +20,7 @@ const CMS_API_HOST =
   'https://cms-datafabrikken.digdir.no';
 const COMMUNITY_API_HOST =
   process.env.NEXT_PUBLIC_COMMUNITY_API_HOST! ??
-  'https://community.staging.fellesdatakatalog.digdir.no';
+  'https://datalandsbyen.norge.no';
 const METADATA_QUALITY_ASSESSMENT_API =
   process.env.NEXT_PUBLIC_METADATA_QUALITY_ASSESSMENT_API! ??
   'https://metadata-quality.staging.fellesdatakatalog.digdir.no';
