@@ -1,14 +1,7 @@
 import ReactGA from 'react-ga4';
 
-import {
-  Environment,
-  GoogleAnalyticsTrackingId,
-  PATHNAME
-} from '../../types/enums';
-import env from '../../../env';
+import { GoogleAnalyticsTrackingId, PATHNAME } from '../../types/enums';
 import { Router } from 'next/router';
-
-const { ENV } = env.clientEnv;
 
 const registerPageView = () => {
   const page = window.location.pathname;
@@ -16,8 +9,6 @@ const registerPageView = () => {
 };
 
 const registerPageViews = () => {
-  registerPageView();
-
   Router.events.on('routeChangeComplete', () => {
     registerPageView();
   });
@@ -39,7 +30,7 @@ export const initAnalytics = () => {
             trackingId
           })),
           {
-            testMode: ENV !== Environment.PRODUCTION,
+            testMode: window.location.hostname !== 'datafabrikken.norge.no',
             gaOptions: { anonymizeIp: true }
           }
         );
