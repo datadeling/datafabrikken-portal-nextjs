@@ -6,6 +6,10 @@ import ContainerSC from '../container/styled';
 const onMobileView = '@media (max-width: 900px)';
 const onDekstopView = '@media (min-width: 901px)';
 
+type factBoxWrapperProps = {
+  $small?: boolean;
+};
+
 const Root = styled.div`
   display: flex;
   flex: 1 0 auto;
@@ -33,6 +37,23 @@ const ImageText = styled.div`
 `;
 
 const InfoBoxWrapper = styled.div`
+  margin-bottom: ${theme.spacing('S20')};
+`;
+
+const FactBoxWrapper = styled.div<factBoxWrapperProps>`
+  margin-bottom: ${theme.spacing('S20')};
+
+  ${({ $small }) =>
+    $small &&
+    css`
+      display: flex;
+      justify-content: flex-end;
+    `}
+`;
+
+const FactBoxWrapperLiten = styled.div`
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: ${theme.spacing('S20')};
 `;
 
@@ -225,5 +246,7 @@ export default {
   Image,
   ImageText,
   InfoBoxWrapper,
+  FactBoxWrapper,
+  FactBoxWrapperLiten,
   Quote
 };

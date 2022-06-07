@@ -4,13 +4,16 @@ import SC from './styled';
 import Markdown from '../markdown';
 import { Variant as ContainerVariant } from '../container';
 import {
+  Enum_Componentbasicfactbox_Variant,
   FancyArticle,
   NewsArticle
 } from '../../services/api/generated/cms/graphql';
 import {
   isBasicParagraph,
   isBasicImage,
-  isBasicInfoBox
+  isBasicInfoBox,
+  isBasicFactBox,
+  isBasicFactBoxVariant
 } from '../../utils/strapi';
 import {
   InfoBox,
@@ -19,6 +22,7 @@ import {
   InfoBoxImage,
   InfoBoxTitle
 } from '../info-box';
+import { FactBox, FactBoxTitle, FactBoxBody } from '../fact-box';
 import { isAbsoluteUrl } from '../../utils/string-helper';
 import env from '../../../env';
 import { dateStringToDate, formatDate } from '../../utils/date';
@@ -149,6 +153,36 @@ export const ArticlePageStrapi: FC<Props> = ({ article }) => {
                   </SC.InfoBoxWrapper>
                 </SC.Container>
               </SC.Background>
+            )) ||
+            (isBasicFactBox(component) && (
+              <SC.Container
+                $variant={
+                  isBasicFactBoxVariant(
+                    Enum_Componentbasicfactbox_Variant.Normal,
+                    component
+                  )
+                    ? ContainerVariant.WIDTH_720
+                    : undefined
+                }
+              >
+                <SC.FactBoxWrapper
+                  $small={
+                    isBasicFactBoxVariant(
+                      Enum_Componentbasicfactbox_Variant.Liten,
+                      component
+                    )
+                      ? true
+                      : false
+                  }
+                >
+                  <FactBox>
+                    <FactBoxTitle>{component?.title}</FactBoxTitle>
+                    <FactBoxBody truncate={false}>
+                      <Markdown allowHtml>{component?.content ?? ''}</Markdown>
+                    </FactBoxBody>
+                  </FactBox>
+                </SC.FactBoxWrapper>
+              </SC.Container>
             ))
         )}
       </SC.ContentSection>

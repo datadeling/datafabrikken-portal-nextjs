@@ -40,6 +40,12 @@ query GetNewsArticle($id: ID!) {
         style
         alternativeBackgroundColor
       }
+      ... on ComponentBasicFactbox {
+        __typename
+        title
+        variant
+        content
+      }
     }
   }
 }
