@@ -41,7 +41,7 @@ const RadioOption: FC<RadioOptionProps> = ({
       name={group}
       value={value}
       onChange={onChange}
-      {...(checked !== undefined && !!checked)}
+      checked={!!checked}
     />
 
     <Translation id={label} />
