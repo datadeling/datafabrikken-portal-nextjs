@@ -1,10 +1,7 @@
-import React, { memo, FC, useEffect } from 'react';
+import React, { memo, FC } from 'react';
 import { compose } from 'redux';
 import { InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-
-import lottie from 'lottie-web';
 
 import Root from '../components/root';
 import {
@@ -22,7 +19,6 @@ import {
   InfoBoxIcon
 } from '../components/info-box';
 import Markdown from '../components/markdown';
-import AutosuggestSearchbar from '../components/autosuggest-searchbar';
 import Translation from '../components/translation';
 import Topic from '../components/community/topic';
 
@@ -30,7 +26,6 @@ import { dateStringToDate, formatDate } from '../utils/date';
 
 import SC from '../styles/pages';
 
-import factoryLottieJson from '../../public/images/factory.lottie.json';
 import { getPopularTopics } from '../services/api/community-api/topics';
 import {
   searchDatasets,
@@ -41,7 +36,6 @@ import CommunityIllustration from '../../public/images/illustration-community-la
 import CourseIllustration from '../../public/images/illustration-course.inline.svg';
 import GuideIllustration from '../../public/images/illustration-guide.inline.svg';
 import BoxOfDataIllustration from '../../public/images/illustration-box-of-data.inline.svg';
-import ArrowDownIcon from '../../public/images/icon-arrow-down.inline.svg';
 import translations from '../services/translations';
 import Head from '../components/head';
 import NewsletterSubscribe from '../components/newsletter-subscribe';
@@ -49,15 +43,21 @@ import {
   NewsArticle,
   GetMainArticleAndLatestNewsDocument,
   FancyArticle,
-  ComponentBasicInfobox
+  ComponentBasicInfobox,
+  ComponentBasicImage,
+  ComponentBasicParagraph
 } from '../services/api/generated/cms/graphql';
 import { initializeApollo } from '../utils/apollo/apolloClient';
-import { isBasicInfoBox } from '../utils/strapi';
+import {
+  isBasicImage,
+  isBasicInfoBox,
+  isBasicParagraph
+} from '../utils/strapi';
 import { PATHNAME } from '../types/enums';
 import env from '../../env';
 
 const { STRAPI_API_HOST } = env.clientEnv;
-const mainArticleId = 12;
+const mainArticleId = 15;
 
 export async function getStaticProps() {
   const fiveMinutesInSeconds = 300;
@@ -93,103 +93,106 @@ const isAbsoluteUrl = (url: string) => {
   return r.test(url) ?? false;
 };
 
-const MainPage: FC<Props> = ({
-  data,
-  totalDatasets,
-  popularCommunityTopics
-}) => {
-  const router = useRouter();
-
-  let animationRef: any = null;
-
-  const initAnimation = () => {
-    lottie.loadAnimation({
-      container: animationRef,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: factoryLottieJson
-    });
-  };
-
-  useEffect(() => {
-    initAnimation();
-  }, []);
-
+const MainPage: FC<Props> = ({ data, popularCommunityTopics }) => {
   const {
     mainArticle,
     newsArticles
   }: { mainArticle: FancyArticle; newsArticles: NewsArticle[] } = data;
 
-  const [firstInfoBox, secondInfoBox, ...mainContent] =
+  const [firstImage] =
+    (mainArticle?.content?.filter(content =>
+      isBasicImage(content)
+    ) as ComponentBasicImage[]) ?? [];
+
+  const [firstParagraph] =
+    (mainArticle?.content?.filter(content =>
+      isBasicParagraph(content)
+    ) as ComponentBasicParagraph[]) ?? [];
+
+  const infoBoxes =
     (mainArticle?.content?.filter(content =>
       isBasicInfoBox(content)
     ) as ComponentBasicInfobox[]) ?? [];
+  console.log(infoBoxes, infoBoxes.slice(0, 3), infoBoxes.slice(3, 1));
 
   return (
     <>
       <Head
         title={translations.translate('title') as string}
-        description={firstInfoBox?.title}
+        description={firstParagraph?.content ?? ''}
       />
       <Root>
-        <SC.Container>
-          <SC.BannerSection>
-            <SC.Row>
-              <ContentBox>
-                <ContentBoxHeader as='h1'>
-                  <ContentBoxSC.ContentBoxHeader.Title>
-                    {firstInfoBox?.title}
-                  </ContentBoxSC.ContentBoxHeader.Title>
-                </ContentBoxHeader>
-                <ContextBoxBody>
-                  <Markdown allowHtml>{firstInfoBox?.content ?? ''}</Markdown>
-                  <AutosuggestSearchbar
-                    maxSuggestions={6}
-                    placeholder={`${translations.translate(
-                      'main.search.findData',
-                      {
-                        totalDatasets
+        <SC.BannerSection
+          $bg={firstImage && `${STRAPI_API_HOST}${firstImage.media?.[0]?.url}`}
+        >
+          <SC.BannerSectionGradient />
+          <SC.BannerContainer>
+            {firstParagraph && <SC.Title>{firstParagraph.content}</SC.Title>}
+
+            <SC.BannerInfoBoxRow>
+              {infoBoxes.slice(0, 3).map(infoBox => (
+                <InfoBox
+                  key={infoBox?.id}
+                  {...(isAbsoluteUrl(`${infoBox?.link}`)
+                    ? {
+                        href: infoBox?.link ?? '',
+                        target: '_blank',
+                        externalLink: true
                       }
-                    )}`}
-                    onSubmit={searchString =>
-                      router.push({
-                        pathname: PATHNAME.FIND_DATA,
-                        query: { q: searchString || '' }
-                      })
-                    }
-                  />
-                </ContextBoxBody>
-              </ContentBox>
-              <div
-                ref={ref => {
-                  animationRef = ref;
-                }}
-              />
-            </SC.Row>
-            <SC.ArrowDown href='#mainContentSection'>
-              <ArrowDownIcon />
-            </SC.ArrowDown>
-          </SC.BannerSection>
-          <SC.MainContentSection id='mainContentSection'>
+                    : {
+                        href: infoBox?.link ?? ''
+                      })}
+                >
+                  <InfoBoxIcon>
+                    <InfoBoxImage
+                      src={`${STRAPI_API_HOST}${infoBox?.illustration?.url}`}
+                      alt={
+                        infoBox?.illustration?.alternativeText ??
+                        `${infoBox?.id}-illustration`
+                      }
+                      hoverSrc={
+                        infoBox?.hoverIllustration?.url &&
+                        `${STRAPI_API_HOST}${infoBox.hoverIllustration.url}`
+                      }
+                      hoverAlt={
+                        infoBox?.hoverIllustration?.alternativeText ??
+                        `${infoBox?.id}-illustration`
+                      }
+                    />
+                  </InfoBoxIcon>
+                  <InfoBoxTitle>
+                    <h4>{infoBox?.title}</h4>
+                  </InfoBoxTitle>
+                  <InfoBoxBody>
+                    <Markdown allowHtml>{infoBox?.content ?? ''}</Markdown>
+                  </InfoBoxBody>
+                </InfoBox>
+              ))}
+            </SC.BannerInfoBoxRow>
+          </SC.BannerContainer>
+        </SC.BannerSection>
+        <SC.MainContentSection id='mainContentSection'>
+          <SC.Container>
             <SC.MainContent>
               <SC.Row>
                 <SC.Topics>
                   <SC.IllustrationBox>
                     <CommunityIllustration />
                     <SC.IllustrationContent>
-                      <ContentBox>
-                        <ContentBoxHeader>
-                          <ContentBoxSC.ContentBoxHeader.Title>
-                            {secondInfoBox?.title}
-                          </ContentBoxSC.ContentBoxHeader.Title>
-                        </ContentBoxHeader>
-                        <ContextBoxBody>
-                          <Markdown allowHtml>
-                            {secondInfoBox?.content ?? ''}
-                          </Markdown>
-                        </ContextBoxBody>
-                      </ContentBox>
+                      {infoBoxes.slice(3, 4).map(infoBox => (
+                        <ContentBox>
+                          <ContentBoxHeader>
+                            <ContentBoxSC.ContentBoxHeader.Title>
+                              {infoBox?.title}
+                            </ContentBoxSC.ContentBoxHeader.Title>
+                          </ContentBoxHeader>
+                          <ContextBoxBody>
+                            <Markdown allowHtml>
+                              {infoBox?.content ?? ''}
+                            </Markdown>
+                          </ContextBoxBody>
+                        </ContentBox>
+                      ))}
                     </SC.IllustrationContent>
                   </SC.IllustrationBox>
                   {popularCommunityTopics
@@ -212,7 +215,7 @@ const MainPage: FC<Props> = ({
                 </SC.Topics>
               </SC.Row>
               <SC.Row>
-                {mainContent.slice(0, 2).map((infoBox, index: number) => (
+                {infoBoxes.slice(4, 6).map((infoBox, index: number) => (
                   <InfoBox
                     key={infoBox?.id}
                     {...(isAbsoluteUrl(`${infoBox?.link}`)
@@ -227,13 +230,21 @@ const MainPage: FC<Props> = ({
                   >
                     <InfoBoxIcon>
                       {index === 0 ? (
-                        <CourseIllustration />
+                        <CourseIllustration
+                          width='100%'
+                          height='auto'
+                          viewBox='0 0 96 96'
+                        />
                       ) : (
-                        <GuideIllustration />
+                        <GuideIllustration
+                          width='100%'
+                          height='auto'
+                          viewBox='0 0 96 96'
+                        />
                       )}
                     </InfoBoxIcon>
                     <InfoBoxTitle>
-                      <h3>{infoBox?.title}</h3>
+                      <h4>{infoBox?.title}</h4>
                     </InfoBoxTitle>
                     <InfoBoxBody>
                       <Markdown allowHtml>{infoBox?.content ?? ''}</Markdown>
@@ -241,7 +252,7 @@ const MainPage: FC<Props> = ({
                   </InfoBox>
                 ))}
               </SC.Row>
-              {mainContent.slice(2, 3).map((infoBox, index: number) => (
+              {infoBoxes.slice(6).map((infoBox, index: number) => (
                 <SC.Row key={`row-${index}`}>
                   <SC.Teaser>
                     <SC.IllustrationBox>
@@ -297,8 +308,8 @@ const MainPage: FC<Props> = ({
               </SC.NewsRow>
               <NewsletterSubscribe />
             </SC.MainContent>
-          </SC.MainContentSection>
-        </SC.Container>
+          </SC.Container>
+        </SC.MainContentSection>
       </Root>
     </>
   );

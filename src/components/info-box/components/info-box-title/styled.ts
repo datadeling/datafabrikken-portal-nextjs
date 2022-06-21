@@ -10,7 +10,6 @@ const Title = styled.div<infoBoxTitleProps>`
   display: block;
   font-size: ${theme.fontSize('FS16')};
   font-weight: ${theme.fontWeight('FW400')};
-  margin-bottom: ${theme.spacing('S8')};
   color: ${({ $invertColor }) =>
     $invertColor
       ? theme.colour(Colour.BLUE, 'B38')
