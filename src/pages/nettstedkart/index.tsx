@@ -43,13 +43,53 @@ const SiteMapPage: NextPage<Props> = () => (
             </Link>
             <SC.SiteMapBranch>
               {routes
-                .filter(({ showInSiteMap }) => showInSiteMap)
+
+                .filter(
+                  ({ showInSiteMap, siteMapPath = '' }) =>
+                    showInSiteMap && siteMapPath.split('/').length == 2
+                )
                 .sort(sortByTitle())
-                .map(({ siteMapPath = '', breadcrumb }) => (
+                .map(({ siteMapPath = '', isLink, breadcrumb }) => (
                   <SC.SiteMapLeaf>
-                    <Link href={siteMapPath} passHref prefetch={false}>
-                      <SC.SiteMapLink>{breadcrumb.title}</SC.SiteMapLink>
-                    </Link>
+                    {isLink === false ? (
+                      breadcrumb.title
+                    ) : (
+                      <Link href={siteMapPath} passHref prefetch={false}>
+                        <SC.SiteMapLink>{breadcrumb.title}</SC.SiteMapLink>
+                      </Link>
+                    )}
+                    <SC.SiteMapBranch>
+                      {routes
+
+                        .filter(
+                          ({
+                            showInSiteMap: showInSiteMap2,
+                            siteMapPath: siteMapPath2 = ''
+                          }) =>
+                            showInSiteMap2 &&
+                            siteMapPath != siteMapPath2 &&
+                            siteMapPath2.startsWith(siteMapPath)
+                        )
+                        .sort(sortByTitle())
+                        .map(
+                          ({
+                            siteMapPath: siteMapPath2 = '',
+                            breadcrumb: breadcrumb2
+                          }) => (
+                            <SC.SiteMapLeaf>
+                              <Link
+                                href={siteMapPath2}
+                                passHref
+                                prefetch={false}
+                              >
+                                <SC.SiteMapLink>
+                                  {breadcrumb2.title}
+                                </SC.SiteMapLink>
+                              </Link>
+                            </SC.SiteMapLeaf>
+                          )
+                        )}
+                    </SC.SiteMapBranch>
                   </SC.SiteMapLeaf>
                 ))}
             </SC.SiteMapBranch>

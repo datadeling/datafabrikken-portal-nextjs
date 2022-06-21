@@ -4,11 +4,35 @@ query GetMainArticleAndLatestNews($id: ID!) {
     title
     subtitle
     content {
+      ... on ComponentBasicImage {
+        __typename
+        media {
+          alternativeText
+          url
+          caption
+        }
+        style
+        alternativeBackgroundColor
+      }
+      ... on ComponentBasicParagraph {
+        __typename
+        content
+        alternativeBackgroundColor
+      }
       ... on ComponentBasicInfobox {
         __typename
         title
-        link
         content
+        illustration {
+          url
+          alternativeText
+        }
+        hoverIllustration {
+          url
+          alternativeText
+        }
+        link
+        alternativeBackgroundColor
       }
     }
   }

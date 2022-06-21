@@ -13,16 +13,18 @@ type infoBoxProps = {
 const IconWrapper = styled.div`
   align-items: flex-start;
   display: flex;
-  flex: 0 0 20%;
 
   & > svg,
   img {
-    height: 100px;
-    width: 100px;
+    height: auto;
+    width: 100%;
+    min-width: 50px;
+    max-width: 100px;
   }
 
   ${onMobileView} {
     margin-bottom: ${theme.spacing('S10')};
+    flex: 0 0 20%;
   }
 `;
 
@@ -115,13 +117,10 @@ const InfoBoxRow = styled.div`
   justify-content: space-between;
   align-items: stretch;
   gap: ${theme.spacing('S12')};
-
-  padding: ${theme.spacing('S24')};
+  padding: ${theme.spacing('S16')};
 
   ${onMobileView} {
-    gap: 0;
-    flex-direction: column;
-    padding: ${theme.spacing('S10')};
+    padding: ${theme.spacing('S12')};
   }
 `;
 

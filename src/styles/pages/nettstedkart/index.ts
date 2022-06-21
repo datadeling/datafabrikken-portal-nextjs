@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import ContainerSC from "../../../components/container/styled";
-import {Colour, theme} from "../../theme";
+import ContainerSC from '../../../components/container/styled';
+import { Colour, theme } from '../../theme';
 
 const onMobileView = '@media (max-width: 900px)';
 
@@ -59,7 +59,7 @@ const SiteMapLeaf = styled.li`
     height: 24px;
     width: 16px;
     display: inline-block;
-    content: "";
+    content: '';
     border-bottom: 1px solid ${theme.colour(Colour.NEUTRAL, 'N0')};
   }
 `;
@@ -80,4 +80,13 @@ const SiteMapLink = styled.a`
   }
 `;
 
-export default { Container, Header, Title, Subtitle, SiteMapRoot, SiteMapBranch, SiteMapLeaf, SiteMapLink };
+export default {
+  Container,
+  Header,
+  Title,
+  Subtitle,
+  SiteMapRoot,
+  SiteMapBranch,
+  SiteMapLeaf,
+  SiteMapLink
+};

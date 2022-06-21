@@ -1,27 +1,56 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import ContainerSC from '../../components/container/styled';
 
 import InfoBoxSC from '../../components/info-box/components/info-box/styled';
+import InfoBoxTitleSC from '../../components/info-box/components/info-box-title/styled';
 
 import { theme, Colour } from '../theme';
 
 const onMobileView = '@media (max-width: 900px)';
 
-const Container = styled(ContainerSC.Container)`
-  width: 100%;
+const BannerContainer = styled(ContainerSC.Container)`
+  flex: 1 0 100%;
+`;
 
-  @media (max-width: 1251px) {
-    & {
-      width: 100%;
-      padding: 0;
+const Container = styled(ContainerSC.Container)``;
+
+const BannerInfoBoxRow = styled.div`
+  display: flex;
+  z-index: 1;
+  margin-bottom: ${theme.spacing('S24')};
+  gap: ${theme.spacing('S8')};
+
+  & > ${InfoBoxSC.InfoBox} {
+    background-color: ${theme.colour(Colour.BLUE, 'B16')};
+    color: ${theme.colour(Colour.BLUE, 'B52')};
+    box-shadow: 0 12px 48px ${theme.colour(Colour.BLUE, 'B38', 15)};
+
+    & ${InfoBoxTitleSC.Title} {
+      color: ${theme.colour(Colour.BLUE, 'B52')};
+    }
+
+    &:hover {
+      background-color: ${theme.colour(Colour.BLUE, 'B48')};
+      color: ${theme.colour(Colour.BLUE, 'B16')};
+
+      & ${InfoBoxTitleSC.Title} {
+        color: ${theme.colour(Colour.BLUE, 'B16')};
+        & > svg {
+          color: ${theme.colour(Colour.BLUE, 'B16')};
+        }
+      }
+    }
+
+    ${onMobileView} {
+      flex-basis: 100%;
+      margin-bottom: 0;
+      box-shadow: 0 6px 24px ${theme.colour(Colour.BLUE, 'B38', 15)};
     }
   }
 
   ${onMobileView} {
-    & {
-      padding: 0;
-    }
+    flex-direction: column;
   }
 `;
 
@@ -47,58 +76,73 @@ const Row = styled.div`
 `;
 
 const Title = styled.h1`
+  display: 'flex';
+  flex-grow: 1;
+  margin-top: ${theme.spacing('S40')};
+  max-width: 36%;
   font-size: ${theme.fontSize('FS32')};
+
+  @media (max-width: 1251px) {
+    max-width: 50%;
+  }
+
   ${onMobileView} {
+    flex-grow: 0;
     font-size: ${theme.fontSize('FS18')};
+    max-width: 100%;
+    margin-top: ${theme.spacing('S64')};
+    margin-bottom: ${theme.spacing('S10')};
   }
 `;
 
-const BannerSection = styled.section`
+const BannerSection = styled.section<{ $bg?: any }>`
+  position: relative;
   display: flex;
-  width: 1200px;
+  flex-direction: column;
   height: 100vh;
-  padding-top: 25vh;
-  margin: 0 auto;
-
-  & > ${Row} {
-    & > div:last-child {
-      position: relative;
-      top: -100px;
-      width: 700px;
-      height: 700px;
-      z-index: -1;
-    }
-  }
-
-  @media (max-width: 1251px) {
-    & {
-      width: 100%;
-      padding: ${theme.spacing('S50')} ${theme.spacing('S10')}
-        ${theme.spacing('S10')} ${theme.spacing('S10')};
-
-      background: none;
-
-      & > ${Row} {
-        flex-direction: column;
-
-        & > div:last-child {
-          top: 0;
-          width: 90%;
-          height: 90%;
-        }
-      }
-    }
-  }
+  width: 100%;
+  ${({ $bg }) =>
+    $bg &&
+    css`
+      background: url(${$bg});
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    `};
 
   ${onMobileView} {
     height: auto;
-    & > ${Row} {
-      flex-direction: column;
+    ${({ $bg }) =>
+      $bg &&
+      css`
+        background: url(${$bg});
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position-y: 68px;
+      `};
+  }
+`;
 
-      & > div:last-child {
-        display: none;
-      }
-    }
+const BannerSectionGradient = styled.div`
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    ${theme.colour(Colour.BLUE, 'B54', 100)} 0%,
+    ${theme.colour(Colour.BLUE, 'B54', 0)} 100%,
+    ${theme.colour(Colour.BLUE, 'B54', 0)} 100%
+  );
+
+  ${onMobileView} {
+    height: 50%;
+    background: linear-gradient(
+      0deg,
+      ${theme.colour(Colour.BLUE, 'B54', 100)} 40%,
+      ${theme.colour(Colour.BLUE, 'B54', 10)} 50%,
+      ${theme.colour(Colour.BLUE, 'B54', 0)} 100%
+    );
   }
 `;
 
@@ -106,12 +150,7 @@ const MainContentSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  background: linear-gradient(
-    ${theme.colour(Colour.BLUE, 'B48')},
-    ${theme.colour(Colour.BLUE, 'B54')},
-    ${theme.colour(Colour.BLUE, 'B54')}
-  );
+  background: ${theme.colour(Colour.BLUE, 'B54')};
 `;
 
 const MainContent = styled.div`
@@ -130,7 +169,6 @@ const MainContent = styled.div`
   @media (max-width: 1251px) {
     & {
       width: 100%;
-      padding: ${theme.spacing('S10')};
     }
   }
 
@@ -307,6 +345,9 @@ export default {
   Container,
   Title,
   BannerSection,
+  BannerSectionGradient,
+  BannerContainer,
+  BannerInfoBoxRow,
   MainContentSection,
   MainContent,
   IllustrationBox,

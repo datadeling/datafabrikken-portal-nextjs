@@ -2473,7 +2473,10 @@ export type GetFancyArticleQuery = { __typename?: "Query" } & {
           Array<
             Maybe<
               | { __typename?: "ComponentBasicContact" }
-              | { __typename?: "ComponentBasicFactbox" }
+              | ({ __typename: "ComponentBasicFactbox" } & Pick<
+                  ComponentBasicFactbox,
+                  "title" | "variant" | "content"
+                >)
               | ({ __typename: "ComponentBasicImage" } & Pick<
                   ComponentBasicImage,
                   "style" | "alternativeBackgroundColor"
@@ -2611,12 +2614,42 @@ export type GetMainArticleAndLatestNewsQuery = { __typename?: "Query" } & {
             Maybe<
               | { __typename?: "ComponentBasicContact" }
               | { __typename?: "ComponentBasicFactbox" }
-              | { __typename?: "ComponentBasicImage" }
+              | ({ __typename: "ComponentBasicImage" } & Pick<
+                  ComponentBasicImage,
+                  "style" | "alternativeBackgroundColor"
+                > & {
+                    media?: Maybe<
+                      Array<
+                        Maybe<
+                          { __typename?: "UploadFile" } & Pick<
+                            UploadFile,
+                            "alternativeText" | "url" | "caption"
+                          >
+                        >
+                      >
+                    >;
+                  })
               | ({ __typename: "ComponentBasicInfobox" } & Pick<
                   ComponentBasicInfobox,
-                  "title" | "link" | "content"
+                  "title" | "content" | "link" | "alternativeBackgroundColor"
+                > & {
+                    illustration?: Maybe<
+                      { __typename?: "UploadFile" } & Pick<
+                        UploadFile,
+                        "url" | "alternativeText"
+                      >
+                    >;
+                    hoverIllustration?: Maybe<
+                      { __typename?: "UploadFile" } & Pick<
+                        UploadFile,
+                        "url" | "alternativeText"
+                      >
+                    >;
+                  })
+              | ({ __typename: "ComponentBasicParagraph" } & Pick<
+                  ComponentBasicParagraph,
+                  "content" | "alternativeBackgroundColor"
                 >)
-              | { __typename?: "ComponentBasicParagraph" }
               | { __typename?: "ComponentBasicQuote" }
             >
           >
@@ -2664,7 +2697,7 @@ export type GetNewsArticleQuery = { __typename?: "Query" } & {
               | { __typename?: "ComponentBasicContact" }
               | ({ __typename: "ComponentBasicFactbox" } & Pick<
                   ComponentBasicFactbox,
-                  "variant" | "content" | "title"
+                  "title" | "variant" | "content"
                 >)
               | ({ __typename: "ComponentBasicImage" } & Pick<
                   ComponentBasicImage,
@@ -2928,6 +2961,12 @@ export const GetFancyArticleDocument = gql`
           style
           alternativeBackgroundColor
         }
+        ... on ComponentBasicFactbox {
+          __typename
+          title
+          variant
+          content
+        }
       }
     }
   }
@@ -3089,11 +3128,35 @@ export const GetMainArticleAndLatestNewsDocument = gql`
       title
       subtitle
       content {
+        ... on ComponentBasicImage {
+          __typename
+          media {
+            alternativeText
+            url
+            caption
+          }
+          style
+          alternativeBackgroundColor
+        }
+        ... on ComponentBasicParagraph {
+          __typename
+          content
+          alternativeBackgroundColor
+        }
         ... on ComponentBasicInfobox {
           __typename
           title
-          link
           content
+          illustration {
+            url
+            alternativeText
+          }
+          hoverIllustration {
+            url
+            alternativeText
+          }
+          link
+          alternativeBackgroundColor
         }
       }
     }
@@ -3206,9 +3269,9 @@ export const GetNewsArticleDocument = gql`
         }
         ... on ComponentBasicFactbox {
           __typename
+          title
           variant
           content
-          title
         }
       }
     }

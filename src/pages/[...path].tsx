@@ -10,12 +10,13 @@ import ArticleStrapi from '../components/article-strapi';
 import Head from '../components/head';
 
 const articleIds: { [pathname: string]: number } = {
+  [`${PATHNAME.HOW_TO_OFFER_DATA}`]: 7,
+  [`${PATHNAME.USE_DATA}`]: 9,
   [`${PATHNAME.ABOUT}`]: 11,
   [`${PATHNAME.COMMUNITY_ABOUT}`]: 13
 };
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const fiveMinutesInSeconds = 300;
   const path = params?.path instanceof Array ? params?.path : [params?.path];
   const articleId = articleIds[`/${path.join('/')}`];
 
@@ -30,8 +31,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   return {
     props: {
       ...data
-    },
-    revalidate: fiveMinutesInSeconds
+    }
   };
 }
 

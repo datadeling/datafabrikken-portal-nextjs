@@ -9,15 +9,19 @@
   "header": {
     "mainContent": "Til hovedinnhold",
     "home": "Hjem",
-    "about": "Om Datafabrikken",
     "findData": "Finn data",
-    "news": "Siste nytt",
+    "news": "Nyheter",
     "community": "Datalandsbyen",
     "communityAbout": "Om Datalandsbyen",
     "organizations": "Virksomheter",
     "metadataquality": "Metadatakvalitet",
     "courses": "Kurs",
-    "guidance": "Veiledning"
+    "guidance": "Veiledning",
+    "offerData": "Tilby data",
+    "howToOfferData": "Hvordan tilby data",
+    "useData": "Bruke data",
+    "search": "Søk",
+    "legalGuide": "Juridisk veileder"
   },
   "footer": {
     "title": "Følg med på Datafabrikken",
@@ -35,9 +39,9 @@
         "home": "Hjem",
         "about": "Om Datafabrikken",
         "communityAbout": "Om Datalandsbyen",
-        "news": "Siste nytt",
+        "news": "Nyheter",
 
-        "findData": "Finn data",
+        "search": "Søk",
         "courses": "Kurs",
         "guidance": "Veiledning",
         "community": "Datalandsbyen",

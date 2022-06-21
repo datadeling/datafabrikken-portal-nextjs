@@ -14,7 +14,7 @@ import {
   InfoBoxTitle,
   SC as InfoBoxSC
 } from '../../components/info-box';
-import SC from '../../styles/pages/siste-nytt';
+import SC from '../../styles/pages/nyheter';
 import { PAGE_PROPERTY, PATHNAME } from '../../types/enums';
 import { initializeApollo } from '../../utils/apollo/apolloClient';
 import {

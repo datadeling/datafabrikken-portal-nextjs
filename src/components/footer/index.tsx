@@ -68,9 +68,9 @@ const Footer: FC<Props> = () => (
           </SC.LinkTitle>
           <SC.LinkList>
             <li>
-              <Link href={PATHNAME.FIND_DATA} passHref prefetch={false}>
+              <Link href={PATHNAME.SEARCH} passHref prefetch={false}>
                 <a>
-                  <Translation id='footer.linkSection.links.findData' />
+                  <Translation id='footer.linkSection.links.search' />
                 </a>
               </Link>
             </li>

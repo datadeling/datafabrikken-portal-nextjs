@@ -1,9 +1,13 @@
 export enum PATHNAME {
   MAIN = '/',
   FIND_DATA = '/finn-data',
+  SEARCH = '/finn-data/sok',
+  USE_DATA = '/finn-data/bruke-data',
+  OFFER_DATA = '/tilby-data',
+  HOW_TO_OFFER_DATA = '/tilby-data/hvordan-tilby-data',
   DATASETS = '/sok-datasett',
   ABOUT = '/om-datafabrikken',
-  NEWS = '/siste-nytt',
+  NEWS = '/nyheter',
   COMMUNITY = '/datalandsbyen',
   COMMUNITY_POPULAR = '/datalandsbyen/populaer',
   COMMUNITY_RECENT = '/datalandsbyen/siste',
@@ -18,7 +22,8 @@ export enum PATHNAME {
   METADATAQUALITY = '/metadatakvalitet',
   COURSES = '/kurs',
   GUIDANCE = '/veiledning',
-  SITEMAP = '/nettstedkart'
+  SITEMAP = '/nettstedkart',
+  LEGAL_GUIDE = '/juridisk-veileder-for-datadeling'
 }
 
 export enum PARAGRAPH {

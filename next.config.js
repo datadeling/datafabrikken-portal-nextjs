@@ -26,6 +26,31 @@ module.exports = {
 
     return config;
   },
+  async redirects() {
+    return [
+      { source: '/finn-data', destination: '/finn-data/sok', permanent: true },
+      {
+        source: '/siste-nytt',
+        destination: '/nyheter',
+        permanent: true
+      },
+      {
+        source: '/siste-nytt/:path',
+        destination: '/nyheter/:path',
+        permanent: true
+      },
+      {
+        source: '/veiledning/bruke-data',
+        destination: '/finn-data/bruke-data',
+        permanent: true
+      },
+      {
+        source: '/veiledning/tilby-data',
+        destination: '/tilby-data/hvordan-tilby-data',
+        permanent: true
+      }
+    ];
+  },
   async rewrites() {
     return {
       // After checking all Next.js pages (including dynamic routes)

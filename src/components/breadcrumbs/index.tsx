@@ -16,6 +16,7 @@ export interface Route {
   breadcrumb: Breadcrumb;
   showInSiteMap?: boolean;
   siteMapPath?: string;
+  isLink?: boolean;
 }
 
 interface Breadcrumb {
@@ -39,7 +40,9 @@ export const routes: Route[] = [
   {
     pathPattern: new RegExp(`^${PATHNAME.ABOUT}$`),
     breadcrumb: {
-      title: translations.translate('header.about') as string,
+      title: translations.translate(
+        'footer.linkSection.headings.about'
+      ) as string,
       dynamic: false
     },
     showInSiteMap: true,
@@ -52,7 +55,17 @@ export const routes: Route[] = [
       dynamic: false
     },
     showInSiteMap: true,
-    siteMapPath: PATHNAME.FIND_DATA
+    siteMapPath: PATHNAME.FIND_DATA,
+    isLink: false
+  },
+  {
+    pathPattern: new RegExp(`^${PATHNAME.SEARCH}$`),
+    breadcrumb: {
+      title: translations.translate('header.search') as string,
+      dynamic: false
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.SEARCH
   },
   {
     pathPattern: new RegExp(`^${PATHNAME.NEWS}$`),
@@ -89,7 +102,7 @@ export const routes: Route[] = [
   },
   {
     pathPattern: new RegExp(
-      `^${PATHNAME.FIND_DATA}${PATHNAME.DATASET_DETAILS}${subPathRegex}$`
+      `^${PATHNAME.SEARCH}${PATHNAME.DATASET_DETAILS}${subPathRegex}$`
     ),
     breadcrumb: { title: undefined, dynamic: true }
   },
@@ -181,10 +194,6 @@ export const routes: Route[] = [
     siteMapPath: PATHNAME.GUIDANCE
   },
   {
-    pathPattern: new RegExp(`^${PATHNAME.GUIDANCE}${subPathRegex}$`),
-    breadcrumb: { title: undefined, dynamic: true }
-  },
-  {
     pathPattern: new RegExp(`^${PATHNAME.SITEMAP}$`),
     breadcrumb: {
       title: translations.translate(
@@ -192,12 +201,44 @@ export const routes: Route[] = [
       ) as string,
       dynamic: false
     }
+  },
+  {
+    pathPattern: new RegExp(`^${PATHNAME.OFFER_DATA}$`),
+    breadcrumb: {
+      title: translations.translate('header.offerData') as string,
+      dynamic: false
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.OFFER_DATA,
+    isLink: false
+  },
+  {
+    pathPattern: new RegExp(`^${PATHNAME.HOW_TO_OFFER_DATA}$`),
+    breadcrumb: {
+      title: translations.translate('header.howToOfferData') as string,
+      dynamic: false
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.HOW_TO_OFFER_DATA
+  },
+  {
+    pathPattern: new RegExp(`^${PATHNAME.USE_DATA}$`),
+    breadcrumb: {
+      title: translations.translate('header.useData') as string,
+      dynamic: false
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.USE_DATA
   }
 ];
 
 const resolveBreadcrumb = (path: string) =>
   routes.find(({ pathPattern }) => pathPattern.test(path))?.breadcrumb ??
   routeNotFound;
+
+const isLink = (path: string) =>
+  routes.find(({ pathPattern }) => pathPattern.test(path))?.isLink !== false ??
+  true;
 
 interface Props {
   dynamicPageTitles?: string[];
@@ -218,14 +259,13 @@ const Breadcrumbs: FC<Props> = ({ dynamicPageTitles }) => {
             const crumbTitle = dynamic ? dynamicPageTitles?.shift() : title;
             return (
               <SC.BreadCrumb key={subpath}>
-                {index < cumulativePathArray.length - 1 && (
+                {index < cumulativePathArray.length - 1 && isLink(subpath) && (
                   <Link href={subpath} hideIcon>
                     {crumbTitle}
                   </Link>
                 )}
-                {index === cumulativePathArray.length - 1 && (
-                  <span>{crumbTitle}</span>
-                )}
+                {(index === cumulativePathArray.length - 1 ||
+                  !isLink(subpath)) && <span>{crumbTitle}</span>}
               </SC.BreadCrumb>
             );
           })}
