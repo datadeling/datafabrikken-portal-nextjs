@@ -127,6 +127,7 @@ export default css`
   input,
   optgroup,
   select,
+  label,
   textarea {
     outline: none;
     font: inherit;

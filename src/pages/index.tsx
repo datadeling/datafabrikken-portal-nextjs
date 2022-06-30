@@ -113,7 +113,6 @@ const MainPage: FC<Props> = ({ data, popularCommunityTopics }) => {
     (mainArticle?.content?.filter(content =>
       isBasicInfoBox(content)
     ) as ComponentBasicInfobox[]) ?? [];
-  console.log(infoBoxes, infoBoxes.slice(0, 3), infoBoxes.slice(3, 1));
 
   return (
     <>
@@ -230,17 +229,9 @@ const MainPage: FC<Props> = ({ data, popularCommunityTopics }) => {
                   >
                     <InfoBoxIcon>
                       {index === 0 ? (
-                        <CourseIllustration
-                          width='100%'
-                          height='auto'
-                          viewBox='0 0 96 96'
-                        />
+                        <CourseIllustration width='100%' viewBox='0 0 96 96' />
                       ) : (
-                        <GuideIllustration
-                          width='100%'
-                          height='auto'
-                          viewBox='0 0 96 96'
-                        />
+                        <GuideIllustration width='100%' viewBox='0 0 96 96' />
                       )}
                     </InfoBoxIcon>
                     <InfoBoxTitle>
