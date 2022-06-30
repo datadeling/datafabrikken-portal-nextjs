@@ -42,6 +42,13 @@ const FDK_USER_FEEDBACK_SERVICE_BASE_URI =
 const MAILCHIMP_HOST =
   process.env.NEXT_PUBLIC_MAILCHIMP_HOST! ??
   'https://norge.us6.list-manage.com/subscribe/post?u=215524fdb6&amp;id=ba4ff3ce11';
+const DATAJEGER_EMAIL_ADDRESS =
+  process.env.NEXT_PUBLIC_DATAJEGER_EMAIL_ADDRESS! ??
+  'datajegeren.staging@norge.no';
+const FDK_MAIL_SERVICE_ENDPOINT =
+  process.env.FDK_MAIL_SERVICE_ENDPOINT! ??
+  'mail-sender-service.staging.fellesdatakatalog.digdir.no/api/sendmail';
+const FDK_MAIL_SERVICE_API_KEY = process.env.FDK_MAIL_SERVICE_API_KEY! ?? '';
 
 const clientEnv: ClientEnvironmentVariables = {
   ENV,
@@ -57,7 +64,10 @@ const clientEnv: ClientEnvironmentVariables = {
   REPORT_API_HOST,
   STRAPI_API_HOST,
   FDK_USER_FEEDBACK_SERVICE_BASE_URI,
-  MAILCHIMP_HOST
+  MAILCHIMP_HOST,
+  DATAJEGER_EMAIL_ADDRESS,
+  FDK_MAIL_SERVICE_ENDPOINT,
+  FDK_MAIL_SERVICE_API_KEY
 };
 
 const OIDC_CLIENT_SECRET = process.env.OIDC_CLIENT_SECRET ?? '';

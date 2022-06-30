@@ -15,6 +15,8 @@ import Logo from '../../../public/images/datafabrikken-logo.inline.svg';
 
 interface Props {}
 
+const DATAJEGEREN_ENABLED = false;
+
 const useMountEffect = (fun: any) => useEffect(fun, []);
 
 const useOnOutsideClick = (handleOutsideClick: { (): void }) => {
@@ -96,12 +98,19 @@ const Header: FC<Props> = () => {
             </SC.Link>
             <SC.Submenu $open={isFindDataMenuOpen} ref={findDataMenuRef}>
               <li>
-                <Link href={`${PATHNAME.SEARCH}`} passHref>
-                  <SC.Link>
-                    <Translation id='header.search' />
-                  </SC.Link>
-                </Link>
+                <SC.Link href={`${PATHNAME.SEARCH}`}>
+                  <Translation id='header.search' />
+                </SC.Link>
               </li>
+              {DATAJEGEREN_ENABLED && (
+                <li>
+                  <Link href={`${PATHNAME.DATAJEGEREN}`} passHref>
+                    <SC.Link>
+                      <Translation id='header.datajegeren' />
+                    </SC.Link>
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link href={`${PATHNAME.USE_DATA}`} passHref>
                   <SC.Link>
@@ -125,11 +134,9 @@ const Header: FC<Props> = () => {
                 </Link>
               </li>
               <li>
-                <Link href={PATHNAME.LEGAL_GUIDE} passHref target={'blank'}>
-                  <SC.Link>
-                    <Translation id='header.legalGuide' />
-                  </SC.Link>
-                </Link>
+                <SC.Link href={PATHNAME.LEGAL_GUIDE} target={'_blank'}>
+                  <Translation id='header.legalGuide' />
+                </SC.Link>
               </li>
             </SC.Submenu>
           </li>
@@ -148,11 +155,9 @@ const Header: FC<Props> = () => {
             </Link>
           </li>
           <li>
-            <Link href={PATHNAME.COMMUNITY} passHref prefetch={false}>
-              <SC.Link>
-                <Translation id='header.community' />
-              </SC.Link>
-            </Link>
+            <SC.Link href={PATHNAME.COMMUNITY}>
+              <Translation id='header.community' />
+            </SC.Link>
           </li>
           <li>
             <Link href={PATHNAME.NEWS} passHref>
@@ -188,12 +193,19 @@ const Header: FC<Props> = () => {
                 </span>
                 <ul>
                   <li>
-                    <Link href={`${PATHNAME.SEARCH}`} passHref>
-                      <SC.Link>
-                        <Translation id='header.search' />
-                      </SC.Link>
-                    </Link>
+                    <SC.Link href={`${PATHNAME.SEARCH}`}>
+                      <Translation id='header.search' />
+                    </SC.Link>
                   </li>
+                  {DATAJEGEREN_ENABLED && (
+                    <li>
+                      <Link href={`${PATHNAME.DATAJEGEREN}`} passHref>
+                        <SC.Link>
+                          <Translation id='header.datajegeren' />
+                        </SC.Link>
+                      </Link>
+                    </li>
+                  )}
                   <li>
                     <Link href={`${PATHNAME.USE_DATA}`} passHref>
                       <SC.Link>
@@ -216,11 +228,9 @@ const Header: FC<Props> = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href={PATHNAME.LEGAL_GUIDE} passHref target={'blank'}>
-                      <SC.Link>
-                        <Translation id='header.legalGuide' />
-                      </SC.Link>
-                    </Link>
+                    <SC.Link href={PATHNAME.LEGAL_GUIDE} target={'_blank'}>
+                      <Translation id='header.legalGuide' />
+                    </SC.Link>
                   </li>
                 </ul>
               </li>
@@ -239,11 +249,9 @@ const Header: FC<Props> = () => {
                 </Link>
               </li>
               <li onClick={() => closeMobileMenu()}>
-                <Link href={PATHNAME.COMMUNITY} passHref>
-                  <SC.Link>
-                    <Translation id='header.community' />
-                  </SC.Link>
-                </Link>
+                <SC.Link href={PATHNAME.COMMUNITY}>
+                  <Translation id='header.community' />
+                </SC.Link>
               </li>
               <li onClick={() => closeMobileMenu()}>
                 <Link href={PATHNAME.NEWS} passHref>

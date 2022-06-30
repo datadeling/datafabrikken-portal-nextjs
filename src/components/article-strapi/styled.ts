@@ -15,7 +15,6 @@ const Root = styled.div`
   flex: 1 0 auto;
   flex-direction: column;
   word-break: break-word;
-  background-color: theme.colour(Colour.BLUE, 'B54');
 `;
 
 const Container = styled(ContainerSC.Container)`

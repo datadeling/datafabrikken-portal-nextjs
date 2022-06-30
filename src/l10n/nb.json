@@ -21,7 +21,8 @@
     "howToOfferData": "Hvordan tilby data",
     "useData": "Bruke data",
     "search": "Søk",
-    "legalGuide": "Juridisk veileder"
+    "legalGuide": "Juridisk veileder",
+    "datajegeren": "Datajegeren"
   },
   "footer": {
     "title": "Følg med på Datafabrikken",
@@ -583,5 +584,26 @@
     "readMore": "Les mer under Personvern",
     "setEmail": "Din e-postadresse",
     "send": "Send påmelding"
+  },
+  "datajegeren": {
+    "dataset": "Hvilket datasett trenger du?",
+    "datasetDescription": "Lag en så tydelig beskrivelse som mulig, f.eks. felter, tidsperiode, ønsket oppdateringsfrekvens.",
+    "location": "Vet du hvor datasettet befinner seg?",
+    "locationDescription": "Hvis du har informasjon om hvor du tror vi kan finne datasettet, f.eks. hos hvilken offentlig etat eller kommune, kan dette være til stor hjelp for datajegeren.",
+    "efforts": "Har du forsøkt å få tak i dette datasettet selv?",
+    "effortsDescription": "Hvis du har gjort forsøk på å få tak i datasettet selv, oppgi hvor du søkt og evt. hvem du har snakket med. Ta gjerne med hvorfor du ikke lykkes hvis du har vært i direkte kontakt med noen i offentlig sektor.",
+    "useCase": "Hva skal datasettet brukes til?",
+    "useCaseDescription": "Ved stor pågang kan vi bli tvunget til å prioritere forretningskritiske data først. Det kan også være juridiske begresninger knyttet til bruk som kan påvirke hvilke data som kan tilgjengeliggjøres.",
+    "name": "Ditt navn",
+    "organizationNumber": "Organisasjonsnummer",
+    "email": "E-postadresse",
+    "phoneNumber": "Telefonnummer",
+    "submit": "Send forespørsel",
+    "required": "obligatorisk",
+    "errorRequired": "Dette feltet er obligatorisk. Du må fylle det ut før skjemaet kan sendes inn.",
+    "errorInvalidEmail": "E-postadresse er ikke gyldig",
+    "confirmation": "Din forespørsel til Datajegeren er sendt. En kopi er sendt til din e-postadresse. Du vil få en e-post når en av våre datajegere starter letingen.",
+    "submitFailed": "Feil. Skjema ble ikke sendt inn. Prøv igjen senere eller kontakt oss på",
+    "submitting": "Sender..."
   }
 }

@@ -30,6 +30,7 @@ import ScrollToTop from '../scroll-to-top';
 
 interface Props {
   article: FancyArticle | NewsArticle;
+  showScrollToTop?: boolean;
 }
 
 const { STRAPI_API_HOST } = env.clientEnv;
@@ -46,7 +47,10 @@ const hasAlternativeBackgroundColor = (component: any) => {
   return false;
 };
 
-export const ArticlePageStrapi: FC<Props> = ({ article }) => {
+export const ArticlePageStrapi: FC<Props> = ({
+  article,
+  showScrollToTop = true
+}) => {
   const { title, subtitle, content } = article;
 
   const publishedDate = () => {
@@ -186,12 +190,14 @@ export const ArticlePageStrapi: FC<Props> = ({ article }) => {
             ))
         )}
       </SC.ContentSection>
-      <ScrollToTop
-        invertColor
-        alternativeBackgroundColor={hasAlternativeBackgroundColor(
-          content?.[content?.length - 1]
-        )}
-      />
+      {showScrollToTop ?? (
+        <ScrollToTop
+          invertColor
+          alternativeBackgroundColor={hasAlternativeBackgroundColor(
+            content?.[content?.length - 1]
+          )}
+        />
+      )}
     </SC.Root>
   );
 };

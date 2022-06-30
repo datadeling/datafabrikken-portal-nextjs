@@ -13,6 +13,9 @@ export interface ClientEnvironmentVariables {
   STRAPI_API_HOST: string;
   FDK_USER_FEEDBACK_SERVICE_BASE_URI: string;
   MAILCHIMP_HOST: string;
+  DATAJEGER_EMAIL_ADDRESS: string;
+  FDK_MAIL_SERVICE_ENDPOINT: string;
+  FDK_MAIL_SERVICE_API_KEY: string;
 }
 
 export interface ServerEnvironmentVariables {
