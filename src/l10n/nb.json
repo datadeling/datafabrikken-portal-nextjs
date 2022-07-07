@@ -593,7 +593,7 @@
     "efforts": "Har du forsøkt å få tak i dette datasettet selv?",
     "effortsDescription": "Hvis du har gjort forsøk på å få tak i datasettet selv, oppgi hvor du søkt og evt. hvem du har snakket med. Ta gjerne med hvorfor du ikke lykkes hvis du har vært i direkte kontakt med noen i offentlig sektor.",
     "useCase": "Hva skal datasettet brukes til?",
-    "useCaseDescription": "Ved stor pågang kan vi bli tvunget til å prioritere forretningskritiske data først. Det kan også være juridiske begresninger knyttet til bruk som kan påvirke hvilke data som kan tilgjengeliggjøres.",
+    "useCaseDescription": "Ved stor pågang kan vi bli tvunget til å prioritere forretningskritiske data først. Det kan også være juridiske begrensninger knyttet til bruk som kan påvirke hvilke data som kan tilgjengeliggjøres.",
     "name": "Ditt navn",
     "organizationNumber": "Organisasjonsnummer",
     "email": "E-postadresse",
