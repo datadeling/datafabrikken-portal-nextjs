@@ -92,11 +92,9 @@ const Footer: FC<Props> = () => (
               </a>
             </li>
             <li>
-              <Link href={PATHNAME.ORGANIZATION} passHref prefetch={false}>
-                <a>
-                  <Translation id='footer.linkSection.links.organizations' />
-                </a>
-              </Link>
+              <a href={PATHNAME.ORGANIZATION}>
+                <Translation id='footer.linkSection.links.organizations' />
+              </a>
             </li>
           </SC.LinkList>
         </div>

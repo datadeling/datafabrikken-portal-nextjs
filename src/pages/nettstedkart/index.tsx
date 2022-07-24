@@ -54,9 +54,9 @@ const SiteMapPage: NextPage<Props> = () => (
                     {isLink === false ? (
                       breadcrumb.title
                     ) : (
-                      <Link href={siteMapPath} passHref prefetch={false}>
-                        <SC.SiteMapLink>{breadcrumb.title}</SC.SiteMapLink>
-                      </Link>
+                      <SC.SiteMapLink href={siteMapPath}>
+                        {breadcrumb.title}
+                      </SC.SiteMapLink>
                     )}
                     <SC.SiteMapBranch>
                       {routes
@@ -77,15 +77,9 @@ const SiteMapPage: NextPage<Props> = () => (
                             breadcrumb: breadcrumb2
                           }) => (
                             <SC.SiteMapLeaf>
-                              <Link
-                                href={siteMapPath2}
-                                passHref
-                                prefetch={false}
-                              >
-                                <SC.SiteMapLink>
-                                  {breadcrumb2.title}
-                                </SC.SiteMapLink>
-                              </Link>
+                              <SC.SiteMapLink href={siteMapPath2}>
+                                {breadcrumb2.title}
+                              </SC.SiteMapLink>
                             </SC.SiteMapLeaf>
                           )
                         )}
