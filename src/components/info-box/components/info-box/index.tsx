@@ -7,7 +7,6 @@ import React, {
   PropsWithChildren
 } from 'react';
 
-import Link from 'next/link';
 import InfoBoxImage from '../info-box-image';
 import InfoBoxIcon from '../info-box-icon';
 import InfoBoxTitle from '../info-box-title';
@@ -79,17 +78,8 @@ const InfoBox: FC<PropsWithChildren<Props>> = ({
   );
 };
 
-const LinkWrapper: FC<PropsWithChildren<Props>> = ({
-  externalLink,
-  href,
-  ...props
-}) =>
-  !externalLink && href ? (
-    <Link href={href} passHref>
-      <InfoBox {...props} />
-    </Link>
-  ) : (
-    <InfoBox href={href} {...props} />
-  );
+const LinkWrapper: FC<PropsWithChildren<Props>> = ({ href, ...props }) => (
+  <InfoBox href={href} {...props} />
+);
 
 export default memo(LinkWrapper);
