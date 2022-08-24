@@ -77,7 +77,11 @@ const DatajegerenPage: FC<Props> = ({ fancyArticle }) => {
         {fancyArticle && (
           <ArticleStrapi article={fancyArticle} showScrollToTop={false} />
         )}
-
+        {!formSubmitted && (
+          <SC.FormIngress $variant={ContainerVariant.WIDTH_720}>
+            {translations.translate('datajegeren.fillOutForm')}
+          </SC.FormIngress>
+        )}
         <SC.FormWrapper>
           <SC.Container $variant={ContainerVariant.WIDTH_720}>
             {formSubmitted ? (
@@ -247,6 +251,28 @@ const DatajegerenPage: FC<Props> = ({ fancyArticle }) => {
                         </Field>
                       </SC.FormFieldWrapper>
                       <SC.FormFieldWrapper>
+                        <label htmlFor='organizationNumber'>
+                          <SC.FormFieldLabel>{`${translations.translate(
+                            'datajegeren.organizationNumber'
+                          )} (${translations.translate(
+                            'datajegeren.required'
+                          )})`}</SC.FormFieldLabel>
+                        </label>
+                        <Field type='number' name='organizationNumber'>
+                          {({ field, meta }: { field: any; meta: any }) => (
+                            <SC.FormField
+                              $error={meta.touched && meta.error}
+                              $small
+                            >
+                              <input {...field} />
+                              {meta.touched && meta.error && (
+                                <SC.TextError>{meta.error}</SC.TextError>
+                              )}
+                            </SC.FormField>
+                          )}
+                        </Field>
+                      </SC.FormFieldWrapper>
+                      <SC.FormFieldWrapper>
                         <label htmlFor='name'>
                           <SC.FormFieldLabel>{`${translations.translate(
                             'datajegeren.name'
@@ -304,29 +330,6 @@ const DatajegerenPage: FC<Props> = ({ fancyArticle }) => {
                           )}
                         </Field>
                       </SC.FormFieldWrapper>
-                      <SC.FormFieldWrapper>
-                        <label htmlFor='organizationNumber'>
-                          <SC.FormFieldLabel>{`${translations.translate(
-                            'datajegeren.organizationNumber'
-                          )} (${translations.translate(
-                            'datajegeren.required'
-                          )})`}</SC.FormFieldLabel>
-                        </label>
-                        <Field type='number' name='organizationNumber'>
-                          {({ field, meta }: { field: any; meta: any }) => (
-                            <SC.FormField
-                              $error={meta.touched && meta.error}
-                              $small
-                            >
-                              <input {...field} />
-                              {meta.touched && meta.error && (
-                                <SC.TextError>{meta.error}</SC.TextError>
-                              )}
-                            </SC.FormField>
-                          )}
-                        </Field>
-                      </SC.FormFieldWrapper>
-
                       <SC.SubmitButton type='submit' disabled={isSubmitting}>
                         {translations.translate(
                           isSubmitting
