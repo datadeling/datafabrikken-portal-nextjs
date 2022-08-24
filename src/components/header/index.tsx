@@ -15,8 +15,6 @@ import Logo from '../../../public/images/datafabrikken-logo.inline.svg';
 
 interface Props {}
 
-const DATAJEGEREN_ENABLED = false;
-
 const useMountEffect = (fun: any) => useEffect(fun, []);
 
 const useOnOutsideClick = (handleOutsideClick: { (): void }) => {
@@ -102,15 +100,13 @@ const Header: FC<Props> = () => {
                   <Translation id='header.search' />
                 </SC.Link>
               </li>
-              {DATAJEGEREN_ENABLED && (
-                <li>
-                  <Link href={`${PATHNAME.DATAJEGEREN}`} passHref>
-                    <SC.Link>
-                      <Translation id='header.datajegeren' />
-                    </SC.Link>
-                  </Link>
-                </li>
-              )}
+              <li>
+                <Link href={`${PATHNAME.DATAJEGEREN}`} passHref>
+                  <SC.Link>
+                    <Translation id='header.datajegeren' />
+                  </SC.Link>
+                </Link>
+              </li>
               <li>
                 <Link href={`${PATHNAME.USE_DATA}`} passHref>
                   <SC.Link>
@@ -197,15 +193,13 @@ const Header: FC<Props> = () => {
                       <Translation id='header.search' />
                     </SC.Link>
                   </li>
-                  {DATAJEGEREN_ENABLED && (
-                    <li>
-                      <Link href={`${PATHNAME.DATAJEGEREN}`} passHref>
-                        <SC.Link>
-                          <Translation id='header.datajegeren' />
-                        </SC.Link>
-                      </Link>
-                    </li>
-                  )}
+                  <li>
+                    <Link href={`${PATHNAME.DATAJEGEREN}`} passHref>
+                      <SC.Link>
+                        <Translation id='header.datajegeren' />
+                      </SC.Link>
+                    </Link>
+                  </li>
                   <li>
                     <Link href={`${PATHNAME.USE_DATA}`} passHref>
                       <SC.Link>
