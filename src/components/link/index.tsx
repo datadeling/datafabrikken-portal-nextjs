@@ -30,7 +30,7 @@ const Link: FC<PropsWithChildren<Props>> = ({
   ...props
 }) =>
   external ? (
-    <SC.Link $variant={variant} $external={external} {...props}>
+    <SC.Link href={href} $variant={variant} $external={external} {...props}>
       {children}
       {!hideIcon && external && <ExternalLinkIcon />}
     </SC.Link>
