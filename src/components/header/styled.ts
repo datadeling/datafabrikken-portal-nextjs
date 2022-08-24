@@ -216,11 +216,10 @@ const Menu = styled.ul`
   overflow-x: hidden;
   list-style: none;
   position: fixed;
-  top: calc(55px + (68 - 55) * ((100vw - 320px) / (900 - 320)));
+  top: calc(55px + (80 - 55) * ((100vw - 320px) / (900 - 320)));
   background: ${theme.colour(Colour.BLUE, 'B52')};
   left: 0;
   bottom: 0;
-  height: 100vh;
   width: 100vh;
   z-index: 9;
 
