@@ -604,6 +604,7 @@
     "errorInvalidEmail": "E-postadresse er ikke gyldig",
     "confirmation": "Din forespørsel til Datajegeren er sendt. En kopi er sendt til din e-postadresse. Du vil få en e-post når en av våre datajegere starter letingen.",
     "submitFailed": "Feil. Skjema ble ikke sendt inn. Prøv igjen senere eller kontakt oss på",
-    "submitting": "Sender..."
+    "submitting": "Sender...",
+    "fillOutForm": "Fyll ut skjemaet under, så setter vi en av våre datajegere på saken din."
   }
 }

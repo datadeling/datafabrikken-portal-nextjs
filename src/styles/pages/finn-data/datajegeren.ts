@@ -90,6 +90,12 @@ const FormFieldLabel = styled.p`
 
 const FormFieldLabelDescription = styled.p``;
 
+const FormIngress = styled(ContainerSC.Container)`
+  font-size: ${theme.fontSize('FS12')};
+  line-height: 1.5;
+  padding-bottom: ${theme.spacing('S16')};
+`;
+
 const SubmitButton = styled.button<{ disabled: boolean }>`
   padding: 14px 22px 14px 24px;
   background-color: ${theme.colour(Colour.BLUE, 'B16')};
@@ -150,6 +156,7 @@ export default {
   FormField,
   FormFieldLabel,
   FormFieldLabelDescription,
+  FormIngress,
   SubmitButton,
   TextError,
   Confirmation,
