@@ -1,7 +1,6 @@
 import React, { memo, FC } from 'react';
 import { compose } from 'redux';
 import { InferGetStaticPropsType } from 'next';
-import Link from 'next/link';
 
 import Root from '../components/root';
 import {
@@ -55,6 +54,7 @@ import {
 } from '../utils/strapi';
 import { PATHNAME } from '../types/enums';
 import env from '../../env';
+import Link from '../components/link';
 
 const { STRAPI_API_HOST } = env.clientEnv;
 const mainArticleId = 15;
@@ -205,10 +205,8 @@ const MainPage: FC<Props> = ({ data, popularCommunityTopics }) => {
                       />
                     ))}
                   <SC.LinkWrapper>
-                    <Link href={PATHNAME.COMMUNITY}>
-                      <a>
-                        <Translation id='main.seeAllPostsCommunity' />
-                      </a>
+                    <Link href={PATHNAME.COMMUNITY} external hideIcon>
+                      <Translation id='main.seeAllPostsCommunity' />
                     </Link>
                   </SC.LinkWrapper>
                 </SC.Topics>
