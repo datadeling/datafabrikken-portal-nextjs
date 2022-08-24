@@ -68,6 +68,15 @@ export const routes: Route[] = [
     siteMapPath: PATHNAME.SEARCH
   },
   {
+    pathPattern: new RegExp(`^${PATHNAME.DATAJEGEREN}$`),
+    breadcrumb: {
+      title: translations.translate('header.datajegeren') as string,
+      dynamic: false
+    },
+    showInSiteMap: true,
+    siteMapPath: PATHNAME.DATAJEGEREN
+  },
+  {
     pathPattern: new RegExp(`^${PATHNAME.NEWS}$`),
     breadcrumb: {
       title: translations.translate('header.news') as string,
