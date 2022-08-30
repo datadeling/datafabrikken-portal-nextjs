@@ -86,7 +86,7 @@ const Header: FC<Props> = () => {
       </Link>
       <SC.Nav role='navigation'>
         <SC.Logo href='/'>
-          <Logo />
+          <Logo viewBox='0 0 272 44' />
         </SC.Logo>
         <SC.NavigationLinks>
           <li>
@@ -166,12 +166,12 @@ const Header: FC<Props> = () => {
         <SC.MobileMenu isOpen={isMobileMenuOpen} onClose={closeMobileMenu}>
           <Trigger>
             <SC.MenuButton onClick={openMobileMenu}>
+              <span>Meny</span>
               <SC.Burger open={isMobileMenuOpen}>
                 <div />
                 <div />
                 <div />
               </SC.Burger>
-              <span>Meny</span>
             </SC.MenuButton>
           </Trigger>
           <Menu>
