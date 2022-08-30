@@ -6,6 +6,10 @@ import SC from './styled';
 import Translation from '../translation';
 import { PATHNAME } from '../../types/enums';
 
+import FacebookIcon from '../../../public/images/social-facebook.inline.svg';
+import LinkedinIcon from '../../../public/images/social-linkedin.inline.svg';
+import TwitterIcon from '../../../public/images/social-twitter.inline.svg';
+
 interface Props {}
 
 const Footer: FC<Props> = () => (
@@ -24,6 +28,32 @@ const Footer: FC<Props> = () => (
             datafabrikken@norge.no
           </a>
         </p>
+        <SC.Social>
+          <a
+            href='https://www.facebook.com/datafabrikken'
+            target='_blank'
+            rel='noopener noreferrer'
+            title='Facebook'
+          >
+            <FacebookIcon />
+          </a>
+          <a
+            href='https://www.linkedin.com/company/datafabrikken/'
+            target='_blank'
+            rel='noopener noreferrer'
+            title='Linkedin'
+          >
+            <LinkedinIcon />
+          </a>
+          <a
+            href='https://twitter.com/datafabrikken'
+            target='_blank'
+            rel='noopener noreferrer'
+            title='Twitter'
+          >
+            <TwitterIcon />
+          </a>
+        </SC.Social>
       </SC.ByLine>
       <SC.LinkSection>
         <div>
