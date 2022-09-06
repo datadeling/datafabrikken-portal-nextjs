@@ -22,6 +22,7 @@ export default async function handler(
   const {
     dataset,
     efforts,
+    location,
     useCase,
     name,
     email,
@@ -46,6 +47,9 @@ Datafabrikken
 
 Hvilket datasett trenger du?
 ${escape(dataset)}
+
+Vet du hvor datasettet befinner seg?
+${escape(location)}
 
 Har du forsøkt å få tak i dette datasettet selv?
 ${escape(efforts)}
