@@ -1,5 +1,5 @@
-import React, { FC, memo, useState } from 'react';
-import { compose } from 'redux';
+import React, { FC, useState } from 'react';
+// import { compose } from 'redux';
 
 import { Field, Form, Formik } from 'formik';
 import axios from 'axios';
@@ -23,10 +23,7 @@ import BullseyeMissedIcon from '../../../public/images/illustration-bullseye-mis
 
 import env from '../../../env';
 
-const { DATAJEGER_EMAIL_ADDRESS } = env.clientEnv;
-
-export async function getStaticProps() {
-  const fiveMinutesInSeconds = 300;
+export async function getServerSideProps() {
   const apolloClient = initializeApollo();
   const { data } = await apolloClient.query({
     query: GetFancyArticleDocument,
@@ -37,13 +34,14 @@ export async function getStaticProps() {
 
   return {
     props: {
+      datajegerEmailAddress: env.clientEnv.DATAJEGER_EMAIL_ADDRESS,
       ...data
-    },
-    revalidate: fiveMinutesInSeconds
+    }
   };
 }
 
 interface Props {
+  datajegerEmailAddress: string;
   fancyArticle?: FancyArticle;
 }
 
@@ -58,7 +56,10 @@ interface FormData {
   organizationNumber: string;
 }
 
-const DatajegerenPage: FC<Props> = ({ fancyArticle }) => {
+const DatajegerenPage: FC<Props> = ({
+  datajegerEmailAddress,
+  fancyArticle
+}) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [submitFailed, setSubmitFailed] = useState(false);
 
@@ -347,8 +348,8 @@ const DatajegerenPage: FC<Props> = ({ fancyArticle }) => {
                     </div>
                     <div>
                       {translations.translate('datajegeren.submitFailed')}{' '}
-                      <a href={`mailto:${DATAJEGER_EMAIL_ADDRESS}`}>
-                        {DATAJEGER_EMAIL_ADDRESS}
+                      <a href={`mailto:${datajegerEmailAddress}`}>
+                        {datajegerEmailAddress}
                       </a>
                       .
                     </div>
@@ -363,4 +364,4 @@ const DatajegerenPage: FC<Props> = ({ fancyArticle }) => {
   );
 };
 
-export default compose<FC>(memo)(DatajegerenPage);
+export default DatajegerenPage;

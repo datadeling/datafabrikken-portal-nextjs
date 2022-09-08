@@ -4,12 +4,6 @@ import escape from 'lodash/escape';
 
 import env from '../../../env';
 
-const {
-  DATAJEGER_EMAIL_ADDRESS,
-  FDK_MAIL_SERVICE_ENDPOINT,
-  FDK_MAIL_SERVICE_API_KEY
-} = env.clientEnv;
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -18,6 +12,12 @@ export default async function handler(
     res.status(405).json({});
     return;
   }
+
+  const {
+    DATAJEGER_EMAIL_ADDRESS,
+    FDK_MAIL_SERVICE_ENDPOINT,
+    FDK_MAIL_SERVICE_API_KEY
+  } = env.clientEnv;
 
   const {
     dataset,
