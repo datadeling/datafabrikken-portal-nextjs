@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { GetStaticPropsContext, InferGetServerSidePropsType } from 'next';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 
 import Root from '../../components/root';
 import env from '../../../env';
@@ -30,7 +30,9 @@ const DRUPAL_ARTICLE_MAPPING: {
   '79be8a0b-c590-40de-a77e-3e27a263706b': 1
 };
 
-export async function getServerSideProps({ params }: GetStaticPropsContext) {
+export async function getServerSideProps({
+  params
+}: GetServerSidePropsContext) {
   const apolloClient = initializeApollo();
 
   const articleId: string = Array.isArray(params?.articleId)
