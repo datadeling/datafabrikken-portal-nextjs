@@ -9,6 +9,7 @@ const registerPageView = () => {
 };
 
 const registerPageViews = () => {
+  registerPageView();
   Router.events.on('routeChangeComplete', () => {
     registerPageView();
   });
