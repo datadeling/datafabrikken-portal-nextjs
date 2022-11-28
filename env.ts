@@ -14,7 +14,8 @@ const SEARCH_FULLTEXT_HOST =
 const REFERENCE_DATA_HOST =
   process.env.NEXT_PUBLIC_REFERENCE_DATA_HOST! ?? 'https://data.norge.no';
 const FDK_PORTAL_HOST =
-  process.env.NEXT_PUBLIC_FDK_PORTAL_HOST! ?? 'https://data.norge.no';
+  process.env.NEXT_PUBLIC_FDK_PORTAL_HOST! ??
+  'https://staging.fellesdatakatalog.digdir.no';
 const CMS_API_HOST =
   process.env.NEXT_PUBLIC_CMS_API_HOST! ??
   'https://cms-datafabrikken.digdir.no';

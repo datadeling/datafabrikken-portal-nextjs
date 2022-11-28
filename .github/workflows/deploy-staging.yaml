@@ -60,6 +60,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
           build-args:  |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+            NEXT_PUBLIC_FDK_PORTAL_HOST=https://staging.fellesdatakatalog.digdir.no
 
       - name: Apply Helm template
         run: |

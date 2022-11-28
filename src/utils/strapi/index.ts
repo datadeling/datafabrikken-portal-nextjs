@@ -1,9 +1,11 @@
 import {
-  ComponentBasicContact, ComponentBasicFactbox,
+  ComponentBasicContact,
+  ComponentBasicFactbox,
   ComponentBasicImage,
   ComponentBasicInfobox,
   ComponentBasicParagraph,
-  ComponentBasicQuote, Enum_Componentbasicfactbox_Variant,
+  ComponentBasicQuote,
+  Enum_Componentbasicfactbox_Variant,
   Provider
 } from '../../services/api/generated/cms/graphql';
 
@@ -31,8 +33,15 @@ export function isBasicFactBox(obj?: any): obj is ComponentBasicFactbox {
   return obj && obj?.__typename === 'ComponentBasicFactbox';
 }
 
-export function isBasicFactBoxVariant(variant: Enum_Componentbasicfactbox_Variant, obj?: any): obj is ComponentBasicFactbox {
-  return obj && obj?.__typename === 'ComponentBasicFactbox' && obj.variant === variant;
+export function isBasicFactBoxVariant(
+  variant: Enum_Componentbasicfactbox_Variant,
+  obj?: any
+): obj is ComponentBasicFactbox {
+  return (
+    obj &&
+    obj?.__typename === 'ComponentBasicFactbox' &&
+    obj.variant === variant
+  );
 }
 
 export function isProvider(obj?: any): obj is Provider {
