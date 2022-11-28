@@ -8,6 +8,8 @@ FROM node:16-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ARG NEXT_PUBLIC_FDK_PORTAL_HOST
+ENV NEXT_PUBLIC_FDK_PORTAL_HOST ${NEXT_PUBLIC_FDK_PORTAL_HOST}
 ENV NEXT_TELEMETRY_DISABLED 1
 # Production image, copy all the files and run next
 RUN npm run build
