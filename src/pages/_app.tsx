@@ -4,6 +4,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from '@apollo/client';
 import type { AppProps } from 'next/app';
+import Script from 'next/script';
 import store from '../redux/store';
 
 import GlobalStyles from '../styles';
@@ -26,6 +27,7 @@ function App({ Component, pageProps }: AppProps) {
       <CookiesProvider>
         <ApolloProvider client={apolloClient}>
           <ReduxProvider store={store}>
+            <Script src='https://siteimproveanalytics.com/js/siteanalyze_6255470.js' />
             <Header {...pageProps} />
             <Component {...pageProps} />
             <Footer {...pageProps} />
