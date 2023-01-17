@@ -78,9 +78,15 @@ jobs:
         with:
           credentials_json: ${{ secrets.DATAFABRIKKEN_DEV_AUTODEPLOY }}
 
-      - run: gcloud container clusters get-credentials datafabrikken-dev --region europe-north1-a --project datafabrikken-dev
+      - name: Get credentials
+        uses: google-github-actions/get-gke-credentials@v1
+        with:
+          cluster_name: datafabrikken-dev
+          location: europe-north1-a
 
-      - run: kubectl apply -f ./kubectlapply.yaml --force
+      - name: Deploy to GCP
+        run: |
+          kubectl apply -f ./kubectlapply.yaml --force
 
       - name: Notify slack
         uses: 8398a7/action-slack@v3
