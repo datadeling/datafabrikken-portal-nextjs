@@ -89,6 +89,13 @@ const Footer: FC<Props> = () => (
                 </a>
               </Link>
             </li>
+            <li>
+              <Link href='https://uustatus.no/nn/erklaringer/publisert/df126c4a-7ba8-4faa-aa84-cfa781659b47'>
+                <a>
+                  <Translation id='footer.linkSection.links.accessibility' />
+                </a>
+              </Link>
+            </li>
           </SC.LinkList>
         </div>
 
