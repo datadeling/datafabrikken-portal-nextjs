@@ -5,8 +5,7 @@ import Markdown from '../markdown';
 import { Variant as ContainerVariant } from '../container';
 import {
   Enum_Componentbasicfactbox_Variant,
-  FancyArticle,
-  NewsArticle
+  NewsArticleEntity
 } from '../../services/api/generated/cms/graphql';
 import {
   isBasicParagraph,
@@ -29,7 +28,7 @@ import { dateStringToDate, formatDate } from '../../utils/date';
 import ScrollToTop from '../scroll-to-top';
 
 interface Props {
-  article: FancyArticle | NewsArticle;
+  article?: any;
   showScrollToTop?: boolean;
 }
 
@@ -51,14 +50,19 @@ export const ArticlePageStrapi: FC<Props> = ({
   article,
   showScrollToTop = true
 }) => {
-  const { title, subtitle, content } = article;
+  const { title, subtitle, content } = article?.attributes ?? {};
 
   const publishedDate = () => {
-    const newsArticle = article as NewsArticle;
-    const published = newsArticle?.published ?? newsArticle?.published_at;
-    return published ? (
-      <SC.Published>{formatDate(dateStringToDate(published))}</SC.Published>
-    ) : null;
+    if (article?.__typename === 'NewsArticleEntity') {
+      const newsArticle = article as NewsArticleEntity;
+      const published =
+        newsArticle?.attributes?.published ??
+        newsArticle?.attributes?.publishedAt;
+      return published ? (
+        <SC.Published>{formatDate(dateStringToDate(published))}</SC.Published>
+      ) : null;
+    }
+    return null;
   };
 
   return (
@@ -72,7 +76,7 @@ export const ArticlePageStrapi: FC<Props> = ({
       </SC.HeaderSection>
       <SC.ContentSection>
         {content?.map(
-          (component, index) =>
+          (component: any, index: number) =>
             (isBasicParagraph(component) && (
               <SC.Background
                 $altColor={hasAlternativeBackgroundColor(component)}
@@ -100,12 +104,12 @@ export const ArticlePageStrapi: FC<Props> = ({
                 >
                   <SC.ImageWrapper key={component?.id}>
                     <SC.Image
-                      alt={`${component?.media?.[0]?.alternativeText}`}
-                      src={`${STRAPI_API_HOST}${component?.media?.[0]?.url}`}
+                      alt={`${component?.media?.data?.attributes?.alternativeText}`}
+                      src={`${STRAPI_API_HOST}${component?.media?.data?.attributes?.url}`}
                     />
-                    {component?.media?.[0]?.caption && (
+                    {component?.media?.data?.attributes?.caption && (
                       <SC.ImageText>
-                        {component?.media?.[0]?.caption}
+                        {component?.media?.data?.attributes?.caption}
                       </SC.ImageText>
                     )}
                   </SC.ImageWrapper>
@@ -130,17 +134,20 @@ export const ArticlePageStrapi: FC<Props> = ({
                     >
                       <InfoBoxIcon>
                         <InfoBoxImage
-                          src={`${STRAPI_API_HOST}${component?.illustration?.url}`}
+                          src={`${STRAPI_API_HOST}${component?.illustration?.data?.attributes?.url}`}
                           alt={
-                            component?.illustration?.alternativeText ??
+                            component?.illustration?.data?.attributes
+                              ?.alternativeText ??
                             `${component?.id}-illustration`
                           }
                           hoverSrc={
-                            component?.hoverIllustration?.url &&
-                            `${STRAPI_API_HOST}${component.hoverIllustration.url}`
+                            component?.hoverIllustration?.data?.attributes
+                              ?.url &&
+                            `${STRAPI_API_HOST}${component.hoverIllustration.data.attributes.url}`
                           }
                           hoverAlt={
-                            component?.hoverIllustration?.alternativeText ??
+                            component?.hoverIllustration?.data?.attributes
+                              ?.alternativeText ??
                             `${component?.id}-illustration`
                           }
                         />

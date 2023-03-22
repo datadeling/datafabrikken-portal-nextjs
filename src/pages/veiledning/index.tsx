@@ -11,10 +11,12 @@ import Markdown from '../../components/markdown';
 import {
   ComponentBasicInfobox,
   Enum_Guide_Primarytargetgroup,
-  FancyArticle,
+  FancyArticleEntityResponse,
   GetGuidanceDocument,
-  Guide,
-  Provider
+  GetGuidanceQueryResult,
+  GuideEntityResponseCollection,
+  ProviderEntity,
+  ProviderEntityResponseCollection
 } from '../../services/api/generated/cms/graphql';
 import { RadioOption } from '../../components/radio-options';
 import {
@@ -30,7 +32,7 @@ import Head from '../../components/head';
 export async function getStaticProps() {
   const fiveMinutesInSeconds = 300;
   const apolloClient = initializeApollo();
-  const { data } = await apolloClient.query({
+  const { data }: GetGuidanceQueryResult = await apolloClient.query({
     query: GetGuidanceDocument
   });
 
@@ -43,37 +45,41 @@ export async function getStaticProps() {
 }
 
 interface Props {
-  guides?: Guide[];
-  topArticle?: FancyArticle;
-  providers?: Provider[];
+  guides?: GuideEntityResponseCollection;
+  topArticle?: FancyArticleEntityResponse;
+  providers?: ProviderEntityResponseCollection;
 }
 
 const GuidancePage: FC<Props> = ({ guides, topArticle, providers }) => {
-  const pageTitle = topArticle?.title ?? undefined;
-  const ingressParagraph = isBasicParagraph(topArticle?.content?.[0])
-    ? topArticle?.content?.[0].content ?? undefined
+  const pageTitle = topArticle?.data?.attributes?.title ?? undefined;
+  const ingressParagraph = isBasicParagraph(
+    topArticle?.data?.attributes?.content?.[0]
+  )
+    ? topArticle?.data?.attributes?.content?.[0].content ?? undefined
     : undefined;
-  const coursesParagraph = isBasicParagraph(topArticle?.content?.[1])
-    ? topArticle?.content?.[1]?.content ?? undefined
+  const coursesParagraph = isBasicParagraph(
+    topArticle?.data?.attributes?.content?.[1]
+  )
+    ? topArticle?.data?.attributes?.content?.[1]?.content ?? undefined
     : undefined;
 
   const [selectedTargetGroup, setSelectedTargetGroup] =
     useState<Enum_Guide_Primarytargetgroup>();
 
   const providersById =
-    providers?.reduce(
+    providers?.data?.reduce(
       (previous, provider) =>
         isProvider(provider)
           ? {
               ...previous,
-              [provider.id]: provider
+              [`${provider.id}`]: provider
             }
           : previous,
-      {} as Record<string, Provider>
+      {} as Record<string, ProviderEntity>
     ) ?? {};
 
   const infoBoxes =
-    (topArticle?.content?.filter(content =>
+    (topArticle?.data?.attributes?.content?.filter(content =>
       isBasicInfoBox(content)
     ) as ComponentBasicInfobox[]) ?? [];
 
@@ -139,20 +145,19 @@ const GuidancePage: FC<Props> = ({ guides, topArticle, providers }) => {
               />
             </SC.RadioContainer>
             <SC.GuideCardContainer>
-              {guides
+              {guides?.data
                 ?.filter(
                   guide =>
                     !selectedTargetGroup ||
                     (guide != null &&
-                      guide.primaryTargetGroup != null &&
-                      guide.primaryTargetGroup === selectedTargetGroup)
+                      guide.attributes?.primaryTargetGroup != null &&
+                      guide.attributes?.primaryTargetGroup ===
+                        selectedTargetGroup)
                 )
                 ?.map(guide => (
                   <GuideCard
                     infoObject={guide}
-                    provider={
-                      guide?.providerId && providersById[guide.providerId]
-                    }
+                    provider={providersById[`${guide.attributes?.providerId}`]}
                   />
                 ))}
             </SC.GuideCardContainer>

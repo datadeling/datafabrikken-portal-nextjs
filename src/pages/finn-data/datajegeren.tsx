@@ -9,8 +9,9 @@ import SC from '../../styles/pages/finn-data/datajegeren';
 
 import { Variant as ContainerVariant } from '../../components/container';
 import {
-  FancyArticle,
-  GetFancyArticleDocument
+  FancyArticleEntityResponse,
+  GetFancyArticleDocument,
+  GetFancyArticleQueryResult
 } from '../../services/api/generated/cms/graphql';
 import { initializeApollo } from '../../utils/apollo/apolloClient';
 
@@ -25,7 +26,7 @@ import env from '../../../env';
 
 export async function getServerSideProps() {
   const apolloClient = initializeApollo();
-  const { data } = await apolloClient.query({
+  const { data }: GetFancyArticleQueryResult = await apolloClient.query({
     query: GetFancyArticleDocument,
     variables: {
       id: 16
@@ -42,7 +43,7 @@ export async function getServerSideProps() {
 
 interface Props {
   datajegerEmailAddress: string;
-  fancyArticle?: FancyArticle;
+  fancyArticle?: FancyArticleEntityResponse;
 }
 
 interface FormData {
@@ -70,13 +71,15 @@ const DatajegerenPage: FC<Props> = ({
   return (
     <>
       <Head
-        title={fancyArticle?.title ?? ''}
-        description={fancyArticle?.subtitle ?? ''}
+        title={fancyArticle?.data?.attributes?.title ?? ''}
+        description={fancyArticle?.data?.attributes?.subtitle ?? ''}
       />
-      <Breadcrumbs dynamicPageTitles={[fancyArticle?.title ?? '']} />
+      <Breadcrumbs
+        dynamicPageTitles={[fancyArticle?.data?.attributes?.title ?? '']}
+      />
       <SC.Root>
         {fancyArticle && (
-          <ArticleStrapi article={fancyArticle} showScrollToTop={false} />
+          <ArticleStrapi article={fancyArticle?.data} showScrollToTop={false} />
         )}
         {!formSubmitted && (
           <SC.FormIngress $variant={ContainerVariant.WIDTH_720}>

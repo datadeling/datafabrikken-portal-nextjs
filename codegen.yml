@@ -4,7 +4,7 @@ hooks:
     - prettier --write
 generates:
   ./src/services/api/generated/cms/graphql.ts:
-    schema: https://cms.datafabrikken.norge.no/graphql
+    schema: https://cms.staging.datafabrikken.norge.no/graphql
     documents: src/services/**/*.graphql
     config:
       withHooks: true

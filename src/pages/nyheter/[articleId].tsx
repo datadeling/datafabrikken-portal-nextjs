@@ -9,7 +9,8 @@ import Head from '../../components/head';
 import { initializeApollo } from '../../utils/apollo/apolloClient';
 import {
   GetNewsArticleDocument,
-  NewsArticle
+  GetNewsArticleQueryResult,
+  NewsArticleEntityResponse
 } from '../../services/api/generated/cms/graphql';
 import ArticleStrapi from '../../components/article-strapi';
 
@@ -49,22 +50,24 @@ export async function getServerSideProps({
     };
   }
 
-  const { data }: { data: { newsArticle: NewsArticle } } =
-    await apolloClient.query({
-      query: GetNewsArticleDocument,
-      variables: {
-        id: articleId?.split('-').pop()
-      }
-    });
+  const { data }: GetNewsArticleQueryResult = await apolloClient.query({
+    query: GetNewsArticleDocument,
+    variables: {
+      id: articleId?.split('-').pop()
+    }
+  });
 
   const slug = articleId?.split('-').slice(0, -1).join('-');
 
   // If slug does not match news article slug, do a permanent redirect (SEO)
-  if (data.newsArticle?.slug && slug !== data.newsArticle.slug) {
+  if (
+    data?.newsArticle?.data?.attributes?.slug &&
+    slug !== data.newsArticle.data.attributes.slug
+  ) {
     return {
       redirect: {
         permanent: true,
-        destination: `${PATHNAME.NEWS}/${data.newsArticle.slug}-${data.newsArticle.id}`
+        destination: `${PATHNAME.NEWS}/${data.newsArticle.data.attributes.slug}-${data.newsArticle.data.id}`
       }
     };
   }
@@ -76,21 +79,24 @@ export async function getServerSideProps({
   };
 }
 
-interface Props
-  extends InferGetServerSidePropsType<typeof getServerSideProps> {}
+interface Props extends InferGetServerSidePropsType<typeof getServerSideProps> {
+  newsArticle: NewsArticleEntityResponse;
+}
 
 const { STRAPI_API_HOST } = env.clientEnv;
 
 const ArticlePage: FC<Props> = ({ newsArticle }) => (
   <>
     <Head
-      title={newsArticle?.title ?? ''}
-      description={newsArticle?.subtitle ?? ''}
-      previewImageSrc={`${STRAPI_API_HOST}${newsArticle?.socialImage?.url}`}
+      title={newsArticle?.data?.attributes?.title ?? ''}
+      description={newsArticle?.data?.attributes?.subtitle ?? ''}
+      previewImageSrc={`${STRAPI_API_HOST}${newsArticle?.data?.attributes?.socialImage?.data?.attributes?.url}`}
     />
-    <Breadcrumbs dynamicPageTitles={[newsArticle?.title ?? '']} />
+    <Breadcrumbs
+      dynamicPageTitles={[newsArticle?.data?.attributes?.title ?? '']}
+    />
     <Root invertColor hideScrollToTop>
-      {newsArticle && <ArticleStrapi article={newsArticle} />}
+      {newsArticle && <ArticleStrapi article={newsArticle.data} />}
     </Root>
   </>
 );

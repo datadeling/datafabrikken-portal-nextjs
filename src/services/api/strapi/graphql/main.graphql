@@ -1,50 +1,75 @@
 query GetMainArticleAndLatestNews($id: ID!) {
   mainArticle: fancyArticle(id: $id) {
-    id
-    title
-    subtitle
-    content {
-      ... on ComponentBasicImage {
-        __typename
-        media {
-          alternativeText
-          url
-          caption
-        }
-        style
-        alternativeBackgroundColor
-      }
-      ... on ComponentBasicParagraph {
-        __typename
-        content
-        alternativeBackgroundColor
-      }
-      ... on ComponentBasicInfobox {
-        __typename
+    data {
+      id
+      attributes {
         title
-        content
-        illustration {
-          url
-          alternativeText
+        subtitle
+        content {
+          ... on ComponentBasicImage {
+            __typename
+            media {
+              data {
+                attributes {
+                  alternativeText
+                  url
+                  caption
+                }
+              }
+            }
+            style
+            alternativeBackgroundColor
+          }
+          ... on ComponentBasicParagraph {
+            __typename
+            content
+            alternativeBackgroundColor
+          }
+          ... on ComponentBasicInfobox {
+            __typename
+            title
+            content
+            illustration {
+              data {
+                attributes {
+                  url
+                  alternativeText
+                }
+              }
+            }
+            hoverIllustration {
+              data {
+                attributes {
+                  url
+                  alternativeText
+                }
+              }
+            }
+            link
+            alternativeBackgroundColor
+          }
         }
-        hoverIllustration {
-          url
-          alternativeText
-        }
-        link
-        alternativeBackgroundColor
       }
     }
   }
-  newsArticles(limit: 3, sort: "published:desc,published_at:desc") {
-    id
-    title
-    subtitle
-    slug
-    published
-    socialImage {
-      url
-      alternativeText
+  newsArticles(sort: "published:desc,publishedAt:desc") {
+    data {
+      id
+      attributes {
+        title
+        subtitle
+        slug
+        published
+        publishedAt
+        socialImage {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+      }
     }
   }
 }

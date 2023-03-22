@@ -19,7 +19,8 @@ import { PAGE_PROPERTY, PATHNAME } from '../../types/enums';
 import { initializeApollo } from '../../utils/apollo/apolloClient';
 import {
   GetNewsArticlesDocument,
-  NewsArticle
+  GetNewsArticlesQueryResult,
+  NewsArticleEntityResponseCollection
 } from '../../services/api/generated/cms/graphql';
 import env from '../../../env';
 
@@ -33,7 +34,7 @@ export async function getStaticProps() {
   const fiveMinutesInSeconds = 300;
   const apolloClient = initializeApollo();
 
-  const { data }: { data: NewsArticle[] } = await apolloClient.query({
+  const { data }: GetNewsArticlesQueryResult = await apolloClient.query({
     query: GetNewsArticlesDocument,
     variables: {
       limit: PAGE_PROPERTY.NEWS_LIMIT
@@ -49,7 +50,7 @@ export async function getStaticProps() {
 }
 
 interface Props {
-  newsArticles: NewsArticle[];
+  newsArticles: NewsArticleEntityResponseCollection;
 }
 
 const NewsPage: FC<Props> = ({ newsArticles }) => (
@@ -63,34 +64,32 @@ const NewsPage: FC<Props> = ({ newsArticles }) => (
             <Translation id='news.title' />
           </SC.Title>
           <SC.Content>
-            {newsArticles?.map(
-              ({
-                id,
-                slug,
-                published,
-                published_at,
-                title,
-                subtitle,
-                socialImage
-              }) => (
-                <InfoBox key={id} href={`${PATHNAME.NEWS}/${slug}-${id}`}>
-                  {socialImage && (
-                    <InfoBoxImage
-                      src={`${STRAPI_API_HOST}${socialImage.url}`}
-                      alt={socialImage.alternativeText ?? ''}
-                    />
-                  )}
-                  <InfoBoxSC.InfoBox.Date>
-                    {published && formatDate(dateStringToDate(published))}
-                    {!published && formatDate(dateStringToDate(published_at))}
-                  </InfoBoxSC.InfoBox.Date>
-                  <InfoBoxTitle>
-                    <h4>{title}</h4>
-                  </InfoBoxTitle>
-                  <InfoBoxBody>{subtitle}</InfoBoxBody>
-                </InfoBox>
-              )
-            )}
+            {newsArticles?.data?.map(({ id, attributes: newsArticle }) => (
+              <InfoBox
+                key={id}
+                href={`${PATHNAME.NEWS}/${newsArticle?.slug}-${id}`}
+              >
+                {newsArticle?.socialImage && (
+                  <InfoBoxImage
+                    src={`${STRAPI_API_HOST}${newsArticle?.socialImage?.data?.attributes?.url}`}
+                    alt={
+                      newsArticle?.socialImage?.data?.attributes
+                        ?.alternativeText ?? ''
+                    }
+                  />
+                )}
+                <InfoBoxSC.InfoBox.Date>
+                  {newsArticle?.published &&
+                    formatDate(dateStringToDate(newsArticle?.published))}
+                  {!newsArticle?.published &&
+                    formatDate(dateStringToDate(newsArticle?.publishedAt))}
+                </InfoBoxSC.InfoBox.Date>
+                <InfoBoxTitle>
+                  <h4>{newsArticle?.title}</h4>
+                </InfoBoxTitle>
+                <InfoBoxBody>{newsArticle?.subtitle}</InfoBoxBody>
+              </InfoBox>
+            ))}
           </SC.Content>
         </SC.Page>
       </Container>

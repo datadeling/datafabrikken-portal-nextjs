@@ -5,8 +5,9 @@ import Root from '../../components/root';
 import env from '../../../env';
 import {
   ComponentBasicContact,
-  FancyArticle,
-  GetContactsDocument
+  FancyArticleEntityResponse,
+  GetContactsDocument,
+  GetContactsQueryResult
 } from '../../services/api/generated/cms/graphql';
 import { initializeApollo } from '../../utils/apollo/apolloClient';
 import NewsletterSubscribe from '../../components/newsletter-subscribe';
@@ -19,7 +20,7 @@ const { STRAPI_API_HOST } = env.clientEnv;
 export async function getStaticProps() {
   const fiveMinutesInSeconds = 300;
   const apolloClient = initializeApollo();
-  const { data } = await apolloClient.query({
+  const { data }: GetContactsQueryResult = await apolloClient.query({
     query: GetContactsDocument
   });
 
@@ -32,19 +33,20 @@ export async function getStaticProps() {
 }
 
 interface Props {
-  contactPage?: FancyArticle;
+  contactPage: FancyArticleEntityResponse;
 }
 
 const FindDataPage: FC<Props> = ({ contactPage }) => {
-  const pageTitle = contactPage?.title ?? undefined;
+  const attr = contactPage.data?.attributes;
+  const pageTitle = attr?.title ?? undefined;
 
   const ingress =
-    contactPage?.content?.[0]?.__typename === 'ComponentBasicParagraph'
-      ? contactPage.content[0].content ?? undefined
+    attr?.content?.[0]?.__typename === 'ComponentBasicParagraph'
+      ? attr.content[0].content ?? undefined
       : undefined;
 
-  const contacts = (contactPage?.content?.filter(
-    contact => contact && contact.__typename === 'ComponentBasicContact'
+  const contacts = (attr?.content?.filter(
+    c => c && c.__typename === 'ComponentBasicContact'
   ) ?? []) as Partial<ComponentBasicContact>[];
 
   return (
@@ -54,7 +56,7 @@ const FindDataPage: FC<Props> = ({ contactPage }) => {
       <Root>
         <SC.Header>
           <SC.Container>
-            <SC.Title>{contactPage?.title}</SC.Title>
+            <SC.Title>{attr?.title}</SC.Title>
             {ingress && <SC.Ingress>{ingress}</SC.Ingress>}
           </SC.Container>
         </SC.Header>
@@ -62,8 +64,10 @@ const FindDataPage: FC<Props> = ({ contactPage }) => {
           <SC.ContactCardContainer>
             {contacts.map(({ image, name, jobTitle, phoneNumber, email }) => (
               <SC.ContactCard key={`contact-${name}`}>
-                {image?.[0]?.url && (
-                  <SC.ContactImage src={`${STRAPI_API_HOST}${image[0].url}`} />
+                {image?.data?.attributes?.url && (
+                  <SC.ContactImage
+                    src={`${STRAPI_API_HOST}${image.data?.attributes?.url}`}
+                  />
                 )}
                 <SC.TopInfo>
                   <SC.ContactName>{name}</SC.ContactName>
