@@ -23,15 +23,21 @@ const InfoBoxStrapi: FC<Props> = ({
 }) => (
   <InfoBox key={id} href={link ?? ''} invertColor={invertColor}>
     <InfoBoxIcon>
-      {illustration?.url && (
+      {illustration?.data?.attributes?.url && (
         <InfoBoxImage
-          src={`${STRAPI_API_HOST}${illustration.url}`}
-          alt={illustration.alternativeText ?? `${id}-illustration`}
-          hoverSrc={
-            hoverIllustration?.url &&
-            `${STRAPI_API_HOST}${hoverIllustration.url}`
+          src={`${STRAPI_API_HOST}${illustration.data?.attributes?.url}`}
+          alt={
+            illustration.data?.attributes?.alternativeText ??
+            `${id}-illustration`
           }
-          hoverAlt={hoverIllustration?.alternativeText ?? `${id}-illustration`}
+          hoverSrc={
+            hoverIllustration?.data?.attributes?.url &&
+            `${STRAPI_API_HOST}${hoverIllustration.data.attributes.url}`
+          }
+          hoverAlt={
+            hoverIllustration?.data?.attributes?.alternativeText ??
+            `${id}-illustration`
+          }
         />
       )}
     </InfoBoxIcon>

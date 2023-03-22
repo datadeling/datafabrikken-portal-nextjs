@@ -1,43 +1,59 @@
 query GetFancyArticle($id: ID!) {
   fancyArticle(id: $id) {
-    title
-    subtitle
-    content {
-      ... on ComponentBasicParagraph {
-        __typename
-        content,
-        alternativeBackgroundColor
-      }
-      ... on ComponentBasicInfobox {
-        __typename
+    data {
+      attributes {
         title
-        content
-        illustration {
-          url
-          alternativeText
+        subtitle
+        content {
+          ... on ComponentBasicParagraph {
+            __typename
+            content,
+            alternativeBackgroundColor
+          }
+          ... on ComponentBasicInfobox {
+            __typename
+            title
+            content
+            illustration {
+              data {
+                attributes {
+                  url
+                  alternativeText
+                }
+              }
+            }
+            hoverIllustration {
+              data {
+                attributes {
+                  url
+                  alternativeText
+                }
+              }
+            }
+            link,
+            alternativeBackgroundColor
+          }
+          ... on ComponentBasicImage {
+            __typename
+            media {
+              data {
+                attributes {
+                  alternativeText
+                  url
+                  caption
+                }
+              }
+            }
+            style,
+            alternativeBackgroundColor
+          }
+          ... on ComponentBasicFactbox {
+            __typename
+            title
+            variant
+            content
+          }
         }
-        hoverIllustration {
-          url
-          alternativeText
-        }
-        link,
-        alternativeBackgroundColor
-      }
-      ... on ComponentBasicImage {
-        __typename
-        media {
-          alternativeText
-          url
-          caption
-        }
-        style,
-        alternativeBackgroundColor
-      }
-      ... on ComponentBasicFactbox {
-        __typename
-        title
-        variant
-        content
       }
     }
   }

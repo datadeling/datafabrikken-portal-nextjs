@@ -1,51 +1,79 @@
 query GetGuidance {
   topArticle: fancyArticle(id: 8) {
-    title
-    content {
-      ... on ComponentBasicParagraph {
-        __typename
-        content
-      }
-      ... on ComponentBasicInfobox {
-        __typename
+    data {
+      attributes {
         title
-        content
-        illustration {
-          url
-          alternativeText
+        content {
+          ... on ComponentBasicParagraph {
+            __typename
+            content
+          }
+          ... on ComponentBasicInfobox {
+            __typename
+            title
+            content
+            illustration {
+              data {
+                attributes {
+                  url
+                  alternativeText
+                }
+              }
+            }
+            hoverIllustration {
+              data {
+                attributes {
+                  url
+                  alternativeText
+                }
+              }            
+            }
+            link
+          }
         }
-        hoverIllustration {
-          url
-          alternativeText
-        }
-        link
       }
     }
   }
 
   guides(sort: "position:asc") {
-    title
-    featureImage {
-      url
+    data {
+      attributes {
+        title
+        featureImage {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        description
+        link
+        primaryTargetGroup
+        durationInMinutes
+        locale
+        publishedAt
+        updatedAt
+        language
+        contentType
+        providerId
+      }
     }
-    description
-    link
-    primaryTargetGroup
-    durationInMinutes
-    locale
-    published_at
-    updated_at
-    language
-    contentType
-    providerId
   }
 
   providers {
-    id
-    title
-    logo {
-      url
-      alternativeText
+    data {
+      id
+      attributes {    
+        title
+        logo {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+      }
     }
   }
 }

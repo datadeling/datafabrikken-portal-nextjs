@@ -1,65 +1,93 @@
 query GetNewsArticle($id: ID!) {
   newsArticle(id: $id) {
-    id
-    title
-    subtitle
-    slug
-    published
-    socialImage {
-      url
-      alternativeText
-    }
-    content {
-      ... on ComponentBasicParagraph {
-        __typename
-        content
-        alternativeBackgroundColor
-      }
-      ... on ComponentBasicInfobox {
-        __typename
+    data {
+      id
+      attributes {
         title
-        content
-        illustration {
-          url
-          alternativeText
+        subtitle
+        slug
+        published
+        socialImage {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
         }
-        hoverIllustration {
-          url
-          alternativeText
+        content {
+          ... on ComponentBasicParagraph {
+            __typename
+            content
+            alternativeBackgroundColor
+          }
+          ... on ComponentBasicInfobox {
+            __typename
+            title
+            content
+            illustration {
+              data {
+                attributes {
+                  url
+                  alternativeText
+                }
+              }
+            }
+            hoverIllustration {
+              data {
+                attributes {
+                  url
+                  alternativeText
+                }
+              }
+            }
+            link
+            alternativeBackgroundColor
+          }
+          ... on ComponentBasicImage {
+            __typename
+            media {
+              data {
+                attributes {
+                  alternativeText
+                  url
+                  caption
+                }
+              }
+            }
+            style
+            alternativeBackgroundColor
+          }
+          ... on ComponentBasicFactbox {
+            __typename
+            title
+            variant
+            content
+          }
         }
-        link
-        alternativeBackgroundColor
-      }
-      ... on ComponentBasicImage {
-        __typename
-        media {
-          alternativeText
-          url
-          caption
-        }
-        style
-        alternativeBackgroundColor
-      }
-      ... on ComponentBasicFactbox {
-        __typename
-        title
-        variant
-        content
       }
     }
   }
 }
 
-query GetNewsArticles($limit: Int) {
-  newsArticles(limit: $limit, sort: "published:desc,published_at:desc") {
-    id
-    title
-    subtitle
-    slug
-    published
-    socialImage {
-      url
-      alternativeText
+query GetNewsArticles {
+  newsArticles(sort: "published:desc,publishedAt:desc") {
+    data {
+      id
+      attributes {
+        title
+        subtitle
+        slug
+        published
+        socialImage {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+      }
     }
   }
 }

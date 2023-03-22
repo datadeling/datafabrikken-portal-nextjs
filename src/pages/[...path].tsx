@@ -5,7 +5,10 @@ import { PATHNAME } from '../types/enums';
 import Root from '../components/root';
 import Breadcrumbs from '../components/breadcrumbs';
 import { initializeApollo } from '../utils/apollo/apolloClient';
-import { GetFancyArticleDocument } from '../services/api/generated/cms/graphql';
+import {
+  GetFancyArticleDocument,
+  GetFancyArticleQueryResult
+} from '../services/api/generated/cms/graphql';
 import ArticleStrapi from '../components/article-strapi';
 import Head from '../components/head';
 
@@ -21,7 +24,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   const articleId = articleIds[`/${path.join('/')}`];
 
   const apolloClient = initializeApollo();
-  const { data } = await apolloClient.query({
+  const { data }: GetFancyArticleQueryResult = await apolloClient.query({
     query: GetFancyArticleDocument,
     variables: {
       id: articleId
@@ -47,12 +50,14 @@ interface Props extends InferGetStaticPropsType<typeof getStaticProps> {}
 const ArticlePage: FC<Props> = ({ fancyArticle }) => (
   <>
     <Head
-      title={fancyArticle?.title ?? ''}
-      description={fancyArticle?.subtitle ?? ''}
+      title={fancyArticle?.data?.attributes?.title ?? ''}
+      description={fancyArticle?.data?.attributes?.subtitle ?? ''}
     />
-    <Breadcrumbs dynamicPageTitles={[fancyArticle?.title ?? '']} />
+    <Breadcrumbs
+      dynamicPageTitles={[fancyArticle?.data?.attributes?.title ?? '']}
+    />
     <Root invertColor hideScrollToTop>
-      {fancyArticle && <ArticleStrapi article={fancyArticle} />}
+      {fancyArticle && <ArticleStrapi article={fancyArticle?.data} />}
     </Root>
   </>
 );

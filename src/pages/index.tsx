@@ -39,12 +39,11 @@ import translations from '../services/translations';
 import Head from '../components/head';
 import NewsletterSubscribe from '../components/newsletter-subscribe';
 import {
-  NewsArticle,
   GetMainArticleAndLatestNewsDocument,
-  FancyArticle,
   ComponentBasicInfobox,
   ComponentBasicImage,
-  ComponentBasicParagraph
+  ComponentBasicParagraph,
+  GetMainArticleAndLatestNewsQueryResult
 } from '../services/api/generated/cms/graphql';
 import { initializeApollo } from '../utils/apollo/apolloClient';
 import {
@@ -66,16 +65,17 @@ export async function getStaticProps() {
 
   const apolloClient = initializeApollo();
 
-  const { data } = await apolloClient.query({
-    query: GetMainArticleAndLatestNewsDocument,
-    variables: {
-      id: mainArticleId
-    }
-  });
+  const { data }: GetMainArticleAndLatestNewsQueryResult =
+    await apolloClient.query({
+      query: GetMainArticleAndLatestNewsDocument,
+      variables: {
+        id: mainArticleId
+      }
+    });
 
   return {
     props: {
-      data,
+      ...data,
       popularCommunityTopics,
       totalDatasets
     },
@@ -93,24 +93,23 @@ const isAbsoluteUrl = (url: string) => {
   return r.test(url) ?? false;
 };
 
-const MainPage: FC<Props> = ({ data, popularCommunityTopics }) => {
-  const {
-    mainArticle,
-    newsArticles
-  }: { mainArticle: FancyArticle; newsArticles: NewsArticle[] } = data;
-
+const MainPage: FC<Props> = ({
+  mainArticle,
+  newsArticles,
+  popularCommunityTopics
+}) => {
   const [firstImage] =
-    (mainArticle?.content?.filter(content =>
+    (mainArticle?.data?.attributes?.content?.filter(content =>
       isBasicImage(content)
     ) as ComponentBasicImage[]) ?? [];
 
   const [firstParagraph] =
-    (mainArticle?.content?.filter(content =>
+    (mainArticle?.data?.attributes?.content?.filter(content =>
       isBasicParagraph(content)
     ) as ComponentBasicParagraph[]) ?? [];
 
   const infoBoxes =
-    (mainArticle?.content?.filter(content =>
+    (mainArticle?.data?.attributes?.content?.filter(content =>
       isBasicInfoBox(content)
     ) as ComponentBasicInfobox[]) ?? [];
 
@@ -122,7 +121,10 @@ const MainPage: FC<Props> = ({ data, popularCommunityTopics }) => {
       />
       <Root>
         <SC.BannerSection
-          $bg={firstImage && `${STRAPI_API_HOST}${firstImage.media?.[0]?.url}`}
+          $bg={
+            firstImage &&
+            `${STRAPI_API_HOST}${firstImage.media?.data?.attributes?.url}`
+          }
         >
           <SC.BannerSectionGradient />
           <SC.BannerContainer>
@@ -144,18 +146,18 @@ const MainPage: FC<Props> = ({ data, popularCommunityTopics }) => {
                 >
                   <InfoBoxIcon>
                     <InfoBoxImage
-                      src={`${STRAPI_API_HOST}${infoBox?.illustration?.url}`}
+                      src={`${STRAPI_API_HOST}${infoBox?.illustration?.data?.attributes?.url}`}
                       alt={
-                        infoBox?.illustration?.alternativeText ??
-                        `${infoBox?.id}-illustration`
+                        infoBox?.illustration?.data?.attributes
+                          ?.alternativeText ?? `${infoBox?.id}-illustration`
                       }
                       hoverSrc={
-                        infoBox?.hoverIllustration?.url &&
-                        `${STRAPI_API_HOST}${infoBox.hoverIllustration.url}`
+                        infoBox?.hoverIllustration?.data?.attributes?.url &&
+                        `${STRAPI_API_HOST}${infoBox.hoverIllustration.data.attributes.url}`
                       }
                       hoverAlt={
-                        infoBox?.hoverIllustration?.alternativeText ??
-                        `${infoBox?.id}-illustration`
+                        infoBox?.hoverIllustration?.data?.attributes
+                          ?.alternativeText ?? `${infoBox?.id}-illustration`
                       }
                     />
                   </InfoBoxIcon>
@@ -265,35 +267,32 @@ const MainPage: FC<Props> = ({ data, popularCommunityTopics }) => {
                 </SC.Row>
               ))}
               <SC.NewsRow>
-                {newsArticles?.map(
-                  ({
-                    id,
-                    slug,
-                    published,
-                    published_at,
-                    title,
-                    subtitle,
-                    socialImage
-                  }) => (
-                    <InfoBox key={id} href={`${PATHNAME.NEWS}/${slug}-${id}`}>
-                      {socialImage && (
-                        <InfoBoxImage
-                          src={`${STRAPI_API_HOST}${socialImage.url}`}
-                          alt={socialImage.alternativeText ?? ''}
-                        />
-                      )}
-                      <InfoBoxSC.InfoBox.Date>
-                        {published && formatDate(dateStringToDate(published))}
-                        {!published &&
-                          formatDate(dateStringToDate(published_at))}
-                      </InfoBoxSC.InfoBox.Date>
-                      <InfoBoxTitle>
-                        <h4>{title}</h4>
-                      </InfoBoxTitle>
-                      <InfoBoxBody>{subtitle}</InfoBoxBody>
-                    </InfoBox>
-                  )
-                )}
+                {newsArticles?.data?.map(({ id, attributes: article }) => (
+                  <InfoBox
+                    key={id}
+                    href={`${PATHNAME.NEWS}/${article?.slug}-${id}`}
+                  >
+                    {article?.socialImage && (
+                      <InfoBoxImage
+                        src={`${STRAPI_API_HOST}${article?.socialImage.data?.attributes?.url}`}
+                        alt={
+                          article?.socialImage.data?.attributes
+                            ?.alternativeText ?? ''
+                        }
+                      />
+                    )}
+                    <InfoBoxSC.InfoBox.Date>
+                      {article?.published &&
+                        formatDate(dateStringToDate(article?.published))}
+                      {!article?.published &&
+                        formatDate(dateStringToDate(article?.publishedAt))}
+                    </InfoBoxSC.InfoBox.Date>
+                    <InfoBoxTitle>
+                      <h4>{article?.title}</h4>
+                    </InfoBoxTitle>
+                    <InfoBoxBody>{article?.subtitle}</InfoBoxBody>
+                  </InfoBox>
+                ))}
               </SC.NewsRow>
               <NewsletterSubscribe />
             </SC.MainContent>
