@@ -151,5 +151,5 @@ export enum CourseProvider {
 }
 
 export enum PAGE_PROPERTY {
-  NEWS_LIMIT = 20
+  NEWS_LIMIT = 18
 }

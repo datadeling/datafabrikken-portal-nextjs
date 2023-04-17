@@ -70,8 +70,11 @@ query GetNewsArticle($id: ID!) {
   }
 }
 
-query GetNewsArticles {
-  newsArticles(sort: "published:desc,publishedAt:desc") {
+query GetNewsArticles($limit: Int!) {
+  newsArticles(
+    sort: "published:desc,publishedAt:desc"
+    pagination: { start: 0, limit: $limit }
+  ) {
     data {
       id
       attributes {

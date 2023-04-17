@@ -2015,7 +2015,9 @@ export type GetNewsArticleQuery = {
   } | null;
 };
 
-export type GetNewsArticlesQueryVariables = Exact<{ [key: string]: never }>;
+export type GetNewsArticlesQueryVariables = Exact<{
+  limit: Scalars["Int"];
+}>;
 
 export type GetNewsArticlesQuery = {
   __typename?: "Query";
@@ -2511,7 +2513,10 @@ export const GetMainArticleAndLatestNewsDocument = gql`
         }
       }
     }
-    newsArticles(sort: "published:desc,publishedAt:desc") {
+    newsArticles(
+      sort: "published:desc,publishedAt:desc"
+      pagination: { start: 0, limit: 3 }
+    ) {
       data {
         id
         attributes {
@@ -2709,8 +2714,11 @@ export type GetNewsArticleQueryResult = Apollo.QueryResult<
   GetNewsArticleQueryVariables
 >;
 export const GetNewsArticlesDocument = gql`
-  query GetNewsArticles {
-    newsArticles(sort: "published:desc,publishedAt:desc") {
+  query GetNewsArticles($limit: Int!) {
+    newsArticles(
+      sort: "published:desc,publishedAt:desc"
+      pagination: { start: 0, limit: $limit }
+    ) {
       data {
         id
         attributes {
@@ -2744,11 +2752,12 @@ export const GetNewsArticlesDocument = gql`
  * @example
  * const { data, loading, error } = useGetNewsArticlesQuery({
  *   variables: {
+ *      limit: // value for 'limit'
  *   },
  * });
  */
 export function useGetNewsArticlesQuery(
-  baseOptions?: Apollo.QueryHookOptions<
+  baseOptions: Apollo.QueryHookOptions<
     GetNewsArticlesQuery,
     GetNewsArticlesQueryVariables
   >
