@@ -52,7 +52,10 @@ query GetMainArticleAndLatestNews($id: ID!) {
       }
     }
   }
-  newsArticles(sort: "published:desc,publishedAt:desc") {
+  newsArticles(
+    sort: "published:desc,publishedAt:desc"
+    pagination: { start: 0, limit: 3 }
+  ) {
     data {
       id
       attributes {
