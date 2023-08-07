@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import httpProxyMiddleware from 'next-http-proxy-middleware';
-import env from '../../../../env';
+import env from '../../../../../env';
 
 export const config = {
   api: {
