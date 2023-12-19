@@ -1,8 +1,10 @@
 FROM node:16.18.1-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json audit-resolve.json ./
+RUN npm install -g npm-audit-resolver@next
 RUN npm install snap && npm ci
+RUN check-audit --omit=dev --audit-level=moderate
 
 FROM node:16.18.1-alpine AS builder
 WORKDIR /app
