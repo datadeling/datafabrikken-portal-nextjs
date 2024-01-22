@@ -2,13 +2,13 @@
   "decisions": {
     "1094729|next": {
       "decision": "ignore",
-      "madeAt": 1702989642609,
-      "expiresAt": 1705581625851
+      "madeAt": 1705931864628,
+      "expiresAt": 1708523839223
     },
     "1094544|next>postcss": {
       "decision": "ignore",
-      "madeAt": 1702989685073,
-      "expiresAt": 1705581625851
+      "madeAt": 1705931869080,
+      "expiresAt": 1708523839223
     }
   },
   "rules": {},
