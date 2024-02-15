@@ -341,6 +341,27 @@ const ArrowDown = styled.a`
 
 const LinkWrapper = styled.div``;
 
+const ShutDown = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
+  padding: 2em 0;
+  background-color: #efcc79;
+  color: #000;
+
+  ${onMobileView} {
+    margin-top: 80px;
+    padding: 2em 1em;
+  }
+`;
+
+const ShutDownContent = styled(ContainerSC.Container)`
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
+
 export default {
   Container,
   Title,
@@ -357,5 +378,7 @@ export default {
   NewsRow,
   Topics,
   Teaser,
-  ArrowDown
+  ArrowDown,
+  ShutDown,
+  ShutDownContent
 };

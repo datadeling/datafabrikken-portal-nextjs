@@ -120,6 +120,23 @@ const MainPage: FC<Props> = ({
         description={firstParagraph?.content ?? ''}
       />
       <Root>
+        <SC.ShutDown>
+          <SC.ShutDownContent>
+            <p>
+              Datafabrikken vil legges ned 30. april 2024. Datafabrikken og
+              data.norge.no fyller samme behov i dag. Ved å samle ressursene
+              rundt data.norge.no vil vi få større kraft til å lage en bedre
+              løsning som dekker både næringslivets og offentlig sektors behov.
+              Du vil fortsatt finne datasettbeskrivelser på data.norge.no.
+              Ønsker du å bidra til at data.norge.no blir bedre? Ta kontakt med
+              oss på&nbsp;
+              <a href='mailto:fellesdatakatalog@digdir.no'>
+                fellesdatakatalog@digdir.no
+              </a>
+              .
+            </p>
+          </SC.ShutDownContent>
+        </SC.ShutDown>
         <SC.BannerSection
           $bg={
             firstImage &&
